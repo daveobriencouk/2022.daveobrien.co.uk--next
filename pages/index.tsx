@@ -1,7 +1,22 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
-export default function Home() {
+import fs from 'fs'
+import matter from 'gray-matter'
+import Link from 'next/link'
+
+type Post = {
+  slug: string
+  frontmatter: {
+    title: string
+  }
+}
+
+type HomeProps = {
+  posts: Post[]
+}
+
+export default function Home({ posts }: HomeProps) {
   return (
     <div className="p-10">
       <Head>
@@ -11,10 +26,38 @@ export default function Home() {
       </Head>
 
       <main className="bg-gray-300 p-10">
-        <h1>
+        <h1 className="mb-10">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <ul>
+          {posts.map((post) => (
+            <li key={post.slug}>
+              <Link href={`/notes/${post.slug}`}>{post.frontmatter.title}</Link>
+            </li>
+          ))}
+        </ul>
       </main>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const files = fs.readdirSync('_notes')
+
+  const posts = files.map((fileName) => {
+    const slug = fileName.replace('.md', '')
+    const readFile = fs.readFileSync(`_notes/${fileName}`, 'utf-8')
+    const { data: frontmatter } = matter(readFile)
+
+    return {
+      slug,
+      frontmatter,
+    }
+  })
+
+  return {
+    props: {
+      posts,
+    },
+  }
 }
