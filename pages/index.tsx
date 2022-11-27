@@ -1,4 +1,10 @@
 import Head from 'next/head'
+import Link from 'next/link'
+
+/**
+ * Feature flagging
+ * Pet peeve of the month, forms without a form tag
+ */
 
 export default function Home() {
   return (
@@ -10,9 +16,43 @@ export default function Home() {
       </Head>
 
       <main className="bg-gray-300 p-10">
-        <h1 className="mb-10">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <article>
+          {/* vert rhy */}
+          <aside>
+            <ul>
+              <li>🛠 React, JavaScript, HTML, CSS, ...</li>
+              <li>🕰 20 years experience in frontend development</li>
+              <li>
+                💼 Worked with companies such as Vodafone, MMT Digital, Maersk and Virgin Media as well as many smaller
+                agencies
+              </li>
+            </ul>
+          </aside>
+          <section>
+            <header>
+              <h1>Ahoy. I&apos;m Dave, and I&apos;m a Frontend engineer.</h1>
+            </header>
+            <p>
+              I&apos;m currently in contract with MMT Digital, working at Vodafone. I&apos;ve been writing code since
+              font tags were all the rage.
+            </p>
+            <p>
+              I&apos;ve seen lots of things come, go and stick. I&apos;ve seen lots of things work well, and lots of
+              things break. And when I’m not seeing things, I love to code.
+            </p>
+            <footer>
+              <h2>Read more...</h2>
+              <ul>
+                {/* <li>
+                  <Link href="/cv">My CV - extended readme</Link>
+                </li> */}
+                <li>
+                  <Link href="/notes">Dev notes</Link>
+                </li>
+              </ul>
+            </footer>
+          </section>
+        </article>
       </main>
     </div>
   )
