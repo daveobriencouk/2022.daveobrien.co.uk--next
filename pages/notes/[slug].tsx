@@ -1,7 +1,7 @@
-import fs from 'fs'
-import matter from 'gray-matter'
 import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
+
+import { getNote, getNotesStaticPaths } from 'models/note'
 
 type NotePageProps = {
   frontmatter: GrayMatterFile<string>['data']
@@ -18,13 +18,7 @@ export default function NotePage({ frontmatter, content }: NotePageProps) {
 }
 
 export async function getStaticPaths() {
-  const files = fs.readdirSync('_notes')
-
-  const paths = files.map((fileName) => ({
-    params: {
-      slug: fileName.replace('.md', ''),
-    },
-  }))
+  const paths = getNotesStaticPaths()
 
   return {
     paths,
@@ -32,15 +26,8 @@ export async function getStaticPaths() {
   }
 }
 
-type GetStaticPropsParams = {
-  params: {
-    slug: string
-  }
-}
-
-export async function getStaticProps({ params: { slug } }: GetStaticPropsParams) {
-  const fileName = fs.readFileSync(`_notes/${slug}.md`, 'utf-8')
-  const { data: frontmatter, content } = matter(fileName)
+export async function getStaticProps({ params: { slug } }) {
+  const { frontmatter, content } = getNote(slug)
   return {
     props: {
       frontmatter,

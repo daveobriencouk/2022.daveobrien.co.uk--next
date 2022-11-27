@@ -1,9 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
-
-import fs from 'fs'
-import matter from 'gray-matter'
 import Link from 'next/link'
+
+import { getNotes } from 'models/note'
 
 type Post = {
   slug: string
@@ -40,18 +38,7 @@ export default function Notes({ posts }: NotesProps) {
 }
 
 export async function getStaticProps() {
-  const files = fs.readdirSync('_notes')
-
-  const posts = files.map((fileName) => {
-    const slug = fileName.replace('.md', '')
-    const readFile = fs.readFileSync(`_notes/${fileName}`, 'utf-8')
-    const { data: frontmatter } = matter(readFile)
-
-    return {
-      slug,
-      frontmatter,
-    }
-  })
+  const posts = getNotes()
 
   return {
     props: {
