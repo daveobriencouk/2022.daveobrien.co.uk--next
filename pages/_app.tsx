@@ -18,7 +18,7 @@ import Layout from 'components/Layout'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={`${yrsa.variable} ${raleway.variable} font-sans`}>
-      <Layout>
+      <Layout showGrid={false}>
         <Component {...pageProps} />
       </Layout>
     </div>

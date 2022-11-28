@@ -28,6 +28,7 @@ module.exports = {
       letterSpacing: {
         ...letterSpacing,
         tightest: '-0.125em',
+        widest: '0.5em',
       },
       spacing: {
         quarter: '0.375rem',
