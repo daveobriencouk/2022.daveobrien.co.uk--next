@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         display: ['var(--font-raleway)', ...fontFamily.sans],
-        sans: ['var(--font-yrsa)', ...fontFamily.serif],
+        // sans: ['var(--font-yrsa)', ...fontFamily.serif],
+        sans: ['var(--font-open-sans)', ...fontFamily.sans],
       },
       // https://samuelhorn.com/leverage-vertical-rhythm-with-tailwind-and-tailbase/
       fontSize: {
@@ -46,5 +47,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

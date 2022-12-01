@@ -26,7 +26,13 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params: { slug } }) {
+type GetStaticPropsParams = {
+  params: {
+    slug: string
+  }
+}
+
+export async function getStaticProps({ params: { slug } }: GetStaticPropsParams) {
   const { frontmatter, content } = getNote(slug)
   return {
     props: {
