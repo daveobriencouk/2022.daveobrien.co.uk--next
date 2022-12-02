@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import waait from 'waait'
 
 type LayoutProps = {
   children: React.ReactNode
@@ -30,10 +31,17 @@ const links = [
 export default function Layout({ children, showGrid }: LayoutProps) {
   const [showLogo, setShowLogo] = useState(false)
 
-  function handleClick() {
-    setShowLogo(true)
-    console.log('clicked')
-  }
+  useEffect(() => {
+    async function loadPage() {
+      // When font has loaded, show logo
+      await waait(500)
+      // setShowLoader(false)
+      // await waait(500)
+      setShowLogo(true)
+    }
+
+    loadPage()
+  }, [])
 
   return (
     <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-gray-100 min-w-[24rem]">
@@ -72,13 +80,19 @@ export default function Layout({ children, showGrid }: LayoutProps) {
                 </span>
               </Link>
             </h1>
-            <h2 className="font-display font-thin text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em]">
+            <h2
+              className={`font-display font-thin text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em] transition-opacity delay-1000 duration-500 ${
+                showLogo ? 'opacity-1' : 'opacity-0'
+              }`}
+            >
               Frontend engineer
             </h2>
           </hgroup>
-          <button onClick={handleClick}>Click me</button>
-
-          <ul className="flex flex-initial gap-half md:mt-two lg:mt-three xl:mt-four justify-center">
+          <ul
+            className={`flex flex-initial gap-half md:mt-two lg:mt-three xl:mt-four justify-center transition-opacity delay-[1500ms] duration-500 ${
+              showLogo ? 'opacity-1' : 'opacity-0'
+            }`}
+          >
             {links.map(({ href, text }) => (
               <li
                 key={text}
