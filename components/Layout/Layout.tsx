@@ -44,15 +44,15 @@ export default function Layout({ children, showGrid }: LayoutProps) {
   }, [])
 
   return (
-    <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-gray-100 min-w-[24rem]">
+    <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-stone-100 min-w-[24rem]">
       {/* className='md:mt-[2.25em] lg:mt-[1.9375em] xl:mt-[1.0625em]' */}
-      <header className="text-stone-500 mt-one mb-two">
+      <header className="text-stone-700 mt-one mb-two">
         <div className="mx-two flex gap-x-one flex-col md:flex-row justify-between items-start">
           <hgroup className="flex flex-col items-start md:items-end">
             <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
               {/* Conditional wrap - link & h1 vs h2? Logo? */}
               <Link href="/" className="flex flex-wrap gap-x-one items-end">
-                <span className="text-stone-700">
+                <span className="text-stone-600">
                   {['D', 'a', 'v', 'e'].map((letter) => (
                     <span
                       key={letter}
@@ -65,7 +65,7 @@ export default function Layout({ children, showGrid }: LayoutProps) {
                     </span>
                   ))}
                 </span>{' '}
-                <span className="-mt-one">
+                <span className="-mt-one text-stone-400">
                   {['O', '’', 'B', 'r', 'i', 'e', 'n'].map((letter) => (
                     <span
                       key={letter}
@@ -81,7 +81,7 @@ export default function Layout({ children, showGrid }: LayoutProps) {
               </Link>
             </h1>
             <h2
-              className={`font-display font-thin text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em] transition-opacity delay-1000 duration-500 ${
+              className={`text-stone-700 font-display mb-one font-light text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em] transition-opacity delay-1000 duration-500 ${
                 showLogo ? 'opacity-1' : 'opacity-0'
               }`}
             >
@@ -89,7 +89,7 @@ export default function Layout({ children, showGrid }: LayoutProps) {
             </h2>
           </hgroup>
           <ul
-            className={`flex flex-initial gap-half md:mt-two lg:mt-three xl:mt-four justify-center transition-opacity delay-[1500ms] duration-500 ${
+            className={`text-stone-500 flex flex-initial gap-half md:mt-two lg:mt-three xl:mt-four justify-center transition-opacity delay-[1500ms] duration-500 ${
               showLogo ? 'opacity-1' : 'opacity-0'
             }`}
           >
