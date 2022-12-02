@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Link from 'next/link'
 
 type LayoutProps = {
@@ -27,6 +28,13 @@ const links = [
 ]
 
 export default function Layout({ children, showGrid }: LayoutProps) {
+  const [showLogo, setShowLogo] = useState(false)
+
+  function handleClick() {
+    setShowLogo(true)
+    console.log('clicked')
+  }
+
   return (
     <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-gray-100 min-w-[24rem]">
       {/* className='md:mt-[2.25em] lg:mt-[1.9375em] xl:mt-[1.0625em]' */}
@@ -36,13 +44,40 @@ export default function Layout({ children, showGrid }: LayoutProps) {
             <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
               {/* Conditional wrap - link & h1 vs h2? Logo? */}
               <Link href="/" className="flex flex-wrap gap-x-one items-end">
-                <span className="text-stone-700">Dave</span> <span className="-mt-one">O&apos;Brien</span>
+                <span className="text-stone-700">
+                  {['D', 'a', 'v', 'e'].map((letter) => (
+                    <span
+                      key={letter}
+                      style={{
+                        transitionDelay: `${Math.round(Math.random() * 1000)}ms`,
+                      }}
+                      className={`transition-opacity duration-200 ${showLogo ? 'opacity-1' : 'opacity-0'}`}
+                    >
+                      {letter}
+                    </span>
+                  ))}
+                </span>{' '}
+                <span className="-mt-one">
+                  {['O', '’', 'B', 'r', 'i', 'e', 'n'].map((letter) => (
+                    <span
+                      key={letter}
+                      style={{
+                        transitionDelay: `${Math.round(Math.random() * 1000)}ms`,
+                      }}
+                      className={`transition-opacity duration-200 ${showLogo ? 'opacity-1' : 'opacity-0'}`}
+                    >
+                      {letter}
+                    </span>
+                  ))}
+                </span>
               </Link>
             </h1>
             <h2 className="font-display font-thin text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em]">
               Frontend engineer
             </h2>
           </hgroup>
+          <button onClick={handleClick}>Click me</button>
+
           <ul className="flex flex-initial gap-half md:mt-two lg:mt-three xl:mt-four justify-center">
             {links.map(({ href, text }) => (
               <li
