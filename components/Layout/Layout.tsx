@@ -18,9 +18,8 @@ export default function Layout({ children, showGrid }: LayoutProps) {
   const [showHeader, setShowHeader] = useState(false)
 
   useEffect(() => {
-    // TODO: Added loading state based on font load / fout
+    // TODO: [P2] Add loading state - base on whether font has loaded
     async function loadPage() {
-      // When font has loaded, show logo
       await waait(500)
       // setShowLoader(false)
       // await waait(500)

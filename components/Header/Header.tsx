@@ -42,6 +42,7 @@ export default function Header({ showHeader }: HeaderProps) {
           letterDuration={letterDuration}
           straplineDuration={straplineDuration}
         />
+        {/* TODO: [P2] Move navigation into a burger menu */}
         <Nav delay={navDelay} duration={navDuration} links={links} showNav={showHeader} />
       </div>
     </header>

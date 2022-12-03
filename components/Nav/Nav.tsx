@@ -26,7 +26,7 @@ export default function Nav({ delay = 0, duration = 0, links, showNav }: NavProp
     >
       {links.map(({ href, text }) => (
         <li key={text} className="font-display font-black text-lg md:text-md lg:text-lg tracking-tighter uppercase">
-          {/* TODO: Add active link */}
+          {/* TODO: [P2] Add active link */}
           <Link href={href} className="block hover:underline underline-offset-4 hover:text-stone-700">
             {text}
           </Link>

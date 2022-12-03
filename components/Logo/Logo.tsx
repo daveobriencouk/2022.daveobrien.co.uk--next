@@ -16,7 +16,7 @@ export default function Logo({ letterDelayRange = 0, letterDuration = 0, showLog
   return (
     <hgroup className="flex flex-col items-start md:items-end">
       <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
-        {/* TODO: Add conditional wrap - link & h1 vs h2? Logo? */}
+        {/* TODO: [P2] Add conditional wrap - Link & h1 vs h2? */}
         <Link href="/" className="flex flex-wrap gap-x-one items-end">
           <span className="text-stone-600">
             {['D', 'a', 'v', 'e'].map((letter) => (

@@ -9,6 +9,12 @@ type NotePageProps = {
 }
 
 export default function NotePage({ frontmatter, content }: NotePageProps) {
+  {
+    /* TODO: [P1] Style notes page */
+  }
+  {
+    /* TODO: [P1] Add meta data??? */
+  }
   return (
     <div className="prose mx-auto">
       <h1>{frontmatter.title}</h1>
