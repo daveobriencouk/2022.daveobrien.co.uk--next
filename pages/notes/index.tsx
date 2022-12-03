@@ -16,7 +16,7 @@ type NotesProps = {
 
 export default function Notes({ posts }: NotesProps) {
   return (
-    <div className="p-10">
+    <>
       <Head>
         {/* TODO: [P1] Update notes page meta */}
         <title>Create Next App</title>
@@ -27,17 +27,41 @@ export default function Notes({ posts }: NotesProps) {
 
       {/* TODO: [P1] Style notes page */}
       {/* TODO: [P1] Add notes content */}
-      <main className="bg-gray-300 p-10">
-        <h1 className="mb-10">Notes</h1>
+      <main className="mx-two">
+        <h1 className="mb-one font-display font-black text-lg md:text-md lg:text-lg tracking-tighter uppercase text-stone-500">
+          Notes
+        </h1>
+        <div className="bg-stone-200 mb-one py-half px-one hover:bg-stone-300 cursor-pointer rounded">
+          {/* Hero icon serarch */}
+          Search
+          {/* keyboard shortcut */}
+        </div>
         <ul>
           {posts.map((post) => (
-            <li key={post.slug}>
-              <Link href={`/notes/${post.slug}`}>{post.frontmatter.title}</Link>
+            <li key={post.slug} className="mb-one">
+              <article>
+                <h1 className="font-display font-black text-2xl md:text-3xl lg:text-4xl">
+                  <Link
+                    href={`/notes/${post.slug}`}
+                    className="hover:underline underline-offset-2 text-stone-500 hover:text-stone-700"
+                  >
+                    {post.frontmatter.title}
+                  </Link>
+                </h1>
+                <div className="flex justify-between">
+                  <ul className="flex gap-one">
+                    <li>Tags</li>
+                    <li>Tags</li>
+                    <li>Tags</li>
+                  </ul>
+                  <time dateTime="2013-02-20">2013-02-20</time>
+                </div>
+              </article>
             </li>
           ))}
         </ul>
       </main>
-    </div>
+    </>
   )
 }
 

@@ -23,7 +23,7 @@ import Layout from 'components/Layout'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={`${openSans.variable} ${yrsa.variable} ${raleway.variable} font-sans`}>
-      <Layout showGrid={false}>
+      <Layout showGrid={true}>
         <Component {...pageProps} />
       </Layout>
     </div>
