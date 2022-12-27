@@ -13,6 +13,8 @@ export type LogoProps = {
 export default function Logo({ letterDelayRange = 0, letterDuration = 0, showLogo, straplineDuration = 0 }: LogoProps) {
   const straplineDelay = letterDuration + letterDelayRange
 
+  // TODO: [P2] Sort prefers reduces motion
+  // TODO: [P2] Check for screen readers / accessibility
   return (
     <hgroup className="flex flex-col items-start md:items-end">
       <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
