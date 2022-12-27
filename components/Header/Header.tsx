@@ -1,14 +1,8 @@
 import React from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 
 import Logo from 'components/Logo'
 import Nav from 'components/Nav'
-
-const animationTimings = {
-  letterDelayRange: 1500,
-  letterDuration: 250,
-  straplineDuration: 500,
-  navDuration: 500,
-}
 
 const links = [
   {
@@ -30,6 +24,13 @@ type HeaderProps = {
 }
 
 export default function Header({ showHeader }: HeaderProps) {
+  const [animationTimings] = useLocalStorage('headerAnimationTimings', {
+    letterDelayRange: 500,
+    letterDuration: 250,
+    straplineDuration: 250,
+    navDuration: 250,
+  })
+
   const { letterDelayRange, letterDuration, straplineDuration, navDuration } = animationTimings
   const navDelay = letterDuration + letterDelayRange + straplineDuration
 
