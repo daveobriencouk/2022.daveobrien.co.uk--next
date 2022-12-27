@@ -1,22 +1,30 @@
 import React from 'react'
 import Link from 'next/link'
+import classNames from 'classnames'
 
 import LogoLetter from './components/LogoLetter'
 
 export type LogoProps = {
-  showLogo?: boolean
+  className?: string
   letterDelayRange?: number
   letterDuration?: number
+  showLogo?: boolean
   straplineDuration?: number
 }
 
-export default function Logo({ letterDelayRange = 0, letterDuration = 0, showLogo, straplineDuration = 0 }: LogoProps) {
+export default function Logo({
+  className,
+  letterDelayRange = 0,
+  letterDuration = 0,
+  showLogo,
+  straplineDuration = 0,
+}: LogoProps) {
   const straplineDelay = letterDuration + letterDelayRange
 
   // TODO: [P2] Sort prefers reduces motion
-  // TODO: [P2] Check for screen readers / accessibility
+  // TODO: [P1] Add closing tag graphic device
   return (
-    <hgroup className="flex flex-col items-start md:items-end">
+    <hgroup className={classNames('flex flex-col items-start md:items-end', className)}>
       <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
         {/* TODO: [P2] Add conditional wrap - Link & h1 vs h2? */}
         <Link href="/" className="flex flex-wrap gap-x-one items-end">

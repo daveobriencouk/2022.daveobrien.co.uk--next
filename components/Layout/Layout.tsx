@@ -32,7 +32,7 @@ export default function Layout({ children, showGrid }: LayoutProps) {
   // TODO: [P2] Add dev panel to control animation speeds and show grid
 
   return (
-    <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-stone-100 min-w-[24rem]">
+    <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-stone-100 min-w-[24rem] relative">
       <Header showHeader={showHeader} />
       <div className="flex-1">{children}</div>
       <footer className="bg-stone-200 mt-one py-one px-two">

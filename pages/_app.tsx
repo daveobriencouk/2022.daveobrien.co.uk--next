@@ -23,6 +23,7 @@ const openSans = Open_Sans({
 
 import Layout from 'components/Layout'
 
+// TODO: [P1] Check for screen readers / accessibility and fix
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>

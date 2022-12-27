@@ -40,7 +40,7 @@ export default function Home() {
         {/* <meta name="description" content="" /> */}
       </Head>
 
-      {/* TODO: [P2] Animate page content in (simple fade) */}
+      {/* TODO: [P1] Animate page content in (simple fade) */}
       <main className="mx-two">
         <article className="mb-three">
           <aside>

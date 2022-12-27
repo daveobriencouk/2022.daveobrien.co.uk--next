@@ -18,6 +18,7 @@ export default function NotePage({ frontmatter, content }: NotePageProps) {
     <>
       <FrontMatterHead frontmatter={frontmatter} />
       <div className="prose mx-auto">
+        {/* TODO: [P2] Add breadcrumb */}
         <h1>{frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
       </div>
