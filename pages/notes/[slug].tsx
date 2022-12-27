@@ -1,6 +1,8 @@
 import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
 
+import FrontMatterHead from 'components/FrontMatterHead'
+
 import { getNote, getNotesStaticPaths } from 'models/note'
 
 type NotePageProps = {
@@ -12,14 +14,14 @@ export default function NotePage({ frontmatter, content }: NotePageProps) {
   {
     /* TODO: [P1] Style notes page */
   }
-  {
-    /* TODO: [P1] Add meta data??? */
-  }
   return (
-    <div className="prose mx-auto">
-      <h1>{frontmatter.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
-    </div>
+    <>
+      <FrontMatterHead frontmatter={frontmatter} />
+      <div className="prose mx-auto">
+        <h1>{frontmatter.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
+      </div>
+    </>
   )
 }
 
