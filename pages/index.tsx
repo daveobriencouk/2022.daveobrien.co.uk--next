@@ -42,6 +42,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* TODO: [P2] Animate page content in (simple fade) */}
       <main className="mx-two">
         <article className="mb-three">
           <aside>

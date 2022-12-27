@@ -29,6 +29,8 @@ export default function Layout({ children, showGrid }: LayoutProps) {
     loadPage()
   }, [])
 
+  // TODO: [P2] Add dev panel to control animation speeds and show grid
+
   return (
     <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-stone-100 min-w-[24rem]">
       <Header showHeader={showHeader} />
