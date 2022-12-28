@@ -12,7 +12,7 @@ type NotePageProps = {
 
 export default function NotePage({ frontmatter, content }: NotePageProps) {
   {
-    /* TODO: [P1] Style notes page */
+    /* TODO: [P1] Style note page */
   }
   return (
     <>

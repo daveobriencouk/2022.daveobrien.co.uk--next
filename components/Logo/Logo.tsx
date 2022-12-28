@@ -28,7 +28,7 @@ export default function Logo({
       <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
         {/* TODO: [P2] Add conditional wrap - Link & h1 vs h2? */}
         <Link href="/" className="flex flex-wrap gap-x-one items-end">
-          <span className="text-stone-600">
+          <span className="text-neutral-600">
             {['D', 'a', 'v', 'e'].map((letter) => (
               <LogoLetter
                 key={letter}
@@ -39,7 +39,7 @@ export default function Logo({
               />
             ))}
           </span>{' '}
-          <span className="-mt-one text-stone-400">
+          <span className="-mt-one text-neutral-400">
             {['O', '’', 'B', 'r', 'i', 'e', 'n'].map((letter) => (
               <LogoLetter
                 key={letter}
@@ -53,7 +53,7 @@ export default function Logo({
         </Link>
       </h1>
       <h2
-        className={`text-stone-700 font-display mb-one font-light text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em] transition-opacity ${
+        className={`text-neutral-700 font-display font-light text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em] transition-opacity ${
           showLogo ? 'opacity-1' : 'opacity-0'
         }`}
         style={{

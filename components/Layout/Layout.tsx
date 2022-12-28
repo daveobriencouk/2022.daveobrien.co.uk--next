@@ -29,13 +29,17 @@ export default function Layout({ children, showGrid }: LayoutProps) {
     loadPage()
   }, [])
 
-  // TODO: [P2] Add dev panel to control animation speeds and show grid
+  // TODO: [P3] Add dev panel to control animation speeds and show grid
 
   return (
-    <div style={showGrid ? gridStyles : {}} className="flex flex-col min-h-screen bg-stone-100 min-w-[24rem] relative">
+    <div
+      style={showGrid ? gridStyles : {}}
+      className="flex flex-col min-h-screen bg-neutral-100 min-w-[24rem] relative"
+    >
       <Header showHeader={showHeader} />
+      {/* TODO: [P1] Animate children and footer in (simple fade), after header... lift that state */}
       <div className="flex-1">{children}</div>
-      <footer className="bg-stone-200 mt-one py-one px-two">
+      <footer className="bg-neutral-200 mt-one py-one px-two">
         <div className="flex text-sm">&copy;{new Date().getFullYear()} Dave O&apos;Brien</div>
       </footer>
     </div>

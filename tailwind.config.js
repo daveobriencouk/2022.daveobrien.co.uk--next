@@ -1,10 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 const { fontFamily, letterSpacing } = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors: {
+        primary: colors.red,
+        neutral: colors.stone,
+      },
       fontFamily: {
         display: ['var(--font-raleway)', ...fontFamily.sans],
         // sans: ['var(--font-yrsa)', ...fontFamily.serif],

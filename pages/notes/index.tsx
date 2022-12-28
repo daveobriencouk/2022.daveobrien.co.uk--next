@@ -26,11 +26,11 @@ export default function Notes({ posts }: NotesProps) {
       {/* TODO: [P1] Style notes page */}
       {/* TODO: [P1] Add notes content */}
       <main className="mx-two">
-        <h1 className="mb-one font-display font-black text-lg md:text-md lg:text-lg tracking-tighter uppercase text-stone-500">
+        <h1 className="mb-one font-display font-black text-lg md:text-md lg:text-lg tracking-tighter uppercase text-neutral-500">
           Notes
         </h1>
-        <div className="bg-stone-200 mb-one py-half px-one hover:bg-stone-300 cursor-pointer rounded">
-          {/* Hero icon serarch */}
+        <div className="bg-neutral-200 mb-one py-half px-one hover:bg-neutral-300 cursor-pointer rounded">
+          {/* Hero icon search */}
           Search
           {/* keyboard shortcut */}
         </div>
@@ -41,7 +41,7 @@ export default function Notes({ posts }: NotesProps) {
                 <h1 className="font-display font-black text-2xl md:text-3xl lg:text-4xl">
                   <Link
                     href={`/notes/${post.slug}`}
-                    className="hover:underline underline-offset-2 text-stone-500 hover:text-stone-700"
+                    className="hover:underline underline-offset-2 text-neutral-500 hover:text-neutral-700"
                   >
                     {post.frontmatter.title}
                   </Link>

@@ -16,7 +16,7 @@ type NavProps = {
 export default function Nav({ delay = 0, duration = 0, links, showNav }: NavProps) {
   return (
     <ul
-      className={`text-stone-500 flex flex-initial gap-half md:mt-two lg:mt-three xl:mt-four justify-center transition-opacity ${
+      className={`text-neutral-500 flex flex-initial gap-half md:mt-two lg:mt-three xl:mt-four justify-center transition-opacity ${
         showNav ? 'opacity-1' : 'opacity-0'
       }`}
       style={{
@@ -27,7 +27,7 @@ export default function Nav({ delay = 0, duration = 0, links, showNav }: NavProp
       {links.map(({ href, text }) => (
         <li key={text} className="font-display font-black text-lg md:text-md lg:text-lg tracking-tighter uppercase">
           {/* TODO: [P2] Add active link */}
-          <Link href={href} className="block hover:underline underline-offset-4 hover:text-stone-700">
+          <Link href={href} className="block hover:underline underline-offset-4 hover:text-neutral-700">
             {text}
           </Link>
         </li>
