@@ -3,15 +3,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 
-type Links = {
-  href: string
-  text: string
-}
+import type { Link as LinkType } from 'components/Header'
 
 type NavProps = {
   delay?: number
   duration?: number
-  links: Links[]
+  links: LinkType[]
   showNav?: boolean
 }
 
