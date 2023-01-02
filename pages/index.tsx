@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { READ_MORE_LINKS } from 'constants/'
 import useFeatureFlags from 'hooks/useFeatureFlags'
 
-// TODO: [P2] Add CV
+// TODO: #10 Add CV page
 
 export default function Home() {
   const { linksByFeatureFlag, flags } = useFeatureFlags()
@@ -21,7 +21,7 @@ export default function Home() {
         <article className="mb-three">
           <aside>
             <ul className="text-sm list-disc mb-two pl-one">
-              {/* TODO: [P1] Add hero icons */}
+              {/* TODO: #11 Add hero icons */}
               <li>React, JavaScript, HTML, CSS, ...</li>
               <li>20 years experience in frontend development</li>
               <li>
@@ -31,8 +31,8 @@ export default function Home() {
             </ul>
           </aside>
           <section>
-            {/* TODO: [P1] Add v1 homepage copy */}
-            {/* TODO: [P3] Migrate homepage content to markdown */}
+            {/* TODO: #12 Add v1 homepage copy */}
+            {/* TODO: #13 Migrate homepage content to markdown */}
             {/* <div className="prose lg:prose-xl">
               <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
             </div> */}

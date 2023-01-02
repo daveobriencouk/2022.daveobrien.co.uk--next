@@ -23,13 +23,13 @@ export default function Notes({ posts }: NotesProps) {
         {/* <meta name="description" content="" /> */}
       </Head>
 
-      {/* TODO: [P1] Style notes page */}
-      {/* TODO: [P1] Add notes content */}
+      {/* TODO: #16 Style notes page */}
+      {/* TODO: #17 Add notes content */}
       <main className="mx-two">
-        <h1 className="mb-one font-display font-black text-lg md:text-md lg:text-lg tracking-tighter uppercase text-neutral-500">
+        <h1 className="text-lg font-black tracking-tighter uppercase mb-one font-display md:text-md lg:text-lg text-neutral-500">
           Notes
         </h1>
-        <div className="bg-neutral-200 mb-one py-half px-one hover:bg-neutral-300 cursor-pointer rounded">
+        <div className="rounded cursor-pointer bg-neutral-200 mb-one py-half px-one hover:bg-neutral-300">
           {/* Hero icon search */}
           Search
           {/* keyboard shortcut */}
@@ -38,7 +38,7 @@ export default function Notes({ posts }: NotesProps) {
           {posts.map((post) => (
             <li key={post.slug} className="mb-one">
               <article>
-                <h1 className="font-display font-black text-2xl md:text-3xl lg:text-4xl">
+                <h1 className="text-2xl font-black font-display md:text-3xl lg:text-4xl">
                   <Link
                     href={`/notes/${post.slug}`}
                     className="hover:underline underline-offset-2 text-neutral-500 hover:text-neutral-700"

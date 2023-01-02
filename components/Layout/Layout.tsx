@@ -18,7 +18,7 @@ export default function Layout({ children, showGrid }: LayoutProps) {
   const [showHeader, setShowHeader] = useState(false)
 
   useEffect(() => {
-    // TODO: [P2] Add loading state - base on whether font has loaded
+    // TODO: #18 Add loading state to Layout
     async function loadPage() {
       await waait(500)
       // setShowLoader(false)
@@ -29,7 +29,7 @@ export default function Layout({ children, showGrid }: LayoutProps) {
     loadPage()
   }, [])
 
-  // TODO: [P3] Add dev panel to control animation speeds and show grid
+  // TODO: #19 Add dev panel to control animation speeds and show grid
 
   return (
     <div
@@ -37,7 +37,7 @@ export default function Layout({ children, showGrid }: LayoutProps) {
       className="flex flex-col min-h-screen bg-neutral-100 min-w-[24rem] relative"
     >
       <Header showHeader={showHeader} />
-      {/* TODO: [P1] Animate children and footer in (simple fade), after header... lift that state */}
+      {/* TODO: #5 Animate children and footer in */}
       <div className="flex-1">{children}</div>
       <footer className="bg-neutral-200 mt-one py-one px-two">
         <div className="flex text-sm">&copy;{new Date().getFullYear()} Dave O&apos;Brien</div>

@@ -12,13 +12,13 @@ type NotePageProps = {
 
 export default function NotePage({ frontmatter, content }: NotePageProps) {
   {
-    /* TODO: [P1] Style note page */
+    /* TODO: #14 Style note page */
   }
   return (
     <>
       <FrontMatterHead frontmatter={frontmatter} />
-      <div className="prose mx-auto">
-        {/* TODO: [P2] Add breadcrumb */}
+      <div className="mx-auto prose">
+        {/* TODO: #15 Add breadcrumb on notes page */}
         <h1>{frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
       </div>

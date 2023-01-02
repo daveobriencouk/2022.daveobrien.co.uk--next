@@ -31,7 +31,7 @@ function App({ Component, pageProps, flagsmithState }: AppProps & { flagsmithSta
       <Head>
         <title>{GLOBAL_META_TITLE}</title>
         {GLOBAL_META_DESC && <meta name="description" content={GLOBAL_META_DESC} />}
-        {/* TODO: [P1] Add favicon */}
+        {/* TODO: #9 Add favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FlagsmithProvider flagsmith={flagsmith} serverState={flagsmithState}>

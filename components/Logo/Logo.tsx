@@ -21,13 +21,13 @@ export default function Logo({
 }: LogoProps) {
   const straplineDelay = letterDuration + letterDelayRange
 
-  // TODO: [P2] Sort prefers reduces motion
-  // TODO: [P1] Add closing tag graphic device
+  // TODO: #7 Sort prefers reduces motion for header animations
+  // TODO: #6 Add closing tag graphic device
   return (
     <hgroup className={classNames('flex flex-col items-start md:items-end', className)}>
       <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
-        {/* TODO: [P2] Add conditional wrap - Link & h1 vs h2? */}
-        <Link href="/" className="flex flex-wrap gap-x-one items-end">
+        {/* TODO: #8 Add conditional wrap to logo link */}
+        <Link href="/" className="flex flex-wrap items-end gap-x-one">
           <span className="text-neutral-600">
             {['D', 'a', 'v', 'e'].map((letter) => (
               <LogoLetter
