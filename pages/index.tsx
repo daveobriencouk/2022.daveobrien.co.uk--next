@@ -1,37 +1,14 @@
 import Head from 'next/head'
-import Link, { LinkProps } from 'next/link'
-import md from 'markdown-it'
+import Link from 'next/link'
 
-import { getNote, getNotesStaticPaths } from 'models/note'
+import { READ_MORE_LINKS } from 'constants/'
+import useFeatureFlags from 'hooks/useFeatureFlags'
 
-// TODO: [P2] Add feature flagging
-
-export type ListLinkProps = {
-  name: string
-  href: LinkProps['href']
-  // featureFlag?: FlagOptions
-}
-
-const readMoreLinks: ListLinkProps[] = [
-  // TODO: [P2] Add CV
-  {
-    name: 'My CV - extended readme',
-    href: '/cv',
-    // featureFlag: 'section_cv',
-  },
-  // {
-  //   name: "Some projects I've worked on",
-  //   href: '/projects',
-  //   featureFlag: 'section_project',
-  // },
-  {
-    name: "An old(er) developer's handbook",
-    href: '/notes',
-    // featureFlag: 'section_notes',
-  },
-]
+// TODO: [P2] Add CV
 
 export default function Home() {
+  const { linksByFeatureFlag, flags } = useFeatureFlags()
+
   return (
     <>
       {/* <FrontMatterHead frontmatter={frontmatter} /> */}
@@ -43,7 +20,7 @@ export default function Home() {
       <main className="mx-two">
         <article className="mb-three">
           <aside>
-            <ul className="text-sm mb-two list-disc pl-one">
+            <ul className="text-sm list-disc mb-two pl-one">
               {/* TODO: [P1] Add hero icons */}
               <li>React, JavaScript, HTML, CSS, ...</li>
               <li>20 years experience in frontend development</li>
@@ -72,14 +49,14 @@ export default function Home() {
             </p>
             <footer>
               <h2 className="text-base font-bold mt-two mb-one">Read more...</h2>
-              <ul className="text-sm mb-one list-disc pl-one-and-half">
-                {readMoreLinks.map((link) => (
-                  <li key={link.name}>
+              <ul className="text-sm list-disc mb-one pl-one-and-half">
+                {READ_MORE_LINKS.filter(linksByFeatureFlag).map((link) => (
+                  <li key={link.text}>
                     <Link
                       href={link.href}
                       className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
                     >
-                      {link.name}
+                      {link.text}
                     </Link>
                   </li>
                 ))}

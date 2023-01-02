@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 
-import type { Link as LinkType } from 'components/Header'
+import type { Link as LinkType } from 'constants/'
+import useFeatureFlags from 'hooks/useFeatureFlags'
 
 type NavProps = {
   delay?: number
@@ -13,6 +14,7 @@ type NavProps = {
 }
 
 export default function Nav({ delay = 0, duration = 0, links, showNav }: NavProps) {
+  const { linksByFeatureFlag } = useFeatureFlags()
   const router = useRouter()
 
   return (
@@ -25,7 +27,7 @@ export default function Nav({ delay = 0, duration = 0, links, showNav }: NavProp
         transitionDuration: `${duration}ms`,
       }}
     >
-      {links.map(({ href, text }) => (
+      {links.filter(linksByFeatureFlag).map(({ href, text }) => (
         <li key={text}>
           <Link
             href={href}

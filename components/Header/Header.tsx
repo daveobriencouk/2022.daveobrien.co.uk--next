@@ -7,25 +7,7 @@ import Nav from 'components/Nav'
 import ResponsiveNavButton from 'components/ResponsiveNavButton'
 import ResponsiveNav from 'components/ResponsiveNav'
 
-export type Link = {
-  href: string
-  text: string
-}
-
-const links: Link[] = [
-  {
-    href: '/',
-    text: 'Home',
-  },
-  {
-    href: '/cv',
-    text: 'CV',
-  },
-  {
-    href: '/notes',
-    text: 'Notes',
-  },
-]
+import { NAV_LINKS } from 'constants/'
 
 type HeaderProps = {
   showHeader?: boolean
@@ -46,10 +28,10 @@ export default function Header({ showHeader }: HeaderProps) {
     <Disclosure as="div">
       {({ open }) => (
         <>
-          {/* TODO: #1 [P1] A11y check */}
-          {/* TODO: #2 [P2] Add transitions - https://headlessui.com/react/disclosure#transitions, https://www.framer.com/motion/, https://www.react-spring.dev/ */}
+          {/* TODO: #1 Perform an A11y check */}
+          {/* TODO: #2 Add responsive nav transitions - https://headlessui.com/react/disclosure#transitions, https://www.framer.com/motion/, https://www.react-spring.dev/ */}
           <ResponsiveNavButton className="absolute z-20 md:hidden top-one right-one" open={open} />
-          <ResponsiveNav className="absolute z-10 w-full min-h-full bg-white md:hidden" links={links} />
+          <ResponsiveNav className="absolute z-10 w-full min-h-full bg-white md:hidden" links={NAV_LINKS} />
 
           <header className="text-neutral-700 mt-one mb-two">
             <div className="flex flex-col items-start justify-between mx-two gap-x-one md:flex-row">
@@ -61,7 +43,7 @@ export default function Header({ showHeader }: HeaderProps) {
                 straplineDuration={straplineDuration}
               />
               <div className="hidden md:flex">
-                <Nav delay={navDelay} duration={navDuration} links={links} showNav={showHeader} />
+                <Nav delay={navDelay} duration={navDuration} links={NAV_LINKS} showNav={showHeader} />
               </div>
             </div>
           </header>

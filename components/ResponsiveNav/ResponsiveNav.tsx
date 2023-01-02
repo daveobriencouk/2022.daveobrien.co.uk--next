@@ -3,7 +3,8 @@ import { useRouter } from 'next/router'
 import { Disclosure } from '@headlessui/react'
 import classNames from 'classnames'
 
-import type { Link as LinkType } from 'components/Header'
+import type { Link as LinkType } from 'constants/'
+import useFeatureFlags from 'hooks/useFeatureFlags'
 
 type ResponsiveNavProps = {
   className?: string
@@ -11,14 +12,15 @@ type ResponsiveNavProps = {
 }
 
 export default function ResponsiveNav({ className, links }: ResponsiveNavProps) {
+  const { linksByFeatureFlag } = useFeatureFlags()
   const router = useRouter()
 
   return (
     <Disclosure.Panel className={className}>
       <div className="flex flex-col items-start space-y-1 pt-two pb-two px-two bg-neutral-300">
-        {links.map(({ text, href }) => (
+        {links.filter(linksByFeatureFlag).map(({ text, href }) => (
           <Disclosure.Button
-            key={href}
+            key={text}
             as={Link}
             href={href}
             className={classNames(
