@@ -1,12 +1,57 @@
 import Head from 'next/head'
-import Link from 'next/link'
+import { ClockIcon, UserIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
+import { sample } from 'lodash'
 
-import { READ_MORE_LINKS } from 'constants/'
+import Link from 'components/Link'
+import { BALONY_SYNONYMS, NAV_LINKS_BY_HREF } from 'constants/'
+import type { Link as LinkType } from 'constants/'
 import useFeatureFlags from 'hooks/useFeatureFlags'
 
 // TODO: #10 Add CV page
+// TODO: #24 Add an about me page (like KCD's)
 
-export default function Home() {
+const INTRO_BULLETS = [
+  {
+    Icon: WrenchScrewdriverIcon,
+    key: 'tools',
+    Text: (
+      <>
+        <b>Tools & technology</b> used on my current contract projects: <Link href="https://reactjs.org/">React</Link>,{' '}
+        <Link href="https://www.typescriptlang.org/">TypeScript</Link>, Express.JS, styled-components, React Query,
+        MobX, React Router, <Link href="https://jestjs.io/">Jest</Link>, Cypress, Yarn, Yalc, Lerna, Workspaces,
+        SonarQube, & ADO (this is what{' '}
+        <Link href="/about#tooling-personal-projects">I&apos;m currently using on personal projects</Link>, and what{' '}
+        <Link href="/about#tooling-past">I&apos;ve used in the past</Link>).
+      </>
+    ),
+  },
+  {
+    Icon: ClockIcon,
+    key: 'experience',
+    Text: (
+      <>
+        With <b>over 20 years of experience</b>, I have a deep understanding of frontend development and a wealth of
+        knowledge to draw upon.
+      </>
+    ),
+  },
+  {
+    Icon: UserIcon,
+    key: 'clients',
+    Text: (
+      <>
+        Throughout my career, I have had the <b>opportunity to work with a diverse range of clients</b>, including
+        household names like Vodafone, MMT Digital, Maersk, and Virgin Media, as well as smaller agencies and SMEs.
+      </>
+    ),
+  },
+]
+
+type HomeProps = {
+  readMoreLinks: LinkType[]
+}
+
+export default function Home({ readMoreLinks }: HomeProps) {
   const { linksByFeatureFlag, flags } = useFeatureFlags()
 
   return (
@@ -18,39 +63,48 @@ export default function Home() {
       </Head>
 
       <main className="mx-two">
-        <article className="mb-three">
-          <aside>
-            <ul className="text-sm list-disc mb-two pl-one">
-              {/* TODO: #11 Add hero icons */}
-              <li>React, JavaScript, HTML, CSS, ...</li>
-              <li>20 years experience in frontend development</li>
-              <li>
-                Worked with companies such as Vodafone, MMT Digital, Maersk and Virgin Media as well as many smaller
-                agencies
-              </li>
-            </ul>
-          </aside>
+        <header>
+          <h1 className="font-bold text-md mb-one">Hello. I&apos;m Dave, and I&apos;m a JavaScript engineer.</h1>
+        </header>
+        {/* TODO: #25 Create plugin to control vertical rhythm via tailwind - with prose etc... https://egghead.io/blog/write-a-plugin-for-tailwind-css */}
+        <article className="max-w-2xl mb-three">
           <section>
             {/* TODO: #12 Add v1 homepage copy */}
             {/* TODO: #13 Migrate homepage content to markdown */}
             {/* <div className="prose lg:prose-xl">
               <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
             </div> */}
-            <header>
-              <h1 className="text-base font-bold mb-one">Ahoy 👋. I&apos;m Dave, and I&apos;m a Frontend engineer.</h1>
-            </header>
+
             <p className="text-sm mb-one">
-              I&apos;m currently in contract with MMT Digital, working at Vodafone. I&apos;ve been writing code since
-              font tags were all the rage.
+              I specialize in building user interfaces for web applications using technologies like React, JavaScript,
+              HTML & CSS. I&apos;m passionate about finding creative solutions to design challenges and am always
+              looking for ways to improve the user experience.
             </p>
+
+            <aside>
+              <ul className="text-sm list-inside mb-one ml-half">
+                {/* TODO: #11 Add hero icons */}
+                {INTRO_BULLETS.map((bullet) => (
+                  <li className="flex gap-half" key={bullet.key}>
+                    <span className="flex-shrink-0 w-5 mt-0.5">
+                      <bullet.Icon className="" />
+                    </span>
+                    <span>{bullet.Text}</span>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+
             <p className="text-sm mb-one">
-              I&apos;ve seen lots of things come, go and stick. I&apos;ve seen lots of things work well, and lots of
-              things break. And when I’m not seeing things, I love to code.
+              In my free time, you can find me staying up to date on the latest frontend frameworks and tools, or
+              tinkering with personal projects.
             </p>
+
             <footer>
               <h2 className="text-base font-bold mt-two mb-one">Read more...</h2>
+              <button>Just want to download my CV?</button>
               <ul className="text-sm list-disc mb-one pl-one-and-half">
-                {READ_MORE_LINKS.filter(linksByFeatureFlag).map((link) => (
+                {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
                   <li key={link.text}>
                     <Link
                       href={link.href}
@@ -69,12 +123,28 @@ export default function Home() {
   )
 }
 
-// export async function getStaticProps() {
-//   const { frontmatter, content } = getNote('home')
-//   return {
-//     props: {
-//       frontmatter,
-//       content,
-//     },
-//   }
-// }
+export async function getServerSideProps() {
+  const READ_MORE_LINKS: LinkType[] = [
+    {
+      text: `My CV - with 32% less ${sample(BALONY_SYNONYMS)}`,
+      href: '/cv',
+    },
+    {
+      text: 'Some projects I&apos;ve worked on',
+      href: '/projects',
+    },
+    {
+      text: 'An old(er) developer&apos;s handbook',
+      href: '/notes',
+    },
+  ].map((link) => ({
+    ...NAV_LINKS_BY_HREF[link.href],
+    ...link,
+  }))
+
+  return {
+    props: {
+      readMoreLinks: READ_MORE_LINKS,
+    },
+  }
+}

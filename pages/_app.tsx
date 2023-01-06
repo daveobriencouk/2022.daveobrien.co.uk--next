@@ -36,6 +36,7 @@ function App({ Component, pageProps, flagsmithState }: AppProps & { flagsmithSta
       </Head>
       <FlagsmithProvider flagsmith={flagsmith} serverState={flagsmithState}>
         <div className={`${openSans.variable} ${yrsa.variable} ${raleway.variable} font-sans`}>
+          {/* TODO: #26 Cookie based debug? Check out the rhythm */}
           <Layout showGrid={false}>
             <Component {...pageProps} />
           </Layout>
