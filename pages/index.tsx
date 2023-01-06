@@ -69,6 +69,7 @@ export default function Home({ readMoreLinks }: HomeProps) {
         {/* TODO: #25 Create plugin to control vertical rhythm via tailwind - with prose etc... https://egghead.io/blog/write-a-plugin-for-tailwind-css */}
         <article className="max-w-2xl mb-three">
           <section>
+            {/* TODO: #27 Redesign body content - font / rhythm */}
             {/* TODO: #12 Add v1 homepage copy */}
             {/* TODO: #13 Migrate homepage content to markdown */}
             {/* <div className="prose lg:prose-xl">
