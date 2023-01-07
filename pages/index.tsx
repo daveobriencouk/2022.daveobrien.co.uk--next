@@ -80,7 +80,7 @@ type HomeProps = {
 }
 
 export default function Home({ readMoreLinks }: HomeProps) {
-  const { linksByFeatureFlag, flags } = useFeatureFlags()
+  const { checkSomeFeatureFlags, linksByFeatureFlag } = useFeatureFlags()
 
   return (
     <>
@@ -137,21 +137,23 @@ export default function Home({ readMoreLinks }: HomeProps) {
               personal projects.
             </p>
 
-            <footer>
-              <h2 className="text-base font-bold mt-two mb-one">Want to find out more?</h2>
-              <ul className="text-sm list-disc mb-one pl-one-and-half">
-                {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
-                  <li key={link.text}>
-                    <Link
-                      href={link.href}
-                      className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
-                    >
-                      {link.text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </footer>
+            {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
+              <footer>
+                <h2 className="text-base font-bold mt-two mb-one">Want to find out more?</h2>
+                <ul className="text-sm list-disc mb-one pl-one-and-half">
+                  {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
+                    <li key={link.text}>
+                      <Link
+                        href={link.href}
+                        className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
+                      >
+                        {link.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </footer>
+            )}
           </section>
         </article>
       </main>
