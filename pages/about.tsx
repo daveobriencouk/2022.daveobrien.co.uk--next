@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import { generateMetaTitle } from 'utils/generateMetaTitle'
 
-// TODO: #10 Add CV page
+// TODO: #29 Add about page
 
 export default function About() {
   // TODO: #28 Trigger a 404 for pages that should not be accessbile via Feature Flags
