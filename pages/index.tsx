@@ -35,7 +35,7 @@ const INTRO_BULLETS = [
     key: 'tools',
     Text: (
       <>
-        <b>Tools & technology</b> used on my current contract projects:
+        <b>Tools & technology</b> used on my current contract projects:{' '}
         {CURRENT_TOOLS_AND_TECHNOLOGIES.map(([tool, href], i) => {
           const isSecondToLast = i === CURRENT_TOOLS_AND_TECHNOLOGIES.length - 2
           const isLast = i === CURRENT_TOOLS_AND_TECHNOLOGIES.length - 1
@@ -78,6 +78,9 @@ const INTRO_BULLETS = [
 type HomeProps = {
   readMoreLinks: LinkType[]
 }
+
+// TODO: #30 Set up correct domains for production
+// TODO: #31 Set up analytics
 
 export default function Home({ readMoreLinks }: HomeProps) {
   const { checkSomeFeatureFlags, linksByFeatureFlag } = useFeatureFlags()
