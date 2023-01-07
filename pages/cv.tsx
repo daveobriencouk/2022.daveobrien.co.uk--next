@@ -18,6 +18,7 @@ export default function Home() {
       <main className="mx-two">
         <article className="mb-three">
           <h1>Curriculum Vitae</h1>
+          <button>Quick download</button>
           <p>
             Hi, I'm Dave. I'm a (contract) senior frontend developer currently in contract at Vodafone / MMT Digital.
             I'm currently working on ... that is used
