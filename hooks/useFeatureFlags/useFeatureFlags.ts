@@ -2,7 +2,7 @@ import { useFlags } from 'flagsmith/react'
 import type { FlagOptions, Link } from 'constants/'
 
 export default function useFeatureFlags() {
-  const flags = useFlags<FlagOptions>(['section_cv', 'section_notes', 'section_project', 'section_foo'])
+  const flags = useFlags<FlagOptions>(['section_about', 'section_cv', 'section_notes', 'section_project'])
 
   const linksByFeatureFlag = (link: Link) => {
     const linkFeatureFlag = link.featureFlag && flags[link.featureFlag]

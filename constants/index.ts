@@ -4,7 +4,7 @@ import { keyBy } from 'lodash'
 export const GLOBAL_META_DESC = null
 export const GLOBAL_META_TITLE = 'Dave O’Brien'
 
-export type FlagOptions = 'section_cv' | 'section_notes' | 'section_project' | 'section_foo'
+export type FlagOptions = 'section_about' | 'section_cv' | 'section_notes' | 'section_project'
 
 export type Link = {
   featureFlag?: FlagOptions
@@ -16,6 +16,11 @@ export const NAV_LINKS: Link[] = [
   {
     href: '/',
     text: 'Home',
+  },
+  {
+    href: '/about',
+    text: 'About',
+    featureFlag: 'section_about',
   },
   {
     href: '/cv',
