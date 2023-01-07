@@ -20,14 +20,15 @@ export default function Home() {
           <h1>Curriculum Vitae</h1>
           <button>Quick download</button>
           <p>
-            Hi, I'm Dave. I'm a (contract) senior frontend developer currently in contract at Vodafone / MMT Digital.
-            I'm currently working on ... that is used
+            Hi, I&apos;m Dave. I&apos;m a (contract) senior frontend developer currently in contract at Vodafone / MMT
+            Digital. I&apos;m currently working on ... that is used
           </p>
 
           <h2>About me</h2>
           <p>
-            I'm a frontend developer with 20 years experience. I've worked with companies such as Vodafone, MMT Digital,
-            Maersk and Virgin Media as well as many smaller agencies. I'm currently working on ... that is used
+            I&apos;m a frontend developer with 20 years experience. I&apos;ve worked with companies such as Vodafone,
+            MMT Digital, Maersk and Virgin Media as well as many smaller agencies. I&apos;m currently working on ...
+            that is used
           </p>
 
           <h2>Work experience</h2>
@@ -37,7 +38,7 @@ export default function Home() {
               <p>
                 I was contracted as a React developer by MMT Digital and placed in a cross-functional agile team within
                 Vodafone to develop an exploratory sub-brand. The development unit was small, yet three months later, we
-                delivered Vodafoneʼs own youth-targeted MVNO proposition called VOXI.
+                delivered Vodafone&apos;s own youth-targeted MVNO proposition called VOXI.
               </p>
               <p>
                 Many initiatives followed, including handset financing, an online shop and Vodafone to VOXI migration
@@ -58,7 +59,7 @@ export default function Home() {
 
           {/*
           I write clear & intuitive code, I architect reusable components & modules, and am as comfortable building user interfaces & integrating APIs as I am writing backends in Node.js. I possess a problem-solving mindset with a thirst for learning that continues to mature my knowledge of front & back-end technologies.
-Practiced in agile methodologies, I'm a proven team player, and believe products are grown through cross-function collaboration. I'm both flexible & adaptable, am sympathetic to timeframes & constraints, and thrive when cultivating a product that yields to the demands of the customer.
+Practiced in agile methodologies, I&apos;m a proven team player, and believe products are grown through cross-function collaboration. I&apos;m both flexible & adaptable, am sympathetic to timeframes & constraints, and thrive when cultivating a product that yields to the demands of the customer.
  */}
 
           {/* About Me
