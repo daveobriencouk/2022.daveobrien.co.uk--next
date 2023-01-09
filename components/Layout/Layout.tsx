@@ -39,8 +39,9 @@ export default function Layout({ children, showGrid }: LayoutProps) {
       <Header showHeader={showHeader} />
       {/* TODO: #5 Animate children and footer in */}
       <div className="flex-1">{children}</div>
-      <footer className="bg-neutral-200 mt-one py-one px-two">
+      <footer className="bg-neutral-200 mt-one py-half md:py-one px-two">
         <div className="flex text-sm">&copy;{new Date().getFullYear()} Dave O&apos;Brien</div>
+        {/* TODO: #32 Add github repo */}
       </footer>
     </div>
   )

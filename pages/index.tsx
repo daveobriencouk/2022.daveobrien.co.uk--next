@@ -93,7 +93,7 @@ export default function Home({ readMoreLinks }: HomeProps) {
         {/* <meta name="description" content="" /> */}
       </Head>
 
-      <main className="mx-two">
+      <main className="mx-one md:mx-two">
         <header>
           <h1 className="font-bold text-md mb-one">Hello. I&apos;m Dave, and I&apos;m a JavaScript engineer.</h1>
         </header>

@@ -30,11 +30,11 @@ export default function Header({ showHeader }: HeaderProps) {
         <>
           {/* TODO: #1 Perform an A11y check */}
           {/* TODO: #2 Add responsive nav transitions - https://headlessui.com/react/disclosure#transitions, https://www.framer.com/motion/, https://www.react-spring.dev/ */}
-          <ResponsiveNavButton className="absolute z-20 md:hidden top-one right-one" open={open} />
+          <ResponsiveNavButton className="absolute z-20 md:hidden top-half right-half" open={open} />
           <ResponsiveNav className="absolute z-10 w-full min-h-full bg-white md:hidden" links={NAV_LINKS} />
 
-          <header className="text-neutral-700 mt-one mb-two">
-            <div className="flex flex-col items-start justify-between mx-two gap-x-one md:flex-row">
+          <header className="text-neutral-700 mt-half md:mt-one mb-two">
+            <div className="flex flex-col items-start justify-between mx-one md:mx-two gap-x-one md:flex-row">
               <Logo
                 className="mr-one-and-half md:mr-0"
                 showLogo={showHeader}
