@@ -17,16 +17,16 @@ const CURRENT_TOOLS_AND_TECHNOLOGIES = [
   ['styled-components', 'https://styled-components.com/'],
   ['React Query', 'https://tanstack.com/query/v4/'],
   ['MobX', 'https://mobx.js.org/'],
-  ['React Router', 'https://reactrouter.com/'],
-  ['Jest', 'https://jestjs.io/'],
-  ['Cypress', 'https://www.cypress.io/'],
-  ['Yarn', 'https://yarnpkg.com/'],
-  ['Yalc', 'https://github.com/wclr/yalc/'],
   ['Lerna', 'https://lerna.js.org/'],
-  ['Yarn Workspaces', 'https://classic.yarnpkg.com/lang/en/docs/workspaces/'],
-  ['SonarQube', 'https://www.sonarsource.com/products/sonarqube/'],
-  ['Webpack', 'https://webpack.js.org/'],
-  ['ADO', 'https://azure.microsoft.com/en-us/products/devops/'],
+  // ['React Router', 'https://reactrouter.com/'],
+  // ['Jest', 'https://jestjs.io/'],
+  ['Cypress', 'https://www.cypress.io/'],
+  // ['Yarn', 'https://yarnpkg.com/'],
+  // ['Yalc', 'https://github.com/wclr/yalc/'],
+  // ['Yarn Workspaces', 'https://classic.yarnpkg.com/lang/en/docs/workspaces/'],
+  // ['SonarQube', 'https://www.sonarsource.com/products/sonarqube/'],
+  // ['Webpack', 'https://webpack.js.org/'],
+  // ['ADO', 'https://azure.microsoft.com/en-us/products/devops/'],
 ]
 
 const INTRO_BULLETS = [
@@ -35,7 +35,7 @@ const INTRO_BULLETS = [
     key: 'tools',
     Text: (
       <>
-        <b>Tools & technology</b> used on my current contract projects:{' '}
+        <b>Tools & technology</b> used on my current contract projects include{' '}
         {CURRENT_TOOLS_AND_TECHNOLOGIES.map(([tool, href], i) => {
           const isSecondToLast = i === CURRENT_TOOLS_AND_TECHNOLOGIES.length - 2
           const isLast = i === CURRENT_TOOLS_AND_TECHNOLOGIES.length - 1
@@ -48,8 +48,11 @@ const INTRO_BULLETS = [
             </>
           )
         })}
-        This is what <Link href="/about#tooling-personal-projects">I&apos;m currently using on personal projects</Link>,
-        and what <Link href="/about#tooling-past">I&apos;ve used in the past</Link>.
+        Take a look at my <Link href="/about#tooling">full list of tooling I&apos;ve used in the past and present</Link>
+        .
+        {/* TODO: #33 Cut the list to 5/6 and replace below with a link to view full list and tooling over the years */}
+        {/* This is what <Link href="/about#tooling-personal-projects">I&apos;m currently using on personal projects</Link>,
+        and what <Link href="/about#tooling-past">I&apos;ve used in the past</Link>. */}
       </>
     ),
   },
@@ -95,23 +98,22 @@ export default function Home({ readMoreLinks }: HomeProps) {
 
       <main className="mx-one md:mx-two">
         <header>
-          <h1 className="font-bold text-md mb-one">Hello. I&apos;m Dave, and I&apos;m a JavaScript engineer.</h1>
+          <h1 className="font-bold text-md mb-one">Hello. I&apos;m Dave, and I&apos;m a Frontend engineer.</h1>
         </header>
         {/* TODO: #25 Create plugin to control vertical rhythm via tailwind - with prose etc... https://egghead.io/blog/write-a-plugin-for-tailwind-css */}
         <article className="max-w-2xl mb-three">
           <section>
             {/* TODO: #27 Redesign body content - font / rhythm */}
             {/* TODO: #13 Migrate homepage content to markdown */}
-            <p className="text-sm mb-one">
-              I have a strong focus on building user interfaces for web applications using technologies like React,
-              JavaScript, HTML, and CSS. I am passionate about finding creative solutions to challenges and am dedicated
-              to improving both the user and developer experience.
+            <p className="text-base mb-one">
+              With a deep passion for frontend engineering and a strong understanding of the web, I am adept at creating
+              intuitive and engaging user experiences using technologies like React, JavaScript, HTML, and CSS.
             </p>
 
             <aside>
-              <ul className="text-sm list-inside mb-one ml-half">
+              <ul className="text-base list-inside mb-one ml-quarter md:ml-half">
                 {INTRO_BULLETS.map((bullet) => (
-                  <li className="flex gap-half" key={bullet.key}>
+                  <li className="flex gap-half mb-one" key={bullet.key}>
                     <span className="flex-shrink-0 w-5 mt-0.5">
                       <bullet.Icon className="" />
                     </span>
@@ -121,23 +123,18 @@ export default function Home({ readMoreLinks }: HomeProps) {
               </ul>
             </aside>
 
-            <p className="text-sm mb-one">
-              My ability to write clear and intuitive code and architect reusable components and modules, combined with
-              my extensive experience in building user interfaces, integrating APIs, and working with{' '}
-              <Link href="https://expressjs.com/">Express</Link>, gives me a comprehensive understanding of both the
-              frontend and backend.
+            <p className="text-base mb-one">
+              As a front-end engineer, I am equally comfortable crafting user interfaces, integrating APIs, and building
+              applications. In addition, I have a strong foundation in backend development, including experience with
+              Express, Ruby, and PHP. My diverse skill set and adaptability allow me to tackle a wide range of projects
+              and challenges with confidence.
             </p>
 
-            <p className="text-sm mb-one">
+            <p className="text-base mb-one">
               I am well-versed in agile methodologies and thrive in collaborative environments where I can contribute to
               the growth and success of a product. I am flexible and adaptable, with a strong awareness of time-frames
               and constraints, and I am committed to delivering high-quality solutions that meet the needs of the
               customer.
-            </p>
-
-            <p className="text-sm mb-one">
-              In my free time, you can find me staying up to date on the latest tooling and techniques or tinkering with
-              personal projects.
             </p>
 
             {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
