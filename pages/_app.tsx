@@ -1,17 +1,31 @@
 import 'styles/globals.css'
 import { Analytics } from '@vercel/analytics/react'
-import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import flagsmith from 'flagsmith/isomorphic'
 import { FlagsmithProvider } from 'flagsmith/react'
 import { IState } from 'flagsmith/types'
+
+import type { ReactElement, ReactNode } from 'react'
+import type { NextPage } from 'next'
+import type { AppProps } from 'next/app'
 
 import { GLOBAL_META_DESC, GLOBAL_META_TITLE } from 'constants/'
 import Layout from 'components/Layout'
 
 // TODO: #35 Align vertical rhythm to base line, rather than leading
 
-function App({ Component, pageProps, flagsmithState }: AppProps & { flagsmithState: IState }) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+  flagsmithState: IState
+}
+
+function App({ Component, pageProps, flagsmithState }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page)
+
   return (
     <>
       <Head>
@@ -22,9 +36,7 @@ function App({ Component, pageProps, flagsmithState }: AppProps & { flagsmithSta
       </Head>
       <FlagsmithProvider flagsmith={flagsmith} serverState={flagsmithState}>
         {/* TODO: #26 Cookie based debug? Check out the rhythm */}
-        <Layout showGrid={false}>
-          <Component {...pageProps} onAnimationComplete={() => console.log('Animation completssse!')} />
-        </Layout>
+        {getLayout(<Component {...pageProps} />)}
       </FlagsmithProvider>
       <Analytics />
     </>

@@ -1,12 +1,16 @@
 import Head from 'next/head'
 import { ClockIcon, UserIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
-import { random } from 'lodash'
-import { sample } from 'lodash'
+import { random, sample } from 'lodash'
+
+import type { ReactElement } from 'react'
 
 import Link from 'components/Link'
 import { BALONY_SYNONYMS, NAV_LINKS_BY_HREF } from 'constants/'
 import type { Link as LinkType } from 'constants/'
 import useFeatureFlags from 'hooks/useFeatureFlags'
+
+import type { NextPageWithLayout } from './_app'
+import BaseLayout from 'components/BaseLayout'
 
 // TODO: #10 Add CV page
 // TODO: #24 Add an about me page (like KCD's)
@@ -84,7 +88,6 @@ type HomeProps = {
 }
 
 // TODO: #30 Set up correct domains for production
-// TODO: #31 Set up analytics
 
 export default function Home({ readMoreLinks }: HomeProps) {
   const { checkSomeFeatureFlags, linksByFeatureFlag } = useFeatureFlags()
@@ -158,6 +161,10 @@ export default function Home({ readMoreLinks }: HomeProps) {
       </main>
     </>
   )
+}
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <BaseLayout>{page}</BaseLayout>
 }
 
 export async function getServerSideProps() {
