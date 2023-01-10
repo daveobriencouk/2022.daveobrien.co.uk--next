@@ -2,29 +2,12 @@ import 'styles/globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { Raleway, Yrsa, Open_Sans } from '@next/font/google'
 import flagsmith from 'flagsmith/isomorphic'
 import { FlagsmithProvider } from 'flagsmith/react'
 import { IState } from 'flagsmith/types'
 
 import { GLOBAL_META_DESC, GLOBAL_META_TITLE } from 'constants/'
 import Layout from 'components/Layout'
-
-// https://nextjs.org/docs/basic-features/font-optimization#with-tailwind-css
-const raleway = Raleway({
-  subsets: ['latin'],
-  variable: '--font-raleway',
-})
-
-const yrsa = Yrsa({
-  subsets: ['latin'],
-  variable: '--font-yrsa',
-})
-
-const openSans = Open_Sans({
-  subsets: ['latin'],
-  variable: '--font-open-sans',
-})
 
 // TODO: #35 Align vertical rhythm to base line, rather than leading
 
@@ -38,12 +21,10 @@ function App({ Component, pageProps, flagsmithState }: AppProps & { flagsmithSta
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FlagsmithProvider flagsmith={flagsmith} serverState={flagsmithState}>
-        <div className={`${openSans.variable} ${yrsa.variable} ${raleway.variable} font-sans`}>
-          {/* TODO: #26 Cookie based debug? Check out the rhythm */}
-          <Layout showGrid={false}>
-            <Component {...pageProps} />
-          </Layout>
-        </div>
+        {/* TODO: #26 Cookie based debug? Check out the rhythm */}
+        <Layout showGrid={false}>
+          <Component {...pageProps} onAnimationComplete={() => console.log('Animation completssse!')} />
+        </Layout>
       </FlagsmithProvider>
       <Analytics />
     </>
