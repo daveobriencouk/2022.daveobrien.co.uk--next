@@ -33,8 +33,8 @@ export default function Header({ showHeader }: HeaderProps) {
           <ResponsiveNavButton className="absolute z-20 md:hidden top-half right-half" open={open} />
           <ResponsiveNav className="absolute z-10 w-full min-h-full bg-white md:hidden" links={NAV_LINKS} />
 
-          <header className="text-neutral-700 mt-half md:mt-one mb-two">
-            <div className="flex flex-col items-start justify-between mx-one md:mx-two gap-x-one md:flex-row">
+          <header className="text-neutral-700 mt-half md:mt-one mb-two md:mb-one-and-half">
+            <div className="flex flex-col items-start justify-between mx-one md:mx-one-and-half gap-x-one md:flex-row">
               <Logo
                 className="mr-one-and-half md:mr-0"
                 showLogo={showHeader}
@@ -43,7 +43,13 @@ export default function Header({ showHeader }: HeaderProps) {
                 straplineDuration={straplineDuration}
               />
               <div className="hidden md:flex">
-                <Nav delay={navDelay} duration={navDuration} links={NAV_LINKS} showNav={showHeader} />
+                <Nav
+                  delay={navDelay}
+                  duration={navDuration}
+                  links={NAV_LINKS}
+                  showNav={showHeader}
+                  className="md:mt-three lg:mt-three xl:mt-five"
+                />
               </div>
             </div>
           </header>

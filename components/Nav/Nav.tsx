@@ -7,21 +7,25 @@ import type { Link as LinkType } from 'constants/'
 import useFeatureFlags from 'hooks/useFeatureFlags'
 
 type NavProps = {
+  className?: string
   delay?: number
   duration?: number
   links: LinkType[]
   showNav?: boolean
 }
 
-export default function Nav({ delay = 0, duration = 0, links, showNav }: NavProps) {
+export default function Nav({ className, delay = 0, duration = 0, links, showNav }: NavProps) {
   const { linksByFeatureFlag } = useFeatureFlags()
   const router = useRouter()
 
   return (
     <ul
-      className={`text-neutral-500 flex flex-initial md:mt-two lg:mt-three xl:mt-four justify-center transition-opacity ${
-        showNav ? 'opacity-1' : 'opacity-0'
-      }`}
+      className={classNames(
+        'text-neutral-500 flex flex-initial justify-center transition-opacity',
+        { 'opacity-1': showNav },
+        { 'opacity-0': !showNav },
+        className
+      )}
       style={{
         transitionDelay: `${delay}ms`,
         transitionDuration: `${duration}ms`,
@@ -32,7 +36,7 @@ export default function Nav({ delay = 0, duration = 0, links, showNav }: NavProp
           <Link
             href={href}
             className={classNames(
-              'block text-lg md:text-md lg:text-lg heading underline-offset-4 focus:outline-none px-quarter hover:underline focus:underline',
+              'block leading-one text-md heading underline-offset-4 focus:outline-none px-quarter hover:underline focus:underline',
               { 'text-primary-700 hover:text-primary-900 focus:text-primary-900': router.pathname === href },
               {
                 'focus:text-neutral-700 hover:text-neutral-700': router.pathname !== href,

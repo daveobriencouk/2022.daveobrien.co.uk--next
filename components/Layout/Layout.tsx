@@ -9,7 +9,7 @@ type LayoutProps = {
 }
 
 const gridStyles = {
-  backgroundSize: '100% 1.5rem',
+  backgroundSize: '100% 1.75rem',
   backgroundImage:
     'linear-gradient(to right, #ddd 1px, transparent 1px), linear-gradient(to bottom, #ddd 1px, transparent 1px)',
 }

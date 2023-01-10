@@ -24,10 +24,10 @@ export default function Logo({
   // TODO: #7 Sort prefers reduces motion for header animations
   // TODO: #6 Add closing tag graphic device
   return (
-    <hgroup className={classNames('flex flex-col items-start md:items-end', className)}>
-      <h1 className="font-display font-black text-6xl lg:text-7xl xl:text-8xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
+    <hgroup className={classNames('flex flex-col items-start xl:items-end', className)}>
+      <h1 className="font-display font-black text-3.5xl md:text-3xl xl:text-4xl tracking-tightest mr-[0.08em] -indent-[0.055em]">
         {/* TODO: #8 Add conditional wrap to logo link */}
-        <Link href="/" className="flex flex-wrap items-end gap-x-one">
+        <Link href="/" className="flex flex-wrap items-end gap-x-quarter">
           <span className="text-neutral-600">
             {['D', 'a', 'v', 'e'].map((letter) => (
               <LogoLetter
@@ -53,7 +53,7 @@ export default function Logo({
         </Link>
       </h1>
       <h2
-        className={`text-neutral-700 font-display font-light text-sm lg:text-base xl:text-md tracking-widest uppercase xl:-mt-one -mr-[0.55em] transition-opacity ${
+        className={`text-neutral-700 font-display font-light text-sm md:text-base xl:text-md tracking-widest uppercase -mt-half xl:-mt-none -mr-[0.55em] transition-opacity ${
           showLogo ? 'opacity-1' : 'opacity-0'
         }`}
         style={{
@@ -61,7 +61,7 @@ export default function Logo({
           transitionDuration: `${straplineDuration}ms`,
         }}
       >
-        Frontend engineer
+        Frontend Engineer
       </h2>
     </hgroup>
   )

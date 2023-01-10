@@ -13,10 +13,7 @@ export default function Link({ children, className, href }: LinkProps) {
   return (
     <NextLink
       href={href}
-      className={classNames(
-        'font-medium text-primary-700 visited:text-primary-900 hover:underline underline-offset-2',
-        className
-      )}
+      className={classNames('text-primary-700 visited:text-primary-900 hover:underline underline-offset-2', className)}
     >
       {children}
     </NextLink>

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { ClockIcon, UserIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
+import { random } from 'lodash'
 import { sample } from 'lodash'
 
 import Link from 'components/Link'
@@ -96,14 +97,13 @@ export default function Home({ readMoreLinks }: HomeProps) {
         {/* <meta name="description" content="" /> */}
       </Head>
 
-      <main className="mx-one md:mx-two">
+      <main className="mx-one md:mx-one-and-half">
         <header>
-          <h1 className="font-bold text-md mb-one">Hello. I&apos;m Dave, and I&apos;m a Frontend engineer.</h1>
+          <h1 className="font-bold text-md mb-one">Hello. I&apos;m Dave, and I&apos;m a Frontend Engineer.</h1>
         </header>
         {/* TODO: #25 Create plugin to control vertical rhythm via tailwind - with prose etc... https://egghead.io/blog/write-a-plugin-for-tailwind-css */}
         <article className="max-w-2xl mb-three">
           <section>
-            {/* TODO: #27 Redesign body content - font / rhythm */}
             {/* TODO: #13 Migrate homepage content to markdown */}
             <p className="text-base mb-one">
               With a deep passion for frontend engineering and a strong understanding of the web, I am adept at creating
@@ -139,8 +139,7 @@ export default function Home({ readMoreLinks }: HomeProps) {
 
             {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
               <footer>
-                <h2 className="text-base font-bold mt-two mb-one">Want to find out more?</h2>
-                <ul className="text-sm list-disc mb-one pl-one-and-half">
+                <ul className="text-base list-disc mt-two mb-one pl-one-and-half">
                   {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
                     <li key={link.text}>
                       <Link
@@ -162,13 +161,14 @@ export default function Home({ readMoreLinks }: HomeProps) {
 }
 
 export async function getServerSideProps() {
+  // TODO: #34 Shift this on the client, so I can add bolding etc... just send down the random value and sampled BALONY_SYNONYMS
   const READ_MORE_LINKS: LinkType[] = [
     {
-      text: `My CV - with 32% less ${sample(BALONY_SYNONYMS)}`,
+      text: `Have a gander at my CV - with ${random(20, 45)}% less ${sample(BALONY_SYNONYMS)}`,
       href: '/cv',
     },
     {
-      text: 'More about me',
+      text: 'Read a little more about me - with less polish, but more substance',
       // text: `More about me - with 32% less ${sample(BALONY_SYNONYMS)}`,
       href: '/about',
     },

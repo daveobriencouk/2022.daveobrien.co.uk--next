@@ -26,6 +26,8 @@ const openSans = Open_Sans({
   variable: '--font-open-sans',
 })
 
+// TODO: #35 Align vertical rhythm to base line, rather than leading
+
 function App({ Component, pageProps, flagsmithState }: AppProps & { flagsmithState: IState }) {
   return (
     <>
