@@ -25,6 +25,8 @@ type AppPropsWithLayout = AppProps & {
   flagsmithState: IState
 }
 
+// TODO: #26 Cookie based debug? Check out the rhythm
+
 function App({ Component, pageProps, flagsmithState }: AppPropsWithLayout) {
   // INFO: Default layout to <Layout>
   const getLayout = Component.getLayout ?? ((page: ReactElement) => <Layout>{page}</Layout>)
@@ -38,8 +40,7 @@ function App({ Component, pageProps, flagsmithState }: AppPropsWithLayout) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FlagsmithProvider flagsmith={flagsmith} serverState={flagsmithState}>
-        {/* TODO: #26 Cookie based debug? Check out the rhythm */}
-        {getLayout(<Component {...pageProps} />)}
+        <>{getLayout(<Component {...pageProps} />)}</>
       </FlagsmithProvider>
       <Analytics />
     </>

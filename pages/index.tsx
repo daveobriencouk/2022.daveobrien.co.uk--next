@@ -2,21 +2,20 @@ import React from 'react'
 import Head from 'next/head'
 import { ClockIcon, UserIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
 import { TypeAnimation } from 'react-type-animation'
-import { useSessionStorage } from 'usehooks-ts'
 import { random, sample } from 'lodash'
 
 import type { ReactElement } from 'react'
 
-import Link from 'components/Link'
-import { BALONY_SYNONYMS, NAV_LINKS_BY_HREF } from 'constants/'
-import type { Link as LinkType } from 'constants/'
-import useFeatureFlags from 'hooks/useFeatureFlags'
-
 import BaseLayout from 'components/BaseLayout'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
+import Link from 'components/Link'
 import Main from 'components/Main'
 import MainContentTransition from 'components/MainContentTransition'
+import { BALONY_SYNONYMS, NAV_LINKS_BY_HREF } from 'constants/'
+import type { Link as LinkType } from 'constants/'
+import useFeatureFlags from 'hooks/useFeatureFlags'
+import useInitialPageLoad from 'hooks/useInitialPageLoad'
 
 // TODO: #10 Add CV page
 // TODO: #24 Add an about me page (like KCD's)
@@ -94,15 +93,14 @@ type HomeProps = {
   readMoreLinks: LinkType[]
 }
 
-// TODO: #30 Set up correct domains for production
-
 export default function Home({ readMoreLinks }: HomeProps) {
   const { checkSomeFeatureFlags, linksByFeatureFlag } = useFeatureFlags()
-  // const [hasAnimationOccurred, setHasAnimationOccurred] = useSessionStorage('dob-homePageAnimationOccurred', false)
+
+  const { hasInitialPageLoaded, loading, setInitialPageLoad } = useInitialPageLoad()
   const [isHeaderShowing, setIsHeaderShowing] = React.useState(false)
   const [isMainContentShowing, setIsMainContentShowing] = React.useState(false)
 
-  const hasAnimationOccurred = true
+  if (loading) return null
 
   return (
     <>
@@ -113,16 +111,15 @@ export default function Home({ readMoreLinks }: HomeProps) {
       </Head>
 
       <Header
-        className="mt-half md:mt-one mb-two md:mb-one-and-half xl:mb-two mx-one md:mx-one-and-half"
         onTransitionEnd={() => setIsMainContentShowing(true)}
         show={isHeaderShowing}
-        skipAnimation={hasAnimationOccurred}
+        skipAnimation={hasInitialPageLoaded}
       />
 
       <Main>
         <header>
-          {hasAnimationOccurred ? (
-            <h1 className="font-bold text-md mb-one">Hello. I’m Dave, and I’m a Frontend Engineer</h1>
+          {hasInitialPageLoaded ? (
+            <h1 className="font-bold text-md mb-one">Hello. I’m Dave, and I’m a Frontend Engineer.</h1>
           ) : (
             <TypeAnimation
               sequence={[
@@ -142,10 +139,10 @@ export default function Home({ readMoreLinks }: HomeProps) {
             />
           )}
         </header>
-        {/* onTransitionEnd={() =>
-        // setHasAnimationOccurred(true)
-        } */}
-        <MainContentTransition show={isMainContentShowing || hasAnimationOccurred}>
+        <MainContentTransition
+          show={isMainContentShowing || hasInitialPageLoaded}
+          onTransitionEnd={() => setInitialPageLoad(true)}
+        >
           {/*
             // TODO: #36 Add navigational buttons to skip or display the CV
             <p>Me in 60 seconds 👇</p>
@@ -209,7 +206,7 @@ export default function Home({ readMoreLinks }: HomeProps) {
         </MainContentTransition>
       </Main>
 
-      <MainContentTransition show={isMainContentShowing || hasAnimationOccurred}>
+      <MainContentTransition show={isMainContentShowing || hasInitialPageLoaded}>
         <Footer />
       </MainContentTransition>
     </>
