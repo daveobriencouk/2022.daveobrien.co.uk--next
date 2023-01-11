@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import type { LogoProps } from '../../Logo'
 
@@ -19,11 +19,16 @@ export default function LogoLetter({
   show,
   skipAnimation,
 }: LogoLetterProps) {
+  const [transitionDelay, setTransitionDelay] = useState<number | undefined>(undefined)
+  useEffect(() => {
+    setTransitionDelay(Math.round(Math.random() * delayRange))
+  }, [delayRange])
+
   return (
     <span
       key={letter}
       style={{
-        transitionDelay: `${Math.round(Math.random() * delayRange)}ms`,
+        transitionDelay: `${transitionDelay}ms`,
         transitionDuration: `${duration}ms`,
       }}
       className={`transition-opacity ${show || skipAnimation ? 'opacity-1' : 'opacity-0'}`}
