@@ -82,7 +82,7 @@ export default function Header({ className, onTransitionEnd, show, skipAnimation
                 handleNavTransitionEnd()
               }}
               show={isNavShowing || skipAnimation}
-              className="md:mt-three lg:mt-three xl:mt-five"
+              className="md:mt-two xl:mt-three"
             />
           </div>
         </div>
