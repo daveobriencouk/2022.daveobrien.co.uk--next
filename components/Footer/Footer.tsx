@@ -11,7 +11,13 @@ type FooterProps = {
 
 export default function Footer({ className }: FooterProps) {
   return (
-    <footer className={classNames('text-sm text-neutral-600', className)}>
+    <footer
+      className={classNames(
+        'py-half md:py-one mt-one mx-one md:mx-one-and-half',
+        'text-sm text-neutral-600',
+        className
+      )}
+    >
       <nav>
         <ul className="flex">
           {FOOTER_LINKS.map(({ href, text }, i) => {

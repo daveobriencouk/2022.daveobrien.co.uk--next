@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import Head from 'next/head'
 import flagsmith from 'flagsmith/isomorphic'
 import { FlagsmithProvider } from 'flagsmith/react'
-import { IState } from 'flagsmith/types'
+import type { IState } from 'flagsmith/types'
 
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
@@ -24,7 +24,8 @@ type AppPropsWithLayout = AppProps & {
 }
 
 function App({ Component, pageProps, flagsmithState }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page)
+  // INFO: Default layout to <Layout>
+  const getLayout = Component.getLayout ?? ((page: ReactElement) => <Layout>{page}</Layout>)
 
   return (
     <>

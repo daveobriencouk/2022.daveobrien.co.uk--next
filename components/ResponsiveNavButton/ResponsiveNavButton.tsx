@@ -4,14 +4,18 @@ import classNames from 'classnames'
 
 type ResponsiveNavButtonProps = {
   className?: string
+  onTransitionEnd?: () => void
   open: boolean
+  show: boolean
 }
 
-export default function ResponsiveNavButton({ className, open }: ResponsiveNavButtonProps) {
+export default function ResponsiveNavButton({ className, onTransitionEnd, open, show }: ResponsiveNavButtonProps) {
   return (
     <Disclosure.Button
+      onTransitionEnd={onTransitionEnd}
       className={classNames(
         'inline-flex items-center justify-center p-quarter text-neutral-500 hover:text-neutral-900 focus-ring',
+        `transition-opacity ${show ? 'opacity-1' : 'opacity-0'}`,
         className,
         { 'bg-neutral-100': open }
       )}

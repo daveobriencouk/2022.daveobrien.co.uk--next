@@ -8,26 +8,27 @@ import useFeatureFlags from 'hooks/useFeatureFlags'
 
 type NavProps = {
   className?: string
-  delay?: number
   duration?: number
   links: LinkType[]
-  showNav?: boolean
+  onTransitionEnd?: () => void
+  show?: boolean
 }
 
-export default function Nav({ className, delay = 0, duration = 0, links, showNav }: NavProps) {
+export default function Nav({ className, duration = 0, links, onTransitionEnd, show }: NavProps) {
   const { linksByFeatureFlag } = useFeatureFlags()
   const router = useRouter()
 
   return (
     <ul
+      onTransitionEnd={() => {
+        onTransitionEnd && onTransitionEnd()
+      }}
       className={classNames(
-        'text-neutral-500 flex flex-initial justify-center transition-opacity',
-        { 'opacity-1': showNav },
-        { 'opacity-0': !showNav },
+        'text-neutral-500 flex flex-initial justify-center',
+        `transition-opacity ${show ? 'opacity-1' : 'opacity-0'}`,
         className
       )}
       style={{
-        transitionDelay: `${delay}ms`,
         transitionDuration: `${duration}ms`,
       }}
     >
@@ -36,11 +37,12 @@ export default function Nav({ className, delay = 0, duration = 0, links, showNav
           <Link
             href={href}
             className={classNames(
-              'block leading-one text-md heading underline-offset-4 focus:outline-none px-quarter hover:underline focus:underline',
-              { 'text-primary-700 hover:text-primary-900 focus:text-primary-900': router.pathname === href },
-              {
-                'focus:text-neutral-700 hover:text-neutral-700': router.pathname !== href,
-              }
+              'block leading-one text-md heading  px-quarter ',
+              `underline-offset-4 focus:outline-none  hover:underline focus:underline ${
+                router.pathname === href
+                  ? 'text-primary-700 hover:text-primary-900 focus:text-primary-900'
+                  : 'focus:text-neutral-700 hover:text-neutral-700'
+              } `
             )}
           >
             {text}

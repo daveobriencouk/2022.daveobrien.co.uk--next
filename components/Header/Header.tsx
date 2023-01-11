@@ -12,10 +12,15 @@ import { NAV_LINKS } from 'constants/'
 
 type HeaderProps = {
   className?: string
-  showHeader?: boolean
+  onTransitionEnd?: () => void
+  show?: boolean
+  skipAnimation?: boolean
 }
 
-export default function Header({ className, showHeader }: HeaderProps) {
+// show Furniture animate...
+
+export default function Header({ className, onTransitionEnd, show, skipAnimation = false }: HeaderProps) {
+  const [isNavShowing, setIsNavShowing] = React.useState(false)
   const [animationTimings] = useLocalStorage('headerAnimationTimings', {
     letterDelayRange: 500,
     letterDuration: 250,
@@ -24,35 +29,59 @@ export default function Header({ className, showHeader }: HeaderProps) {
   })
 
   const { letterDelayRange, letterDuration, straplineDuration, navDuration } = animationTimings
-  const navDelay = letterDuration + letterDelayRange + straplineDuration
+
+  function handleNavTransitionEnd() {
+    onTransitionEnd && onTransitionEnd()
+  }
 
   return (
     <>
       <Disclosure as="div">
-        {({ open }) => (
-          <>
-            {/* TODO: #1 Perform an A11y check */}
-            {/* TODO: #2 Add responsive nav transitions - https://headlessui.com/react/disclosure#transitions, https://www.framer.com/motion/, https://www.react-spring.dev/ */}
-            <ResponsiveNavButton className="absolute z-20 md:hidden top-half right-half" open={open} />
-            <ResponsiveNav className="absolute z-10 w-full min-h-full bg-white md:hidden" links={NAV_LINKS} />
-          </>
-        )}
+        {({ open }) => {
+          return (
+            <>
+              {/* TODO: #1 Perform an A11y check */}
+              {/* TODO: #2 Add responsive nav transitions - https://headlessui.com/react/disclosure#transitions, https://www.framer.com/motion/, https://www.react-spring.dev/ */}
+              <ResponsiveNavButton
+                className="absolute z-20 md:hidden top-half right-half"
+                open={open}
+                show={isNavShowing || skipAnimation}
+                onTransitionEnd={() => {
+                  handleNavTransitionEnd()
+                }}
+              />
+              <ResponsiveNav className="absolute z-10 w-full min-h-full bg-white md:hidden" links={NAV_LINKS} />
+            </>
+          )
+        }}
       </Disclosure>
-      <header className={classNames('text-neutral-700', className)}>
+      <header
+        className={classNames(
+          'mt-half md:mt-one mb-two md:mb-one-and-half xl:mb-two mx-one md:mx-one-and-half',
+          'text-neutral-700',
+          className
+        )}
+      >
         <div className="flex flex-col items-start justify-between gap-x-one md:flex-row">
           <Logo
             className="mr-one-and-half md:mr-0"
-            showLogo={showHeader}
             letterDelayRange={letterDelayRange}
             letterDuration={letterDuration}
+            onTransitionEnd={() => {
+              setIsNavShowing(true)
+            }}
+            show={show || skipAnimation}
+            showStrapline={skipAnimation}
             straplineDuration={straplineDuration}
           />
           <div className="hidden md:flex">
             <Nav
-              delay={navDelay}
               duration={navDuration}
               links={NAV_LINKS}
-              showNav={showHeader}
+              onTransitionEnd={() => {
+                handleNavTransitionEnd()
+              }}
+              show={isNavShowing || skipAnimation}
               className="md:mt-three lg:mt-three xl:mt-five"
             />
           </div>

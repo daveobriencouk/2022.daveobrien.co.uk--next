@@ -1,5 +1,8 @@
+import React from 'react'
 import Head from 'next/head'
 import { ClockIcon, UserIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
+import { TypeAnimation } from 'react-type-animation'
+import { useSessionStorage } from 'usehooks-ts'
 import { random, sample } from 'lodash'
 
 import type { ReactElement } from 'react'
@@ -9,8 +12,11 @@ import { BALONY_SYNONYMS, NAV_LINKS_BY_HREF } from 'constants/'
 import type { Link as LinkType } from 'constants/'
 import useFeatureFlags from 'hooks/useFeatureFlags'
 
-import type { NextPageWithLayout } from './_app'
 import BaseLayout from 'components/BaseLayout'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
+import Main from 'components/Main'
+import MainContentTransition from 'components/MainContentTransition'
 
 // TODO: #10 Add CV page
 // TODO: #24 Add an about me page (like KCD's)
@@ -84,6 +90,7 @@ const INTRO_BULLETS = [
 ]
 
 type HomeProps = {
+  onAnimationComplete: () => void
   readMoreLinks: LinkType[]
 }
 
@@ -91,6 +98,11 @@ type HomeProps = {
 
 export default function Home({ readMoreLinks }: HomeProps) {
   const { checkSomeFeatureFlags, linksByFeatureFlag } = useFeatureFlags()
+  // const [hasAnimationOccurred, setHasAnimationOccurred] = useSessionStorage('dob-homePageAnimationOccurred', false)
+  const [isHeaderShowing, setIsHeaderShowing] = React.useState(false)
+  const [isMainContentShowing, setIsMainContentShowing] = React.useState(false)
+
+  const hasAnimationOccurred = true
 
   return (
     <>
@@ -100,65 +112,106 @@ export default function Home({ readMoreLinks }: HomeProps) {
         {/* <meta name="description" content="" /> */}
       </Head>
 
-      <main className="mx-one md:mx-one-and-half">
+      <Header
+        className="mt-half md:mt-one mb-two md:mb-one-and-half xl:mb-two mx-one md:mx-one-and-half"
+        onTransitionEnd={() => setIsMainContentShowing(true)}
+        show={isHeaderShowing}
+        skipAnimation={hasAnimationOccurred}
+      />
+
+      <Main>
         <header>
-          <h1 className="font-bold text-md mb-one">Hello. I&apos;m Dave, and I&apos;m a Frontend Engineer.</h1>
+          {hasAnimationOccurred ? (
+            <h1 className="font-bold text-md mb-one">Hello. I’m Dave, and I’m a Frontend Engineer</h1>
+          ) : (
+            <TypeAnimation
+              sequence={[
+                'Hello.',
+                500,
+                'Hello. I’m Dave,',
+                300,
+                'Hello. I’m Dave, and I’m a Frontend Developer.',
+                200,
+                'Hello. I’m Dave, and I’m a Frontend Engineer.',
+                () => setIsHeaderShowing(true),
+              ]}
+              wrapper="h1"
+              speed={55}
+              cursor={false}
+              className="font-bold text-md mb-one"
+            />
+          )}
         </header>
-        {/* TODO: #25 Create plugin to control vertical rhythm via tailwind - with prose etc... https://egghead.io/blog/write-a-plugin-for-tailwind-css */}
-        <article className="max-w-2xl mb-three">
-          <section>
-            {/* TODO: #13 Migrate homepage content to markdown */}
-            <p className="text-base mb-one">
-              With a deep passion for frontend engineering and a strong understanding of the web, I am adept at creating
-              intuitive and engaging user experiences using technologies like React, JavaScript, HTML, and CSS.
-            </p>
+        {/* onTransitionEnd={() =>
+        // setHasAnimationOccurred(true)
+        } */}
+        <MainContentTransition show={isMainContentShowing || hasAnimationOccurred}>
+          {/*
+            // TODO: #36 Add navigational buttons to skip or display the CV
+            <p>Me in 60 seconds 👇</p>
+            <p>, or my CV</p>
+          */}
+          {/* TODO: #25 Create plugin to control vertical rhythm via tailwind - with prose etc... https://egghead.io/blog/write-a-plugin-for-tailwind-css */}
+          {/* TODO: #13 Migrate homepage content to markdown */}
+          <article className="max-w-2xl mb-three">
+            <section>
+              <p className="text-base mb-one">
+                With a deep passion for frontend engineering and a strong understanding of the web, I am adept at
+                creating intuitive and engaging user experiences using technologies like React, JavaScript, HTML, and
+                CSS.
+              </p>
 
-            <aside>
-              <ul className="text-base list-inside mb-one ml-quarter md:ml-half">
-                {INTRO_BULLETS.map((bullet) => (
-                  <li className="flex gap-half mb-one" key={bullet.key}>
-                    <span className="flex-shrink-0 w-5 mt-0.5">
-                      <bullet.Icon className="" />
-                    </span>
-                    <span>{bullet.Text}</span>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-
-            <p className="text-base mb-one">
-              As a front-end engineer, I am equally comfortable crafting user interfaces, integrating APIs, and building
-              applications. In addition, I have a strong foundation in backend development, including experience with
-              Express, Ruby, and PHP. My diverse skill set and adaptability allow me to tackle a wide range of projects
-              and challenges with confidence.
-            </p>
-
-            <p className="text-base mb-one">
-              I am well-versed in agile methodologies and thrive in collaborative environments where I can contribute to
-              the growth and success of a product. I am flexible and adaptable, with a strong awareness of time-frames
-              and constraints, and I am committed to delivering high-quality solutions that meet the needs of the
-              customer.
-            </p>
-
-            {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
-              <footer>
-                <ul className="text-base list-disc mt-two mb-one pl-one-and-half">
-                  {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
-                    <li key={link.text}>
-                      <Link
-                        href={link.href}
-                        className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
-                      >
-                        {link.text}
-                      </Link>
+              <aside>
+                <ul className="text-base list-inside mb-one ml-quarter md:ml-half">
+                  {INTRO_BULLETS.map((bullet) => (
+                    <li className="flex gap-half mb-one" key={bullet.key}>
+                      <span className="flex-shrink-0 w-5 mt-0.5">
+                        <bullet.Icon className="" />
+                      </span>
+                      <span>{bullet.Text}</span>
                     </li>
                   ))}
                 </ul>
-              </footer>
-            )}
-          </section>
-        </article>
-      </main>
+              </aside>
+
+              <p className="text-base mb-one">
+                As a front-end engineer, I am equally comfortable crafting user interfaces, integrating APIs, and
+                building applications. In addition, I have a strong foundation in backend development, including
+                experience with Express, Ruby, and PHP. My diverse skill set and adaptability allow me to tackle a wide
+                range of projects and challenges with confidence.
+              </p>
+
+              <p className="text-base mb-one">
+                I am well-versed in agile methodologies and thrive in collaborative environments where I can contribute
+                to the growth and success of a product. I am flexible and adaptable, with a strong awareness of
+                time-frames and constraints, and I am committed to delivering high-quality solutions that meet the needs
+                of the customer.
+              </p>
+
+              {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
+                <footer>
+                  <ul className="text-base list-disc mt-two mb-one pl-one-and-half">
+                    {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
+                      <li key={link.text}>
+                        <Link
+                          href={link.href}
+                          className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
+                        >
+                          {link.text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </footer>
+              )}
+            </section>
+          </article>
+        </MainContentTransition>
+      </Main>
+
+      <MainContentTransition show={isMainContentShowing || hasAnimationOccurred}>
+        <Footer />
+      </MainContentTransition>
     </>
   )
 }
