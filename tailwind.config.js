@@ -48,6 +48,11 @@ module.exports = {
         twelve: '21rem',
         sixteen: '28rem',
       },
+      lineHeight: {
+        one: '1.75rem',
+        'one-and-half': '2.625rem',
+        two: '3.5rem',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

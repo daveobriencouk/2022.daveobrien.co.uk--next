@@ -2,11 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (prefers-reduced-motion: no-preference) {
+  *,
+  html {
+    scroll-behavior: smooth !important;
+  }
+}
+
 @layer components {
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-900;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-900 focus:ring-offset-2;
   }
   .heading {
-    @apply font-black tracking-tighter uppercase font-display;
+    @apply font-black tracking-tighter font-display;
   }
 }

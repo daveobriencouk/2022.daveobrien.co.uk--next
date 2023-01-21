@@ -7,6 +7,7 @@ import { random, sample } from 'lodash'
 import type { ReactElement } from 'react'
 
 import BaseLayout from 'components/BaseLayout'
+import CommaSeparatedList from 'components/CommaSeparatedList'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import Link from 'components/Link'
@@ -21,22 +22,22 @@ import useInitialPageLoad from 'hooks/useInitialPageLoad'
 // TODO: #24 Add an about me page (like KCD's)
 
 const CURRENT_TOOLS_AND_TECHNOLOGIES = [
-  ['React', 'https://reactjs.org/'],
-  ['TypeScript', 'https://www.typescriptlang.org/'],
-  ['Express.JS', 'https://expressjs.com/'],
-  ['styled-components', 'https://styled-components.com/'],
-  ['React Query', 'https://tanstack.com/query/v4/'],
-  ['MobX', 'https://mobx.js.org/'],
-  ['Lerna', 'https://lerna.js.org/'],
-  // ['React Router', 'https://reactrouter.com/'],
-  // ['Jest', 'https://jestjs.io/'],
-  ['Cypress', 'https://www.cypress.io/'],
-  // ['Yarn', 'https://yarnpkg.com/'],
-  // ['Yalc', 'https://github.com/wclr/yalc/'],
-  // ['Yarn Workspaces', 'https://classic.yarnpkg.com/lang/en/docs/workspaces/'],
-  // ['SonarQube', 'https://www.sonarsource.com/products/sonarqube/'],
-  // ['Webpack', 'https://webpack.js.org/'],
-  // ['ADO', 'https://azure.microsoft.com/en-us/products/devops/'],
+  { text: 'React', href: 'https://reactjs.org/' },
+  { text: 'TypeScript', href: 'https://www.typescriptlang.org/' },
+  { text: 'Express.JS', href: 'https://expressjs.com/' },
+  { text: 'styled-components', href: 'https://styled-components.com/' },
+  { text: 'React Query', href: 'https://tanstack.com/query/v4/' },
+  { text: 'MobX', href: 'https://mobx.js.org/' },
+  { text: 'Lerna', href: 'https://lerna.js.org/' },
+  // {text: 'React Router', href: 'https://reactrouter.com/'},
+  // {text: 'Jest', href: 'https://jestjs.io/'},
+  { text: 'Cypress', href: 'https://www.cypress.io/' },
+  // {text: 'Yarn', href: 'https://yarnpkg.com/'},
+  // {text: 'Yalc', href: 'https://github.com/wclr/yalc/'},
+  // {text: 'Yarn Workspaces', href: 'https://classic.yarnpkg.com/lang/en/docs/workspaces/'},
+  // {text: 'SonarQube', href: 'https://www.sonarsource.com/products/sonarqube/'},
+  // {text: 'Webpack', href: 'https://webpack.js.org/'},
+  // {text: 'ADO', href: 'https://azure.microsoft.com/en-us/products/devops/'},
 ]
 
 const INTRO_BULLETS = [
@@ -46,20 +47,8 @@ const INTRO_BULLETS = [
     Text: (
       <>
         <b>Tools & technology</b> used on my current contract projects include{' '}
-        {CURRENT_TOOLS_AND_TECHNOLOGIES.map(([tool, href], i) => {
-          const isSecondToLast = i === CURRENT_TOOLS_AND_TECHNOLOGIES.length - 2
-          const isLast = i === CURRENT_TOOLS_AND_TECHNOLOGIES.length - 1
-          return (
-            <>
-              <Link key={tool} href={href}>
-                {tool}
-              </Link>
-              {isSecondToLast ? ', and' : isLast ? '.' : ','}{' '}
-            </>
-          )
-        })}
-        Take a look at my <Link href="/about#tooling">full list of tooling I&apos;ve used in the past and present</Link>
-        .
+        <CommaSeparatedList array={CURRENT_TOOLS_AND_TECHNOLOGIES} /> Take a look at my{' '}
+        <Link href="/about#tooling">full list of tooling I&apos;ve used in the past and present</Link>.
         {/* TODO: #33 Cut the list to 5/6 and replace below with a link to view full list and tooling over the years */}
         {/* This is what <Link href="/about#tooling-personal-projects">I&apos;m currently using on personal projects</Link>,
         and what <Link href="/about#tooling-past">I&apos;ve used in the past</Link>. */}
@@ -119,7 +108,7 @@ export default function Home({ readMoreLinks }: HomeProps) {
       <Main>
         <header>
           {hasInitialPageLoaded ? (
-            <h1 className="font-bold text-md mb-one">Hello. I’m Dave, and I’m a Frontend Engineer.</h1>
+            <h1 className="text-xl mb-one heading">Hello. I’m Dave, and I’m a Frontend Engineer.</h1>
           ) : (
             <TypeAnimation
               sequence={[
@@ -135,7 +124,7 @@ export default function Home({ readMoreLinks }: HomeProps) {
               wrapper="h1"
               speed={55}
               cursor={false}
-              className="font-bold text-md mb-one"
+              className="text-xl mb-one heading"
             />
           )}
         </header>

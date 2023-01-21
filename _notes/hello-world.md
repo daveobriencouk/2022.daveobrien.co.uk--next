@@ -10,3 +10,13 @@ tags:
 # This is a heading
 
 And this is a paragraph.
+
+#### Responsibilities
+
+And this is a paragraph.
+
+#### Achievements
+
+And this is a paragraph.
+
+#### Skills & Technologies

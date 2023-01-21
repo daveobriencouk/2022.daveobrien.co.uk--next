@@ -37,7 +37,7 @@ export default function Nav({ className, duration = 0, links, onTransitionEnd, s
           <Link
             href={href}
             className={classNames(
-              'block leading-one text-md heading  px-quarter ',
+              'block leading-one text-md heading uppercase px-quarter ',
               `underline-offset-4 focus:outline-none  hover:underline focus:underline ${
                 router.pathname === href
                   ? 'text-primary-700 hover:text-primary-900 focus:text-primary-900'

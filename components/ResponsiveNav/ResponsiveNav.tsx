@@ -24,7 +24,7 @@ export default function ResponsiveNav({ className, links }: ResponsiveNavProps) 
             as={Link}
             href={href}
             className={classNames(
-              'bg-neutral-500 text-neutral-100 pl-quarter pr-half text-2xl heading focus:outline-none',
+              'bg-neutral-500 text-neutral-100 pl-quarter pr-half text-2xl heading uppercase focus:outline-none',
               { 'bg-primary-700 hover:bg-primary-900 focus:bg-primary-900': router.pathname === href },
               { 'focus:bg-neutral-700 hover:bg-neutral-700': router.pathname !== href }
             )}
