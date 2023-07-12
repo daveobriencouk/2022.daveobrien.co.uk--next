@@ -6,10 +6,12 @@ import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
 
 import CommaSeparatedList from 'components/CommaSeparatedList'
+import getSkills from 'helpers/getSkills'
 import useFeatureFlags from 'hooks/useFeatureFlags'
 import { generateMetaTitle } from 'utils/generateMetaTitle'
 
 import { getWorkExperiences } from 'models/workExperience'
+import { SKILLS_INFO } from 'constants/'
 
 // TODO: #10 Add CV page
 
@@ -65,14 +67,16 @@ const MENU_ITEMS: MenuItem[] = [
   },
 ]
 
-const SKILLS_AT_WORK = [['React', 'https://reactjs.org/']] // see first work experience skills
+// see first work experience skills
+const SKILLS_WORK = ['react']
 
-const SKILLS_AT_PLAY = [
-  // - React
-  // - TypeScript
-  // - Jest
-  // - Cypress
-  // - React Testing Library
+const SKILLS_PLAY = [
+  'react',
+  'typescript',
+  'jest',
+  'cypress',
+  'reactTestingLibrary',
+
   'nextjs',
   'remix',
   'tailwindcss',
@@ -81,16 +85,78 @@ const SKILLS_AT_PLAY = [
   'zod',
 ]
 
-const PAST_SKILLS = [
+const SKILL_CATEGORY = {
+  backend: 'Backend',
+}
+
+const SKILLS_ALL = [
   {
-    skill: ['Ruby', 'https://www.ruby-lang.org/en/'],
-    lastUsed: 2008,
-    yearsUsed: 3,
+    skill: 'html',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2002,
   },
   {
-    skill: ['Ruby on Rails', 'https://rubyonrails.org/'],
-    lastUsed: 2008,
-    yearsUsed: 3,
+    skill: 'haml',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2002,
+  },
+  {
+    skill: 'jade',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2002,
+  },
+  {
+    skill: 'css',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2002,
+  },
+  {
+    skill: 'less',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2003,
+  },
+  {
+    skill: 'sass',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2003,
+  },
+  {
+    skill: 'bootstrap',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2003,
+  },
+  {
+    skill: 'foundation',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2003,
+  },
+  {
+    skill: 'bootstrap',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2003,
+  },
+  {
+    skill: 'bem',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2003,
+  },
+  {
+    skill: 'tailwind',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2022,
+  },
+
+  {
+    skill: 'php',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2004,
+    endYear: 2016,
+  },
+  {
+    skill: 'rubyOnRails',
+    category: SKILL_CATEGORY.backend,
+    startYear: 2005,
+    endYear: 2008,
   },
 ]
 
@@ -103,7 +169,7 @@ type HomeProps = {
   workExperiences: WorkExperience[]
 }
 
-export default function Home({ workExperiences }: HomeProps) {
+export default function CV({ workExperiences }: HomeProps) {
   const { linksByFeatureFlag, flags } = useFeatureFlags()
 
   console.log({ workExperiences })
@@ -140,8 +206,8 @@ export default function Home({ workExperiences }: HomeProps) {
                 <div className="pl-one">
                   <p className="text-base mb-one">
                     {/* Summarise home */}
-                    Hi, I&apos;m Dave. I&apos;m a (contract) senior frontend developer currently in contract at Vodafone
-                    / MMT Digital. I&apos;m currently working on ... that is used. Based in Surrey (near J3 on the M3)
+                    Hi, I&apos;m Dave. I&apos;m a senior frontend developer currently in contract at Vodafone / MMT
+                    Digital. I&apos;m currently working on ... that is used. Based in Surrey (near J3 on the M3)
                   </p>
                 </div>
               </section>
@@ -152,30 +218,61 @@ export default function Home({ workExperiences }: HomeProps) {
                 <div className="text-base pl-one">
                   <h3 className="uppercase heading">At work</h3>
 
-                  <CommaSeparatedList array={['dsa', 'dsa', 'dsa', 'dsa']} as="ul" className="mb-one" />
+                  <CommaSeparatedList array={getSkills(SKILLS_WORK)} as="ul" className="mb-one" />
 
                   <h3 className="text-base uppercase heading">At play</h3>
 
-                  <CommaSeparatedList array={['dsa', 'dsa', 'dsa', 'dsa']} as="ul" className="mb-one" />
+                  <CommaSeparatedList array={getSkills(SKILLS_PLAY)} as="ul" className="mb-one" />
 
-                  <h3 className="text-base uppercase heading">At rest</h3>
+                  {false && (
+                    <>
+                      <h3 className="text-base uppercase heading">Over the years</h3>
 
-                  <table className="w-full text-base border-collapse gap-quarter mb-one border-spacing-0">
-                    <thead>
-                      <tr>
-                        <th>Skill / tooling</th>
-                        <th>Last used</th>
-                        <th>Years used</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>dsa</td>
-                        <td>dsa</td>
-                        <td>dsa</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                      <table className="w-full text-base border-collapse gap-quarter mb-one border-spacing-0">
+                        <thead>
+                          <tr>
+                            <th>Skill / tool</th>
+                            <th>Year started using</th>
+                            <th>Year stopped using</th>
+                            <th>Category</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {SKILLS_ALL.map((skill) => (
+                            <tr key={skill.skill}>
+                              <td>{SKILLS_INFO[skill.skill]?.text}</td>
+                              <td>{skill.startYear}</td>
+                              <td>{skill.endYear || '-'}</td>
+                              <td>{skill.category}</td>
+                            </tr>
+                          ))}
+                          {/* <tr> */}
+                          {/* <td>Foundation</td>
+                        <td>Rebase</td>
+                        <td>Backbone</td>
+                        <td>jQuery</td>
+                        <td>PHP /Codeignigher</td>
+                        <td>CMS: ExpressionEngine</td>
+                        <td>CMS: Craft</td>
+                        <td>CMS: Drupal</td>
+                        <td>MySql</td>
+                        <td>Ruby on Rails</td> */}
+                          {/* HTML; Semantic Markup, Accessibility, Aria, Microdata, HAML, Pug, Mustache
+CSS; CSS3, Responsive Design, Mobile First, BEM, SMACSS, Atomic Design,
+SCSS, CSS Modules, PostCSS, MDL, Bourbon, Pure, Semantic UI, Foundation
+JavaScript; ES.Next, React, Angular, Node.js, Express, OO & Modular Principles,
+Functional Principles, MobX, Babel, JEST, Enzyme, Web APIs
+Tooling; Git, Yarn, NPM, Grunt, Gulp, Webpack, Browserify, VirtualBox,
+BrowserStack, Azure DevOps, Jira, Pivotal Tracker
+CMS; ExpressionEngine, Craft, Contentful, GatsbyJS, Middleman, Drupal
+PHP; OO Principles, Codeigniter, Yii, CMS Plugin Development,
+Data; Redis, GraphQL, Web Storage, CouchDB / PouchDB, MySQL, MongoDB */}
+
+                          {/* </tr> */}
+                        </tbody>
+                      </table>
+                    </>
+                  )}
                 </div>
               </section>
 
@@ -199,7 +296,7 @@ export default function Home({ workExperiences }: HomeProps) {
                         {frontmatter.skills && (
                           <div className="text-base">
                             <h4 className="font-black uppercase">Skills & Tooling</h4>
-                            <CommaSeparatedList array={frontmatter.skills} as="ul" />
+                            <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
                           </div>
                         )}
                       </li>

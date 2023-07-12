@@ -3,25 +3,25 @@ title: 'Senior React Developer'
 company: 'Vodafone / MMT Digital'
 startDate: '2017-04'
 skills:
-  - React
-  - TypeScript
-  - Express
-  - Jest
-  - Cypress
-  - React Testing Library
-  - styled-components
-  - React Hook Forms
-  - AJV
-  - JSON Schema
-  - React Query
-  - MobX
-  - Lerna
-  - SonarQube
-  - Enzyme
-  - Redis
-  - CSS Modules
-  - SCSS
-  - ADO
+  - react
+  - typescript
+  - express
+  - jest
+  - cypress
+  - reactTestingLibrary
+  - styledComponents
+  - reactHookForm
+  - ajv
+  - jsonSchema
+  - reactQuery
+  - mobx
+  - lerna
+  - sonarqube
+  - enzyme
+  - redis
+  - cssModules
+  - scss
+  - ado
 ---
 
 Lorem ipsum dolor sit, amet consectetur adipisicing elit.

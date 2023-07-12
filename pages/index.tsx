@@ -15,29 +15,23 @@ import Main from 'components/Main'
 import MainContentTransition from 'components/MainContentTransition'
 import { BALONY_SYNONYMS, NAV_LINKS_BY_HREF } from 'constants/'
 import type { Link as LinkType } from 'constants/'
+import getSkills from 'helpers/getSkills'
 import useFeatureFlags from 'hooks/useFeatureFlags'
 import useInitialPageLoad from 'hooks/useInitialPageLoad'
 
 // TODO: #10 Add CV page
 // TODO: #24 Add an about me page (like KCD's)
 
-const CURRENT_TOOLS_AND_TECHNOLOGIES = [
-  { text: 'React', href: 'https://reactjs.org/' },
-  { text: 'TypeScript', href: 'https://www.typescriptlang.org/' },
-  { text: 'Express.JS', href: 'https://expressjs.com/' },
-  { text: 'styled-components', href: 'https://styled-components.com/' },
-  { text: 'React Query', href: 'https://tanstack.com/query/v4/' },
-  { text: 'MobX', href: 'https://mobx.js.org/' },
-  { text: 'Lerna', href: 'https://lerna.js.org/' },
-  // {text: 'React Router', href: 'https://reactrouter.com/'},
-  // {text: 'Jest', href: 'https://jestjs.io/'},
-  { text: 'Cypress', href: 'https://www.cypress.io/' },
-  // {text: 'Yarn', href: 'https://yarnpkg.com/'},
-  // {text: 'Yalc', href: 'https://github.com/wclr/yalc/'},
-  // {text: 'Yarn Workspaces', href: 'https://classic.yarnpkg.com/lang/en/docs/workspaces/'},
-  // {text: 'SonarQube', href: 'https://www.sonarsource.com/products/sonarqube/'},
-  // {text: 'Webpack', href: 'https://webpack.js.org/'},
-  // {text: 'ADO', href: 'https://azure.microsoft.com/en-us/products/devops/'},
+const SKILLS_CURRENT = [
+  'react',
+  'typescript',
+  'express',
+  'styledComponents',
+  'reactQuery',
+  'mobx',
+  'lerna',
+  'cypress',
+  'reactTestingLibrary',
 ]
 
 const INTRO_BULLETS = [
@@ -47,8 +41,8 @@ const INTRO_BULLETS = [
     Text: (
       <>
         <b>Tools & technology</b> used on my current contract projects include{' '}
-        <CommaSeparatedList array={CURRENT_TOOLS_AND_TECHNOLOGIES} /> Take a look at my{' '}
-        <Link href="/about#tooling">full list of tooling I&apos;ve used in the past and present</Link>.
+        <CommaSeparatedList array={getSkills(SKILLS_CURRENT)} /> Take a look at my{' '}
+        <Link href="/cv#skills-tooling">full list of tooling I&apos;ve used in the past and present</Link>.
         {/* TODO: #33 Cut the list to 5/6 and replace below with a link to view full list and tooling over the years */}
         {/* This is what <Link href="/about#tooling-personal-projects">I&apos;m currently using on personal projects</Link>,
         and what <Link href="/about#tooling-past">I&apos;ve used in the past</Link>. */}
@@ -169,9 +163,9 @@ export default function Home({ readMoreLinks }: HomeProps) {
 
               <p className="text-base mb-one">
                 I am well-versed in agile methodologies and thrive in collaborative environments where I can contribute
-                to the growth and success of a product. I am flexible and adaptable, with a strong awareness of
-                time-frames and constraints, and I am committed to delivering high-quality solutions that meet the needs
-                of the customer.
+                to the growth and success of a product. I am flexible, with a strong awareness of time-frames and
+                constraints, and I am committed to delivering high-quality solutions that meet the needs of the
+                end-user.
               </p>
 
               {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
