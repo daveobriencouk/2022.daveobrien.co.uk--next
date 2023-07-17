@@ -15,8 +15,10 @@ type NavProps = {
 }
 
 export default function Nav({ className, duration = 0, links, onTransitionEnd, show }: NavProps) {
-  const { linksByFeatureFlag } = useFeatureFlags()
+  const { linksByFeatureFlag, flags } = useFeatureFlags()
   const router = useRouter()
+
+  console.log('Nav', { flags, links: links.filter(() => true) })
 
   return (
     <ul

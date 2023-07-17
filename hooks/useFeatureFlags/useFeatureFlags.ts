@@ -7,17 +7,16 @@ export default function useFeatureFlags() {
 
   // INFO: Hardcoded feature flags for now - flagsmith not working on second render (app getInitialState looks OK)
   // TODO: #37 Fix flagsmith flags not working on second render (app getInitialState looks OK)
-  const linksByFeatureFlag = (link: Link) =>
-    !link.featureFlag || ['section_about', 'section_cv'].includes(link.featureFlag)
+  // const linksByFeatureFlag = (link: Link) => !link.featureFlag || ['section_about', 'section_cv'].includes(link.featureFlag)
 
-  // const linksByFeatureFlag = (link: Link) => {
-  //   const linkFeatureFlag = link.featureFlag && flags[link.featureFlag]
+  const linksByFeatureFlag = (link: Link) => {
+    const linkFeatureFlag = link.featureFlag && flags[link.featureFlag]
 
-  //   // If no flag exists, then return the link
-  //   if (!linkFeatureFlag) return true
+    // If no flag exists, then return the link
+    if (!linkFeatureFlag) return true
 
-  //   return linkFeatureFlag.enabled
-  // }
+    return linkFeatureFlag.enabled
+  }
 
   const checkSomeFeatureFlags = (flagsToCheck: FlagOptions[]) => flagsToCheck.some((flag) => flags[flag].enabled)
 
