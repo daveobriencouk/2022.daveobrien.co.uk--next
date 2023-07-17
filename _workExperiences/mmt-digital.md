@@ -5,23 +5,28 @@ startDate: '2017-04'
 skills:
   - react
   - typescript
+  - mobx
+  - reactQuery
+  - jsonSchema
+  - ajv
   - express
+  - redis
+  - css
+  - cssModules
+  - scss
+  - styledComponents
   - jest
   - cypress
   - reactTestingLibrary
-  - styledComponents
-  - reactHookForm
-  - ajv
-  - jsonSchema
-  - reactQuery
-  - mobx
-  - lerna
-  - sonarqube
   - enzyme
-  - redis
-  - cssModules
-  - scss
+  - html
+  - lerna
+  - vite
+  - webpack
+  - babel
   - ado
+  - sonarqube
+  - datadog
 ---
 
 Lorem ipsum dolor sit, amet consectetur adipisicing elit.

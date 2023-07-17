@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { kebabCase } from 'lodash'
+import kebabCase from 'lodash/kebabCase'
 import NextLink from 'next/link'
 import Main from 'components/Main'
 import type { GrayMatterFile } from 'gray-matter'
@@ -12,6 +12,7 @@ import { generateMetaTitle } from 'utils/generateMetaTitle'
 
 import { getWorkExperiences } from 'models/workExperience'
 import { SKILLS_INFO } from 'constants/'
+import dayjs from 'dayjs'
 
 // TODO: #10 Add CV page
 
@@ -203,19 +204,28 @@ export default function CV({ workExperiences }: HomeProps) {
               <section id="intro" className="pt-half -mt-half">
                 <h2 className="uppercase text-md heading mb-one">Intro</h2>
 
-                <div className="pl-one">
+                <div className="pl-xxx">
                   <p className="text-base mb-one">
-                    {/* Summarise home */}
-                    Hi, I&apos;m Dave. I&apos;m a senior frontend developer currently in contract at Vodafone / MMT
-                    Digital. I&apos;m currently working on ... that is used. Based in Surrey (near J3 on the M3)
+                    Hello, I&rsquo;m Dave, a seasoned Frontend Engineer with over 20 years of experience, proficient in
+                    web technologies like React, JavaScript, HTML, CSS, and TypeScript, among others. With a deep
+                    passion for frontend engineering, I excel at designing intuitive user experiences, crafting
+                    interfaces, integrating APIs, and building applications.
+                  </p>
+                  <p className="text-base mb-one">
+                    My experience spans working with prominent clients like Vodafone, MMT Digital, Maersk, Virgin Media,
+                    to smaller agencies and SMEs. Accustomed to agile methodologies, I thrive in collaborative settings,
+                    effectively navigating time constraints, and am devoted to delivering high-quality solutions catered
+                    to the end-user&rsquo;s needs.
                   </p>
                 </div>
               </section>
 
+              <hr className="mb-one" />
+
               <section id="skills-tooling" className="pt-half -mt-half">
                 <h2 className="uppercase text-md heading mb-one">Skills & tooling</h2>
 
-                <div className="text-base pl-one">
+                <div className="text-base pl-xxx">
                   <h3 className="uppercase heading">At work</h3>
 
                   <CommaSeparatedList array={getSkills(SKILLS_WORK)} as="ul" className="mb-one" />
@@ -276,33 +286,41 @@ Data; Redis, GraphQL, Web Storage, CouchDB / PouchDB, MySQL, MongoDB */}
                 </div>
               </section>
 
+              <hr className="mb-one" />
+
               <section id="work-experience" className="pt-half -mt-half">
                 <h2 className="uppercase text-md heading mb-one">Work experience</h2>
-                <div className="pl-one">
+                <div className="pl-xxx">
                   <ol>
-                    {workExperiences.map(({ frontmatter, content }) => (
-                      <li key={frontmatter.title}>
-                        {/* Correct tags? */}
-                        <header className="flex flex-wrap mb-one gap-x-one">
-                          <h3 className="text-lg uppercase heading basis-full shrink-0">{frontmatter.title}</h3>
-                          <h4 className="uppercase text-md heading text-neutral-500">{frontmatter.company}</h4>
-                          {frontmatter.startDate && (
-                            <p className="text-md heading text-neutral-400">
-                              <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
-                            </p>
+                    {workExperiences
+                      .sort((a, b) => dayjs(b.frontmatter.startDate).unix() - dayjs(a.frontmatter.startDate).unix())
+                      .map(({ frontmatter, content }) => (
+                        <li key={frontmatter.title} className="mb-one" id={kebabCase(frontmatter.company)}>
+                          {/* Correct tags? */}
+                          <header className="flex flex-wrap mb-one gap-x-one">
+                            <h3 className="text-lg uppercase heading basis-full shrink-0">{frontmatter.title}</h3>
+                            <h4 className="uppercase text-md heading text-neutral-500">{frontmatter.company}</h4>
+                            {frontmatter.startDate && (
+                              <p className="text-md heading text-neutral-400">
+                                <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
+                              </p>
+                            )}
+                          </header>
+                          <div
+                            dangerouslySetInnerHTML={{ __html: md().render(content) }}
+                            className="text-base prose mb-one prose-h4:font-black prose-h4:uppercase prose-h4:text-neutral-600"
+                          />
+                          {frontmatter.skills && (
+                            <div className="text-base">
+                              <h4 className="font-black uppercase">Skills & Tooling</h4>
+                              <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
+                            </div>
                           )}
-                        </header>
-                        <div dangerouslySetInnerHTML={{ __html: md().render(content) }} className="text-base mb-one" />
-                        {frontmatter.skills && (
-                          <div className="text-base">
-                            <h4 className="font-black uppercase">Skills & Tooling</h4>
-                            <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
-                          </div>
-                        )}
-                      </li>
-                    ))}
+                        </li>
+                      ))}
+                  </ol>
 
-                    {/* <li>
+                  {/* <li>
                       <header className="flex flex-wrap mb-one gap-x-one">
                         <h3 className="text-lg uppercase heading basis-full shrink-0">Senior React Developer</h3>
                         <h4 className="uppercase text-md heading text-neutral-500">Vodafone/MMT Digital</h4>
@@ -330,7 +348,6 @@ Data; Redis, GraphQL, Web Storage, CouchDB / PouchDB, MySQL, MongoDB */}
                         nostrum? Sint, nemo?
                       </p>
                     </li> */}
-                  </ol>
                 </div>
               </section>
             </section>
@@ -339,6 +356,10 @@ Data; Redis, GraphQL, Web Storage, CouchDB / PouchDB, MySQL, MongoDB */}
 
               <ul className="text-sm mb-one">
                 {/* ICONS? And on the headings in the content */}
+                {/*
+                  workExperiences...
+
+                */}
                 {MENU_ITEMS.map(({ text, children }) => (
                   <li key={text}>
                     <NextLink
@@ -364,9 +385,13 @@ Data; Redis, GraphQL, Web Storage, CouchDB / PouchDB, MySQL, MongoDB */}
                   </li>
                 ))}
               </ul>
-              <button className="w-full text-base text-white uppercase rounded-sm heading bg-primary-700 px-one grow-0 hover:bg-primary-900 focus-ring leading-one-and-half my-quarter">
+              <a
+                download
+                href="/api/pages.pdf"
+                className="block w-full text-base text-white uppercase rounded-sm heading bg-primary-700 px-one grow-0 hover:bg-primary-900 focus-ring leading-one-and-half my-quarter"
+              >
                 Download CV
-              </button>
+              </a>
             </aside>
 
             {/*

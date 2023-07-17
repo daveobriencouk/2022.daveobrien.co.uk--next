@@ -153,10 +153,6 @@ export const SKILLS_INFO: SKILLS = {
     href: 'https://styled-components.com/',
     text: 'styled-components',
   },
-  reactHookForm: {
-    href: 'https://react-hook-form.com/',
-    text: 'React Hook Forms',
-  },
   ajv: {
     href: 'https://ajv.js.org/',
     text: 'AJV',
@@ -228,5 +224,125 @@ export const SKILLS_INFO: SKILLS = {
   html: {
     href: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
     text: 'HTML',
+  },
+  javascript: {
+    href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+    text: 'JavaScript',
+  },
+  backbone: {
+    href: 'https://backbonejs.org/',
+    text: 'Backbone.js',
+  },
+  underscore: {
+    href: 'https://underscorejs.org/',
+    text: 'Underscore.js',
+  },
+  css: {
+    href: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+    text: 'CSS',
+  },
+  jquery: {
+    href: 'https://jquery.com/',
+    text: 'jQuery',
+  },
+  handlebars: {
+    href: 'https://handlebarsjs.com/',
+    text: 'Handlebars',
+  },
+  bem: {
+    href: 'https://getbem.com/',
+    text: 'BEM',
+  },
+  grunt: {
+    href: 'https://gruntjs.com/',
+    text: 'Grunt',
+  },
+  datadog: {
+    href: 'https://www.datadoghq.com/',
+    text: 'Datadog',
+  },
+  babel: {
+    href: 'https://babeljs.io/',
+    text: 'Babel',
+  },
+  webpack: {
+    href: 'https://webpack.js.org/',
+    text: 'webpack',
+  },
+  vite: {
+    href: 'https://vitejs.dev/',
+    text: 'Vite',
+  },
+  angular: {
+    href: 'https://angular.io/',
+    text: 'Angular',
+  },
+  cordova: {
+    href: 'https://cordova.apache.org/',
+    text: 'Cordova',
+  },
+  haml: {
+    href: 'https://haml.info/',
+    text: 'Haml',
+  },
+  pug: {
+    href: 'https://pugjs.org/',
+    text: 'Pug',
+  },
+  less: {
+    href: 'https://lesscss.org/',
+    text: 'Less',
+  },
+  foundation: {
+    href: 'https://get.foundation/',
+    text: 'Foundation',
+  },
+  bourbon: {
+    href: 'https://www.bourbon.io/',
+    text: 'Bourbon',
+  },
+  php: {
+    href: 'https://www.php.net/',
+    text: 'PHP',
+  },
+  codeIgniter: {
+    href: 'https://www.codeigniter.com/',
+    text: 'CodeIgniter',
+  },
+  yii: {
+    href: 'https://www.yiiframework.com/',
+    text: 'Yii',
+  },
+  expressionEngine: {
+    href: 'https://expressionengine.com/',
+    text: 'ExpressionEngine',
+  },
+  craft: {
+    href: 'https://craftcms.com/',
+    text: 'Craft',
+  },
+  middleman: {
+    href: 'https://middlemanapp.com/',
+    text: 'Middleman',
+  },
+  mysql: {
+    href: 'https://www.mysql.com/',
+    text: 'MySQL',
+  },
+  mongodb: {
+    href: 'https://www.mongodb.com/',
+    text: 'MongoDB',
+  },
+  couchdb: {
+    href: 'https://couchdb.apache.org/',
+    text: 'CouchDB',
+  },
+  pouchdb: {
+    href: 'https://pouchdb.com/',
+    text: 'PouchDB',
+  },
+  gulp: {
+    href: 'https://gulpjs.com/',
+    text: 'Gulp',
   },
 }
