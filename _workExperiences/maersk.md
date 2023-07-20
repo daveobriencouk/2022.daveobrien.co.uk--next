@@ -15,19 +15,20 @@ skills:
   - bem
   - html
   - grunt
+contract: true
 ---
 
-In my role as a Senior UI Developer at Maersk, I stepped in to replace the Lead Developer, heading an existing project to build the next generation of a complex, self-service application. The project required a multi-branded, localized solution, with support for Internet Explorer 8.
+At the outset of my contract with Maersk, I was brought in to replace the Lead Developer on a challenging project tasked with building the next iteration of a self-service application. The project involved complex business requirements, including multi-branding, localisation, and support for Internet Explorer 8.
 
-#### Responsibilities
+#### Core responsibilities
 
-- Developed business logic based on UX & requirements
-- Constructed view logic, templates, and UI components in line with UX & visual design requirements
-- Served as the lead UI resource on the core project
-- Collaborated with BAs, UX, UI designers, and backend developers to actualize requirements
-- Participated in an initiative to standardize UI across various projects
+- Developing robust business logic based on UX and project requirements
+- Building view logic, templates, and UI components in accordance with UX and visual design specifications
+- Taking the lead as the UI resource on the core project
+- Collaborating closely with BAs, UX & UI designers, and backend developers to translate requirements into functional solutions
+- Contributing to a cross-project initiatives focused on harmonising the UI across the entire program
 
-#### Achievements
+#### Key achievements
 
 - Architected and executed a proof of concept for an atomic approach using the existing UI library
 - Integrated modelling into the single-page application
