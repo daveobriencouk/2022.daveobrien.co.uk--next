@@ -4,6 +4,7 @@ import NextLink from 'next/link'
 import Main from 'components/Main'
 import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
+import { MegaphoneIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
 
 import CommaSeparatedList from 'components/CommaSeparatedList'
 import getSkills from 'helpers/getSkills'
@@ -13,6 +14,7 @@ import { generateMetaTitle } from 'utils/generateMetaTitle'
 import { getWorkExperiences } from 'models/workExperience'
 import { SKILLS_INFO } from 'constants/'
 import dayjs from 'dayjs'
+import classNames from 'classnames'
 
 // TODO: #10 Add CV page
 
@@ -164,10 +166,28 @@ const SKILLS_ALL = [
 type WorkExperience = {
   frontmatter: GrayMatterFile<string>['data']
   content: GrayMatterFile<string>['content']
+  fileName: string
 }
 
 type HomeProps = {
   workExperiences: WorkExperience[]
+}
+
+function CvSection({ title, children, id }: { title: string; children: React.ReactNode; id: string }) {
+  return (
+    <section id={id} className="pl-6 border-l-[20px] py-half border-l-neutral-200 mb-10">
+      <h2 className="relative flex items-center gap-2 uppercase text-md heading mb-one">
+        <span className="absolute block p-3 text-white bg-neutral-500 -left-[57px]">
+          {id === 'intro' && <MegaphoneIcon className="block w-5 h-5" aria-hidden="true" />}
+          {id === 'skills-tooling' && <WrenchScrewdriverIcon className="block w-5 h-5" aria-hidden="true" />}
+          {id === 'work-experience' && <WrenchScrewdriverIcon className="block w-5 h-5" aria-hidden="true" />}
+          {id === 'education' && <WrenchScrewdriverIcon className="block w-5 h-5" aria-hidden="true" />}
+        </span>
+        {title}
+      </h2>
+      <div className="text-base pl-xxx">{children}</div>
+    </section>
+  )
 }
 
 export default function CV({ workExperiences }: HomeProps) {
@@ -201,155 +221,68 @@ export default function CV({ workExperiences }: HomeProps) {
 
           <div className="flex flex-wrap gap-three">
             <section className="max-w-2xl basis-96 shrink grow">
-              <section id="intro" className="pt-half -mt-half">
-                <h2 className="uppercase text-md heading mb-one">Intro</h2>
+              <CvSection title="Intro" id="intro">
+                <p className="text-base mb-one">
+                  Hello, I&rsquo;m Dave, a seasoned Frontend Engineer with over 20 years of experience, based in Surrey
+                  near J3 on the M3. I am proficient in web technologies like React, TypeScript, JavaScript, HTML, and
+                  CSS, among others. With a deep passion for frontend engineering, I excel at designing intuitive user
+                  experiences, crafting interfaces, integrating APIs, and building applications.
+                </p>
+                <p className="text-base mb-one">
+                  My experience spans working with prominent clients like Vodafone, MMT Digital, Maersk, Virgin Media,
+                  to smaller agencies and SMEs. Accustomed to agile methodologies, I thrive in collaborative settings,
+                  effectively navigating time constraints, and am devoted to delivering high-quality solutions catered
+                  to the end-user&rsquo;s needs.
+                </p>
+              </CvSection>
 
-                <div className="pl-xxx">
-                  <p className="text-base mb-one">
-                    Hello, I&rsquo;m Dave, a seasoned Frontend Engineer with over 20 years of experience, proficient in
-                    web technologies like React, JavaScript, HTML, CSS, and TypeScript, among others. With a deep
-                    passion for frontend engineering, I excel at designing intuitive user experiences, crafting
-                    interfaces, integrating APIs, and building applications.
-                  </p>
-                  <p className="text-base mb-one">
-                    My experience spans working with prominent clients like Vodafone, MMT Digital, Maersk, Virgin Media,
-                    to smaller agencies and SMEs. Accustomed to agile methodologies, I thrive in collaborative settings,
-                    effectively navigating time constraints, and am devoted to delivering high-quality solutions catered
-                    to the end-user&rsquo;s needs.
-                  </p>
-                </div>
-              </section>
+              <CvSection title="Skills & tooling" id="skills-tooling">
+                <h3 className="uppercase heading">At work</h3>
+                <CommaSeparatedList array={getSkills(SKILLS_WORK)} as="ul" className="mb-one" />
 
-              <hr className="mb-one" />
+                <h3 className="text-base uppercase heading">At play</h3>
+                <CommaSeparatedList array={getSkills(SKILLS_PLAY)} as="ul" className="mb-one" />
+              </CvSection>
 
-              <section id="skills-tooling" className="pt-half -mt-half">
-                <h2 className="uppercase text-md heading mb-one">Skills & tooling</h2>
-
-                <div className="text-base pl-xxx">
-                  <h3 className="uppercase heading">At work</h3>
-
-                  <CommaSeparatedList array={getSkills(SKILLS_WORK)} as="ul" className="mb-one" />
-
-                  <h3 className="text-base uppercase heading">At play</h3>
-
-                  <CommaSeparatedList array={getSkills(SKILLS_PLAY)} as="ul" className="mb-one" />
-
-                  {false && (
-                    <>
-                      <h3 className="text-base uppercase heading">Over the years</h3>
-
-                      <table className="w-full text-base border-collapse gap-quarter mb-one border-spacing-0">
-                        <thead>
-                          <tr>
-                            <th>Skill / tool</th>
-                            <th>Year started using</th>
-                            <th>Year stopped using</th>
-                            <th>Category</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {SKILLS_ALL.map((skill) => (
-                            <tr key={skill.skill}>
-                              <td>{SKILLS_INFO[skill.skill]?.text}</td>
-                              <td>{skill.startYear}</td>
-                              <td>{skill.endYear || '-'}</td>
-                              <td>{skill.category}</td>
-                            </tr>
-                          ))}
-                          {/* <tr> */}
-                          {/* <td>Foundation</td>
-                        <td>Rebase</td>
-                        <td>Backbone</td>
-                        <td>jQuery</td>
-                        <td>PHP /Codeignigher</td>
-                        <td>CMS: ExpressionEngine</td>
-                        <td>CMS: Craft</td>
-                        <td>CMS: Drupal</td>
-                        <td>MySql</td>
-                        <td>Ruby on Rails</td> */}
-                          {/* HTML; Semantic Markup, Accessibility, Aria, Microdata, HAML, Pug, Mustache
-CSS; CSS3, Responsive Design, Mobile First, BEM, SMACSS, Atomic Design,
-SCSS, CSS Modules, PostCSS, MDL, Bourbon, Pure, Semantic UI, Foundation
-JavaScript; ES.Next, React, Angular, Node.js, Express, OO & Modular Principles,
-Functional Principles, MobX, Babel, JEST, Enzyme, Web APIs
-Tooling; Git, Yarn, NPM, Grunt, Gulp, Webpack, Browserify, VirtualBox,
-BrowserStack, Azure DevOps, Jira, Pivotal Tracker
-CMS; ExpressionEngine, Craft, Contentful, GatsbyJS, Middleman, Drupal
-PHP; OO Principles, Codeigniter, Yii, CMS Plugin Development,
-Data; Redis, GraphQL, Web Storage, CouchDB / PouchDB, MySQL, MongoDB */}
-
-                          {/* </tr> */}
-                        </tbody>
-                      </table>
-                    </>
-                  )}
-                </div>
-              </section>
-
-              <hr className="mb-one" />
-
-              <section id="work-experience" className="pt-half -mt-half">
-                <h2 className="uppercase text-md heading mb-one">Work experience</h2>
-                <div className="pl-xxx">
-                  <ol>
-                    {workExperiences
-                      .sort((a, b) => dayjs(b.frontmatter.startDate).unix() - dayjs(a.frontmatter.startDate).unix())
-                      .map(({ frontmatter, content }) => (
-                        <li key={frontmatter.title} className="mb-one" id={kebabCase(frontmatter.company)}>
-                          {/* Correct tags? */}
-                          <header className="flex flex-wrap mb-one gap-x-one">
-                            <h3 className="text-lg uppercase heading basis-full shrink-0">{frontmatter.title}</h3>
-                            <h4 className="uppercase text-md heading text-neutral-500">{frontmatter.company}</h4>
-                            {frontmatter.startDate && (
-                              <p className="text-md heading text-neutral-400">
-                                <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
-                              </p>
-                            )}
-                          </header>
-                          <div
-                            dangerouslySetInnerHTML={{ __html: md().render(content) }}
-                            className="text-base prose mb-one prose-h4:font-black prose-h4:uppercase prose-h4:text-neutral-600"
-                          />
-                          {frontmatter.skills && (
-                            <div className="text-base">
-                              <h4 className="font-black uppercase">Skills & Tooling</h4>
-                              <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
-                            </div>
+              <CvSection title="Work experience" id="work-experience">
+                <ol>
+                  {workExperiences
+                    .sort((a, b) => dayjs(b.frontmatter.startDate).unix() - dayjs(a.frontmatter.startDate).unix())
+                    .map(({ frontmatter, content, fileName }) => (
+                      <li key={frontmatter.title} className="mb-one" id={fileName}>
+                        {/* Correct tags? */}
+                        <header className="flex flex-wrap mb-one gap-x-one">
+                          <h3 className="text-lg uppercase heading basis-full shrink-0">{frontmatter.title}</h3>
+                          <h4 className="uppercase text-md heading text-neutral-500">{frontmatter.company}</h4>
+                          {frontmatter.contract && <span className="text-md heading text-neutral-500">[Contract]</span>}
+                          {frontmatter.startDate && (
+                            <p className="text-md heading text-neutral-400">
+                              <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
+                            </p>
                           )}
-                        </li>
-                      ))}
-                  </ol>
+                        </header>
+                        <div
+                          dangerouslySetInnerHTML={{ __html: md().render(content) }}
+                          className="text-base prose mb-one prose-h4:font-black prose-h4:uppercase prose-h4:text-neutral-600"
+                        />
+                        {frontmatter.skills && (
+                          <div className="text-base">
+                            <h4 className="font-black uppercase">Skills & Tooling</h4>
+                            <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                </ol>
+              </CvSection>
 
-                  {/* <li>
-                      <header className="flex flex-wrap mb-one gap-x-one">
-                        <h3 className="text-lg uppercase heading basis-full shrink-0">Senior React Developer</h3>
-                        <h4 className="uppercase text-md heading text-neutral-500">Vodafone/MMT Digital</h4>
-                        <p className="text-md heading text-neutral-400">
-                          <time>Apr 2017</time> - <time>Current</time>
-                        </p>
-                      </header>
-                      <p className="text-base mb-one">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas adipisci earum nobis odio illum
-                        maxime incidunt architecto aut eveniet? Autem architecto odio, fuga quisquam quas quo beatae
-                        nostrum? Sint, nemo?
-                      </p>
-                      <h4 className="text-base font-black uppercase">Responsibilities</h4>
-                      <ul className="text-base mb-one">
-                        <li>Lorem ipsum dolor, sit amet consectetur</li>
-                      </ul>
-                      <h4 className="text-base font-black uppercase">Achievements</h4>
-                      <ul className="text-base mb-one">
-                        <li>Lorem ipsum dolor, sit amet consectetur</li>
-                      </ul>
-                      <h4 className="text-base font-black uppercase">Technology Stack</h4>
-                      <p className="text-base mb-one">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas adipisci earum nobis odio illum
-                        maxime incidunt architecto aut eveniet? Autem architecto odio, fuga quisquam quas quo beatae
-                        nostrum? Sint, nemo?
-                      </p>
-                    </li> */}
-                </div>
-              </section>
+              <CvSection title="Education" id="education">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas provident voluptatem reprehenderit
+                  accusamus pariatur nesciunt tenetur aspernatur vel voluptatum. Autem modi facere dignissimos labore
+                  pariatur accusamus quod nesciunt necessitatibus exercitationem.
+                </p>
+              </CvSection>
             </section>
             <aside className="sticky top-0 self-start basis-60 pt-half -mt-half">
               <h2 className="uppercase text-md heading mb-one">CV Contents</h2>
@@ -360,30 +293,47 @@ Data; Redis, GraphQL, Web Storage, CouchDB / PouchDB, MySQL, MongoDB */}
                   workExperiences...
 
                 */}
-                {MENU_ITEMS.map(({ text, children }) => (
-                  <li key={text}>
-                    <NextLink
-                      href={`#${kebabCase(text)}`}
-                      className="inline-block font-black uppercase bg-neutral-400 hover:bg-primary-600 text-neutral-100 pl-quarter px-quarter"
-                    >
-                      {text}
-                    </NextLink>
-                    {children && (
-                      <ul className="pl-quarter">
-                        {children.map(({ text }) => (
-                          <li key={text}>
-                            <NextLink
-                              href={`#${kebabCase(text)}`}
-                              className="inline-block font-black uppercase hover:bg-primary-600 text-neutral-400 hover:text-white px-quarter"
-                            >
-                              {text}
-                            </NextLink>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
+                {MENU_ITEMS.map(({ text, children }) => {
+                  const isActive = window.location.hash.slice(1) === kebabCase(text)
+                  console.log({ isActive, hash: window.location.hash.slice(1), text, kebabCase: kebabCase(text) })
+
+                  return (
+                    <li key={text}>
+                      <NextLink
+                        href={`#${kebabCase(text)}`}
+                        className={classNames(
+                          'inline-block font-black uppercase  hover:bg-primary-600 text-neutral-100 pl-quarter px-quarter',
+                          { 'bg-primary-700': isActive },
+                          { 'bg-neutral-400': !isActive }
+                        )}
+                      >
+                        {text}
+                      </NextLink>
+                      {text === 'Work Experience' && (
+                        <ul className="pl-quarter">
+                          {workExperiences.map(({ fileName, frontmatter }) => {
+                            const isActive = window.location.hash.slice(1) === fileName
+
+                            return (
+                              <li key={text}>
+                                <NextLink
+                                  href={`#${fileName}`}
+                                  className={classNames(
+                                    'inline-block font-black uppercase hover:bg-primary-600  hover:text-white px-quarter',
+                                    { 'bg-primary-700 text-white': isActive },
+                                    { 'text-neutral-400': !isActive }
+                                  )}
+                                >
+                                  {frontmatter.company}
+                                </NextLink>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      )}
+                    </li>
+                  )
+                })}
               </ul>
               <a
                 download
