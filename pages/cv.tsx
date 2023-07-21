@@ -4,7 +4,8 @@ import NextLink from 'next/link'
 import Main from 'components/Main'
 import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
-import { MegaphoneIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
+import { ChevronUpIcon, DocumentTextIcon, MegaphoneIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
+import { Disclosure, Transition } from '@headlessui/react'
 
 import CommaSeparatedList from 'components/CommaSeparatedList'
 import getSkills from 'helpers/getSkills'
@@ -249,29 +250,61 @@ export default function CV({ workExperiences }: HomeProps) {
                   {workExperiences
                     .sort((a, b) => dayjs(b.frontmatter.startDate).unix() - dayjs(a.frontmatter.startDate).unix())
                     .map(({ frontmatter, content, fileName }) => (
-                      <li key={frontmatter.title} className="mb-one" id={fileName}>
-                        {/* Correct tags? */}
-                        <header className="flex flex-wrap mb-one gap-x-one">
-                          <h3 className="text-lg uppercase heading basis-full shrink-0">{frontmatter.title}</h3>
-                          <h4 className="uppercase text-md heading text-neutral-500">{frontmatter.company}</h4>
-                          {frontmatter.contract && <span className="text-md heading text-neutral-500">[Contract]</span>}
-                          {frontmatter.startDate && (
-                            <p className="text-md heading text-neutral-400">
-                              <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
-                            </p>
-                          )}
-                        </header>
-                        <div
-                          dangerouslySetInnerHTML={{ __html: md().render(content) }}
-                          className="text-base prose mb-one prose-h4:font-black prose-h4:uppercase prose-h4:text-neutral-600"
-                        />
-                        {frontmatter.skills && (
-                          <div className="text-base">
-                            <h4 className="font-black uppercase">Skills & Tooling</h4>
-                            <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
-                          </div>
+                      <Disclosure as="li" key={frontmatter.title} className="mb-one" id={fileName}>
+                        {({ open }) => (
+                          <>
+                            <Disclosure.Button
+                              as="header"
+                              className="flex flex-wrap cursor-pointer mb-one gap-x-one hover:text-primary-700 group"
+                            >
+                              {frontmatter.startDate && (
+                                <p className="text-md heading text-neutral-400 group-hover:text-primary-400">
+                                  <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
+                                </p>
+                              )}
+                              <h3 className="relative flex items-baseline gap-6 text-lg uppercase heading basis-full shrink-0">
+                                <ChevronUpIcon
+                                  className={`${
+                                    open ? 'rotate-180 transform' : ''
+                                  } h-10 w-10 text-neutral-400 group-hover:text-primary-400 absolute stroke-2 -left-[54px] top-2 transition-transform`}
+                                />
+                                {frontmatter.title}
+                                {frontmatter.contract && (
+                                  <DocumentTextIcon
+                                    className="block w-6 h-6 stroke-2 text-neutral-500 group-hover:text-primary-500"
+                                    aria-hidden="true"
+                                    aria-label="Contract position"
+                                  />
+                                )}
+                              </h3>
+                              <h4 className="uppercase text-md heading text-neutral-500 group-hover:text-primary-500">
+                                {frontmatter.company}
+                              </h4>
+                            </Disclosure.Button>
+                            <Transition
+                              enter="transition duration-200 ease-out"
+                              enterFrom="transform opacity-0"
+                              enterTo="transform opacity-100"
+                              leave="transition duration-150 ease-out"
+                              leaveFrom="transform opacity-100"
+                              leaveTo="transform opacity-0"
+                            >
+                              <Disclosure.Panel>
+                                <div
+                                  dangerouslySetInnerHTML={{ __html: md().render(content) }}
+                                  className="text-base prose mb-one prose-h4:font-black prose-h4:uppercase prose-h4:text-neutral-600"
+                                />
+                                {frontmatter.skills && (
+                                  <div className="text-base">
+                                    <h4 className="font-black uppercase">Skills & Tooling</h4>
+                                    <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
+                                  </div>
+                                )}
+                              </Disclosure.Panel>
+                            </Transition>
+                          </>
                         )}
-                      </li>
+                      </Disclosure>
                     ))}
                 </ol>
               </CvSection>
