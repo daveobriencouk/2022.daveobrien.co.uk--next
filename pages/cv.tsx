@@ -176,6 +176,25 @@ type HomeProps = {
   workExperiences: WorkExperience[]
 }
 
+const EDUCATION_COLUMNS = [
+  {
+    column: 'Years',
+    isSmHidden: false,
+  },
+  {
+    column: 'Institution',
+    isSmHidden: false,
+  },
+  {
+    column: 'Qualification',
+    isSmHidden: true,
+  },
+  {
+    column: 'Grade',
+    isSmHidden: true,
+  },
+]
+
 const EDUCATION = [
   {
     years: '1997-1999',
@@ -370,33 +389,24 @@ export default function CV({ workExperiences }: HomeProps) {
                 <table className="min-w-full divide-y divide-gray-300">
                   <thead>
                     <tr>
-                      <th scope="col" className="py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0">
-                        Year
-                      </th>
-                      <th scope="col" className="py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0">
-                        Institution
-                      </th>
-                      <th
-                        scope="col"
-                        className=" hidden lg:table-cell py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0"
-                      >
-                        Qualification
-                      </th>
-                      <th
-                        scope="col"
-                        className=" hidden lg:table-cell py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0"
-                      >
-                        Grade
-                      </th>
+                      {EDUCATION_COLUMNS.map(({ column, isSmHidden }) => (
+                        <th
+                          scope="col"
+                          className={classNames('py-2 pl-4 pr-3 text-left text-sm font-bold sm:pl-0', {
+                            'hidden lg:table-cell': isSmHidden,
+                          })}
+                          key={column}
+                        >
+                          {column}
+                        </th>
+                      ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-neutral-200">
                     {EDUCATION.map(({ years, institution, qualification, grade }) => (
                       <tr key={years}>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0 align-text-top">
-                          {years}
-                        </td>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-bold text-gray-900 sm:pl-0">
+                        <td className="whitespace-nowrap py-4 pl-4 pr-4 sm:pl-0 align-text-top">{years}</td>
+                        <td className="whitespace-nowrap py-4 pl-4 pr-4 font-bold sm:pl-0">
                           {institution}
                           <dl className="font-normal lg:hidden">
                             <dt className="sr-only">Qualification</dt>
@@ -405,12 +415,10 @@ export default function CV({ workExperiences }: HomeProps) {
                             <dd className="mt-1 truncate text-gray-500">{grade}</dd>
                           </dl>
                         </td>
-                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-4 sm:pl-0">
                           {qualification}
                         </td>
-                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                          {grade}
-                        </td>
+                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-4 sm:pl-0">{grade}</td>
                       </tr>
                     ))}
                   </tbody>
