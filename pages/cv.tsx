@@ -176,6 +176,21 @@ type HomeProps = {
   workExperiences: WorkExperience[]
 }
 
+const EDUCATION = [
+  {
+    years: '1997-1999',
+    institution: 'Collingwood 6th Form',
+    qualification: 'GNVQ Art & Design',
+    grade: 'Distinction',
+  },
+  {
+    years: '1993-1997',
+    institution: 'Collingwood College',
+    qualification: '10 GCSEs',
+    grade: 'A-C',
+  },
+]
+
 function CvSection({ title, children, id }: { title: string; children: React.ReactNode; id: string }) {
   return (
     <section id={id} className="pl-6 border-l-[20px] py-half border-l-neutral-200 mb-10">
@@ -352,11 +367,54 @@ export default function CV({ workExperiences }: HomeProps) {
               </CvSection>
 
               <CvSection title="Education" id="education">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas provident voluptatem reprehenderit
-                  accusamus pariatur nesciunt tenetur aspernatur vel voluptatum. Autem modi facere dignissimos labore
-                  pariatur accusamus quod nesciunt necessitatibus exercitationem.
-                </p>
+                <table className="min-w-full divide-y divide-gray-300">
+                  <thead>
+                    <tr>
+                      <th scope="col" className="py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0">
+                        Year
+                      </th>
+                      <th scope="col" className="py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0">
+                        Institution
+                      </th>
+                      <th
+                        scope="col"
+                        className=" hidden lg:table-cell py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0"
+                      >
+                        Qualification
+                      </th>
+                      <th
+                        scope="col"
+                        className=" hidden lg:table-cell py-2 pl-4 pr-3 text-left text-sm font-bold text-gray-900 sm:pl-0"
+                      >
+                        Grade
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {EDUCATION.map(({ years, institution, qualification, grade }) => (
+                      <tr key={years}>
+                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0 align-text-top">
+                          {years}
+                        </td>
+                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-bold text-gray-900 sm:pl-0">
+                          {institution}
+                          <dl className="font-normal lg:hidden">
+                            <dt className="sr-only">Qualification</dt>
+                            <dd className="mt-1 truncate text-gray-500">{qualification}</dd>
+                            <dt className="sr-only">Grade</dt>
+                            <dd className="mt-1 truncate text-gray-500">{grade}</dd>
+                          </dl>
+                        </td>
+                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                          {qualification}
+                        </td>
+                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                          {grade}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </CvSection>
             </section>
             <aside className="sticky top-0 self-start basis-60 pt-half -mt-half">
