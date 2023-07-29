@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import kebabCase from 'lodash/kebabCase'
 import NextLink from 'next/link'
@@ -6,6 +7,7 @@ import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
 import { ChevronUpIcon, DocumentTextIcon, MegaphoneIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
 import { Disclosure, Transition } from '@headlessui/react'
+import { Waypoint } from 'react-waypoint'
 
 import CommaSeparatedList from 'components/CommaSeparatedList'
 import getSkills from 'helpers/getSkills'
@@ -194,7 +196,26 @@ function CvSection({ title, children, id }: { title: string; children: React.Rea
 export default function CV({ workExperiences }: HomeProps) {
   const { linksByFeatureFlag, flags } = useFeatureFlags()
 
-  console.log({ workExperiences })
+  const [active, setActive] = useState(null)
+
+  console.log({ active })
+
+  // console.log({ workExperiences })
+
+  function handleEnter({ previousPosition, currentPosition, event }, foo) {
+    if (currentPosition === 'inside') {
+      setActive(foo)
+    }
+    console.log('enter', { previousPosition, currentPosition, event, foo })
+  }
+
+  function handleLeave({ previousPosition, currentPosition, event }, foo) {
+    if (currentPosition === 'inside') {
+      setActive(foo)
+    }
+
+    console.log('leave', { previousPosition, currentPosition, event, foo })
+  }
 
   return (
     <>
@@ -226,8 +247,8 @@ export default function CV({ workExperiences }: HomeProps) {
                 <p className="text-base mb-one">
                   Hello, I&rsquo;m Dave, a seasoned Frontend Engineer with over 20 years of experience, based in Surrey
                   near J3 on the M3. I am proficient in web technologies like React, TypeScript, JavaScript, HTML, and
-                  CSS, among others. With a deep passion for frontend engineering, I excel at designing intuitive user
-                  experiences, crafting interfaces, integrating APIs, and building applications.
+                  CSS, among others. With a deep passion for frontend engineering, I excel at crafting high-quality
+                  interfaces, seamlessly integrating APIs, and building robust applications.
                 </p>
                 <p className="text-base mb-one">
                   My experience spans working with prominent clients like Vodafone, MMT Digital, Maersk, Virgin Media,
@@ -250,61 +271,82 @@ export default function CV({ workExperiences }: HomeProps) {
                   {workExperiences
                     .sort((a, b) => dayjs(b.frontmatter.startDate).unix() - dayjs(a.frontmatter.startDate).unix())
                     .map(({ frontmatter, content, fileName }) => (
-                      <Disclosure as="li" key={frontmatter.title} className="mb-one" id={fileName}>
-                        {({ open }) => (
-                          <>
-                            <Disclosure.Button
-                              as="header"
-                              className="flex flex-wrap cursor-pointer mb-one gap-x-one hover:text-primary-700 group"
-                            >
-                              {frontmatter.startDate && (
-                                <p className="text-md heading text-neutral-400 group-hover:text-primary-400">
-                                  <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
-                                </p>
-                              )}
-                              <h3 className="relative flex items-baseline gap-6 text-lg uppercase heading basis-full shrink-0">
-                                <ChevronUpIcon
-                                  className={`${
-                                    open ? 'rotate-180 transform' : ''
-                                  } h-10 w-10 text-neutral-400 group-hover:text-primary-400 absolute stroke-2 -left-[54px] top-2 transition-transform`}
-                                />
-                                {frontmatter.title}
-                                {frontmatter.contract && (
-                                  <DocumentTextIcon
-                                    className="block w-6 h-6 stroke-2 text-neutral-500 group-hover:text-primary-500"
-                                    aria-hidden="true"
-                                    aria-label="Contract position"
-                                  />
-                                )}
-                              </h3>
-                              <h4 className="uppercase text-md heading text-neutral-500 group-hover:text-primary-500">
-                                {frontmatter.company}
-                              </h4>
-                            </Disclosure.Button>
-                            <Transition
-                              enter="transition duration-200 ease-out"
-                              enterFrom="transform opacity-0"
-                              enterTo="transform opacity-100"
-                              leave="transition duration-150 ease-out"
-                              leaveFrom="transform opacity-100"
-                              leaveTo="transform opacity-0"
-                            >
-                              <Disclosure.Panel>
-                                <div
-                                  dangerouslySetInnerHTML={{ __html: md().render(content) }}
-                                  className="text-base prose mb-one prose-h4:font-black prose-h4:uppercase prose-h4:text-neutral-600"
-                                />
-                                {frontmatter.skills && (
-                                  <div className="text-base">
-                                    <h4 className="font-black uppercase">Skills & Tooling</h4>
-                                    <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
-                                  </div>
-                                )}
-                              </Disclosure.Panel>
-                            </Transition>
-                          </>
-                        )}
-                      </Disclosure>
+                      <div key={`experience-${fileName}`}>
+                        <Waypoint
+                          onEnter={(waypoints) => handleEnter(waypoints, fileName)}
+                          onLeave={(waypoints) => handleLeave(waypoints, fileName)}
+                          // topOffset="0%"
+                          bottomOffset="99.9%"
+                        >
+                          <Disclosure as="li" className="mb-one" id={fileName}>
+                            {({ open }) => (
+                              <>
+                                <Disclosure.Button
+                                  as="header"
+                                  className={classNames(
+                                    'flex flex-wrap cursor-pointer mb-one gap-x-one hover:text-primary-700 group',
+                                    {
+                                      'text-orange-700': active === fileName,
+                                    }
+                                  )}
+                                >
+                                  {frontmatter.startDate && (
+                                    <p
+                                      className={classNames(
+                                        'text-md heading text-neutral-400 group-hover:text-primary-400',
+                                        {
+                                          'text-orange-400': active === fileName,
+                                        }
+                                      )}
+                                    >
+                                      <time>{frontmatter.startDate}</time> - <time>{frontmatter.endDate}</time>
+                                    </p>
+                                  )}
+                                  <h3 className="relative flex items-baseline gap-6 text-lg uppercase heading basis-full shrink-0">
+                                    <ChevronUpIcon
+                                      className={`${
+                                        open ? 'rotate-180 transform' : ''
+                                      } h-10 w-10 text-neutral-400 group-hover:text-primary-400 absolute stroke-2 -left-[54px] top-2 transition-transform`}
+                                    />
+                                    {frontmatter.title}
+                                    {frontmatter.contract && (
+                                      <DocumentTextIcon
+                                        className="block w-6 h-6 stroke-2 text-neutral-500 group-hover:text-primary-500"
+                                        aria-hidden="true"
+                                        aria-label="Contract position"
+                                      />
+                                    )}
+                                  </h3>
+                                  <h4 className="uppercase text-md heading text-neutral-500 group-hover:text-primary-500">
+                                    {frontmatter.company}
+                                  </h4>
+                                </Disclosure.Button>
+                                <Transition
+                                  enter="transition duration-200 ease-out"
+                                  enterFrom="transform opacity-0"
+                                  enterTo="transform opacity-100"
+                                  leave="transition duration-150 ease-out"
+                                  leaveFrom="transform opacity-100"
+                                  leaveTo="transform opacity-0"
+                                >
+                                  <Disclosure.Panel>
+                                    <div
+                                      dangerouslySetInnerHTML={{ __html: md().render(content) }}
+                                      className="text-base prose mb-one prose-h4:font-black prose-h4:uppercase prose-h4:text-neutral-600"
+                                    />
+                                    {frontmatter.skills && (
+                                      <div className="text-base">
+                                        <h4 className="font-black uppercase">Skills & Tooling</h4>
+                                        <CommaSeparatedList array={getSkills(frontmatter.skills)} as="ul" />
+                                      </div>
+                                    )}
+                                  </Disclosure.Panel>
+                                </Transition>
+                              </>
+                            )}
+                          </Disclosure>
+                        </Waypoint>
+                      </div>
                     ))}
                 </ol>
               </CvSection>
@@ -328,10 +370,10 @@ export default function CV({ workExperiences }: HomeProps) {
                 */}
                 {MENU_ITEMS.map(({ text, children }) => {
                   const isActive = window.location.hash.slice(1) === kebabCase(text)
-                  console.log({ isActive, hash: window.location.hash.slice(1), text, kebabCase: kebabCase(text) })
+                  // console.log({ isActive, hash: window.location.hash.slice(1), text, kebabCase: kebabCase(text) })
 
                   return (
-                    <li key={text}>
+                    <li key={`menu-222-${kebabCase(text)}`}>
                       <NextLink
                         href={`#${kebabCase(text)}`}
                         className={classNames(
@@ -348,13 +390,13 @@ export default function CV({ workExperiences }: HomeProps) {
                             const isActive = window.location.hash.slice(1) === fileName
 
                             return (
-                              <li key={text}>
+                              <li key={fileName}>
                                 <NextLink
                                   href={`#${fileName}`}
                                   className={classNames(
                                     'inline-block font-black uppercase hover:bg-primary-600  hover:text-white px-quarter',
-                                    { 'bg-primary-700 text-white': isActive },
-                                    { 'text-neutral-400': !isActive }
+                                    { 'bg-primary-700 text-white': isActive || active === fileName },
+                                    { 'text-neutral-400': !isActive || active !== fileName }
                                   )}
                                 >
                                   {frontmatter.company}
