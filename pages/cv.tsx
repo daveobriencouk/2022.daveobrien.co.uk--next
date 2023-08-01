@@ -5,8 +5,16 @@ import NextLink from 'next/link'
 import Main from 'components/Main'
 import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
-import { ChevronUpIcon, DocumentTextIcon, MegaphoneIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
-import { Disclosure, Transition } from '@headlessui/react'
+import {
+  ChevronUpIcon,
+  DocumentTextIcon,
+  MegaphoneIcon,
+  WrenchScrewdriverIcon,
+  BriefcaseIcon,
+  FingerPrintIcon,
+  ArchiveBoxArrowDownIcon,
+} from '@heroicons/react/24/outline'
+import { Disclosure, Tab, Transition } from '@headlessui/react'
 import { Waypoint } from 'react-waypoint'
 
 import CommaSeparatedList from 'components/CommaSeparatedList'
@@ -15,7 +23,7 @@ import useFeatureFlags from 'hooks/useFeatureFlags'
 import { generateMetaTitle } from 'utils/generateMetaTitle'
 
 import { getWorkExperiences } from 'models/workExperience'
-import { SKILLS_INFO } from 'constants/'
+import { FOO } from 'constants/'
 import dayjs from 'dayjs'
 import classNames from 'classnames'
 
@@ -74,7 +82,32 @@ const MENU_ITEMS: MenuItem[] = [
 ]
 
 // see first work experience skills
-const SKILLS_WORK = ['react']
+const SKILLS_WORK = [
+  'react',
+  'typescript',
+  'jest',
+  'cypress',
+  'reactTestingLibrary',
+  'styledComponents',
+  'ajv',
+  'jsonSchema',
+  'reactQuery',
+  'mobx',
+  'lerna',
+  'sonarqube',
+  'enzyme',
+  'redis',
+  'cssModules',
+  'scss',
+  'ado',
+  'html',
+  'javascript',
+  'css',
+  'datadog',
+  'babel',
+  'webpack',
+  'vite',
+]
 
 const SKILLS_PLAY = [
   'react',
@@ -82,7 +115,6 @@ const SKILLS_PLAY = [
   'jest',
   'cypress',
   'reactTestingLibrary',
-
   'nextjs',
   'remix',
   'tailwindcss',
@@ -90,6 +122,8 @@ const SKILLS_PLAY = [
   'github',
   'zod',
 ]
+
+const SKILLS_PAST = ['react']
 
 const SKILL_CATEGORY = {
   backend: 'Backend',
@@ -293,11 +327,61 @@ export default function CV({ workExperiences }: HomeProps) {
               </CvSection>
 
               <CvSection title="Skills & tooling" id="skills-tooling">
-                <h3 className="uppercase heading">At work</h3>
-                <CommaSeparatedList array={getSkills(SKILLS_WORK)} as="ul" className="mb-one" />
+                <Tab.Group onChange={(index) => console.log(Object.entries(FOO)[index])}>
+                  <Tab.List className="flex gap-2 mb-one flex-wrap">
+                    {FOO.map(({ key, title }) => (
+                      <Tab
+                        key={key}
+                        className={({ selected }) =>
+                          classNames(
+                            'font-black uppercase text-sm hover:bg-primary-600 text-neutral-100 pl-quarter px-quarter',
+                            selected ? 'bg-primary-700' : 'bg-neutral-400'
+                          )
+                        }
+                      >
+                        {title}
+                      </Tab>
+                    ))}
+                  </Tab.List>
+                  <Tab.Panels>
+                    {FOO.map(({ key: panelKey, skills }) => (
+                      <Tab.Panel key={`${panelKey}-panel`}>
+                        <ul className="flex gap-x-4 flex-wrap">
+                          {skills.map(({ text, href, key: skillKey, primaryArea }) => (
+                            <li key={`${skillKey}-skill`}>
+                              <a href={href} className="flex gap-1 items-center  hover:text-primary-900">
+                                {primaryArea === 'work' && (
+                                  <BriefcaseIcon className="block w-5 h-5" aria-hidden="true" />
+                                )}
+                                {primaryArea === 'personal' && (
+                                  <FingerPrintIcon className="block w-5 h-5" aria-hidden="true" />
+                                )}
+                                {primaryArea === 'past' && (
+                                  <ArchiveBoxArrowDownIcon className="block w-5 h-5" aria-hidden="true" />
+                                )}
+                                {text}
+                              </a>
+                            </li>
+                            // https://codesandbox.io/s/happy-waterfall-437kdg
+                          ))}
+                        </ul>
+                        {/* <CommaSeparatedList array={getSkills()} as="ul" className="mb-one" /> */}
+                      </Tab.Panel>
+                    ))}
+                  </Tab.Panels>
+                </Tab.Group>
 
-                <h3 className="text-base uppercase heading">At play</h3>
+                {/* <h3 className="text-md heading text-neutral-400">Day to day</h3>
+                <h3 className=" text-base uppercase heading text-md heading text-neutral-500 group-hover:text-primary-500">
+                  At work
+                </h3>
+                <CommaSeparatedList array={getSkills(SKILLS_WORK)} as="ul" className="mb-one" />
+                <h3 className="text-base uppercase heading text-md heading text-neutral-500 group-hover:text-primary-500">
+                  At play
+                </h3>
                 <CommaSeparatedList array={getSkills(SKILLS_PLAY)} as="ul" className="mb-one" />
+                <h3 className="text-md heading text-neutral-400">From the past</h3>
+                <CommaSeparatedList array={getSkills(SKILLS_PAST)} as="ul" className="mb-one" /> */}
               </CvSection>
 
               <CvSection title="Work experience" id="work-experience">
@@ -392,7 +476,7 @@ export default function CV({ workExperiences }: HomeProps) {
                       {EDUCATION_COLUMNS.map(({ column, isSmHidden }) => (
                         <th
                           scope="col"
-                          className={classNames('py-2 pl-4 pr-3 text-left text-sm font-bold sm:pl-0', {
+                          className={classNames('py-2 pl-4 pr-3 text-left font-bold sm:pl-0', {
                             'hidden lg:table-cell': isSmHidden,
                           })}
                           key={column}

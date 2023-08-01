@@ -27,10 +27,7 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
 
   return (
     <div className={`${openSans.variable} ${raleway.variable} font-sans`}>
-      <div
-        style={showGrid ? gridStyles : {}}
-        className="flex flex-col min-h-screen bg-neutral-100 min-w-[24rem] relative"
-      >
+      <div style={true ? gridStyles : {}} className="flex flex-col min-h-screen bg-neutral-100 min-w-[24rem] relative">
         {children}
       </div>
     </div>

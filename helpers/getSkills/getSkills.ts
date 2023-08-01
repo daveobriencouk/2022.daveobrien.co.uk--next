@@ -1,10 +1,9 @@
-import { SKILLS_INFO } from 'constants/'
-import type { SKILLS } from 'constants/'
+import { SKILLS } from 'constants/'
 
-export default function getSkills(array: (keyof SKILLS)[]) {
+export default function getSkills(array: (keyof typeof SKILLS)[]) {
   return array
     .map((item) => {
-      const skill = SKILLS_INFO[item]
+      const skill = SKILLS[item]
 
       if (!skill) {
         console.warn(`Skill missing in lookup "${item}"`)
