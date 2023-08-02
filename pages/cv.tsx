@@ -246,9 +246,12 @@ const EDUCATION = [
 
 function CvSection({ title, children, id }: { title: string; children: React.ReactNode; id: string }) {
   return (
-    <section id={id} className="pl-6 border-l-[20px] py-half border-l-neutral-200 mb-10">
+    <section
+      id={id}
+      className="pl-one ml-half border-l-[0.875rem] py-half -mt-half border-l-neutral-200 mb-one-and-half"
+    >
       <h2 className="relative flex items-center gap-2 uppercase text-md heading mb-one">
-        <span className="absolute block p-3 text-white bg-neutral-500 -left-[57px]">
+        <span className="absolute block p-3 text-white bg-neutral-500 -left-[3.55rem]">
           {id === 'intro' && <MegaphoneIcon className="block w-5 h-5" aria-hidden="true" />}
           {id === 'skills-tooling' && <WrenchScrewdriverIcon className="block w-5 h-5" aria-hidden="true" />}
           {id === 'work-experience' && <WrenchScrewdriverIcon className="block w-5 h-5" aria-hidden="true" />}
@@ -256,7 +259,7 @@ function CvSection({ title, children, id }: { title: string; children: React.Rea
         </span>
         {title}
       </h2>
-      <div className="text-base pl-xxx">{children}</div>
+      <div className="text-base">{children}</div>
     </section>
   )
 }
@@ -318,7 +321,7 @@ export default function CV({ workExperiences }: HomeProps) {
                   CSS, among others. With a deep passion for frontend engineering, I excel at crafting high-quality
                   interfaces, seamlessly integrating APIs, and building robust applications.
                 </p>
-                <p className="text-base mb-one">
+                <p className="text-base">
                   My experience spans working with prominent clients like Vodafone, MMT Digital, Maersk, Virgin Media,
                   to smaller agencies and SMEs. Accustomed to agile methodologies, I thrive in collaborative settings,
                   effectively navigating time constraints, and am devoted to delivering high-quality solutions catered
@@ -328,7 +331,8 @@ export default function CV({ workExperiences }: HomeProps) {
 
               <CvSection title="Skills & tooling" id="skills-tooling">
                 <Tab.Group onChange={(index) => console.log(Object.entries(FOO)[index])}>
-                  <Tab.List className="flex gap-2 mb-one flex-wrap">
+                  {/* <Tab.List className="flex gap-x-2 gap-y-2 mb-one pt-half pb-half flex-wrap"> */}
+                  <Tab.List className="flex gap-x-2 gap-y-0 mb-one flex-wrap">
                     {FOO.map(({ key, title }) => (
                       <Tab
                         key={key}
@@ -370,18 +374,6 @@ export default function CV({ workExperiences }: HomeProps) {
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-
-                {/* <h3 className="text-md heading text-neutral-400">Day to day</h3>
-                <h3 className=" text-base uppercase heading text-md heading text-neutral-500 group-hover:text-primary-500">
-                  At work
-                </h3>
-                <CommaSeparatedList array={getSkills(SKILLS_WORK)} as="ul" className="mb-one" />
-                <h3 className="text-base uppercase heading text-md heading text-neutral-500 group-hover:text-primary-500">
-                  At play
-                </h3>
-                <CommaSeparatedList array={getSkills(SKILLS_PLAY)} as="ul" className="mb-one" />
-                <h3 className="text-md heading text-neutral-400">From the past</h3>
-                <CommaSeparatedList array={getSkills(SKILLS_PAST)} as="ul" className="mb-one" /> */}
               </CvSection>
 
               <CvSection title="Work experience" id="work-experience">
@@ -389,14 +381,14 @@ export default function CV({ workExperiences }: HomeProps) {
                   {workExperiences
                     .sort((a, b) => dayjs(b.frontmatter.startDate).unix() - dayjs(a.frontmatter.startDate).unix())
                     .map(({ frontmatter, content, fileName }) => (
-                      <div key={`experience-${fileName}`}>
+                      <li key={`experience-${fileName}`}>
                         <Waypoint
                           onEnter={(waypoints) => handleEnter(waypoints, fileName)}
                           onLeave={(waypoints) => handleLeave(waypoints, fileName)}
                           // topOffset="0%"
                           bottomOffset="99.9%"
                         >
-                          <Disclosure as="li" className="mb-one" id={fileName}>
+                          <Disclosure as="div" id={fileName}>
                             {({ open }) => (
                               <>
                                 <Disclosure.Button
@@ -464,19 +456,19 @@ export default function CV({ workExperiences }: HomeProps) {
                             )}
                           </Disclosure>
                         </Waypoint>
-                      </div>
+                      </li>
                     ))}
                 </ol>
               </CvSection>
 
               <CvSection title="Education" id="education">
-                <table className="min-w-full divide-y divide-gray-300">
+                <table className="min-w-full divide-y divide-gray-300 leading-[calc(1.75rem-1px)]">
                   <thead>
                     <tr>
                       {EDUCATION_COLUMNS.map(({ column, isSmHidden }) => (
                         <th
                           scope="col"
-                          className={classNames('py-2 pl-4 pr-3 text-left font-bold sm:pl-0', {
+                          className={classNames('px-one py-0 -mb-[1px] text-left font-bold pl-0 border-0', {
                             'hidden lg:table-cell': isSmHidden,
                           })}
                           key={column}
@@ -489,20 +481,18 @@ export default function CV({ workExperiences }: HomeProps) {
                   <tbody className="divide-y divide-neutral-200">
                     {EDUCATION.map(({ years, institution, qualification, grade }) => (
                       <tr key={years}>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-4 sm:pl-0 align-text-top">{years}</td>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-4 font-bold sm:pl-0">
+                        <td className="whitespace-nowrap px-one py-0 pl-0 align-text-top">{years}</td>
+                        <td className="whitespace-nowrap px-one py-0 font-bold pl-0">
                           {institution}
-                          <dl className="font-normal lg:hidden">
+                          <dl className="font-normal lg:hidden leading-one">
                             <dt className="sr-only">Qualification</dt>
-                            <dd className="mt-1 truncate text-gray-500">{qualification}</dd>
+                            <dd className="truncate text-neutral-500">{qualification}</dd>
                             <dt className="sr-only">Grade</dt>
-                            <dd className="mt-1 truncate text-gray-500">{grade}</dd>
+                            <dd className="truncate text-neutral-500">{grade}</dd>
                           </dl>
                         </td>
-                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-4 sm:pl-0">
-                          {qualification}
-                        </td>
-                        <td className="hidden lg:table-cell whitespace-nowrap py-4 pl-4 pr-4 sm:pl-0">{grade}</td>
+                        <td className="hidden lg:table-cell whitespace-nowrap px-one py-0 pl-0">{qualification}</td>
+                        <td className="hidden lg:table-cell whitespace-nowrap px-one py-0 pl-0">{grade}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -563,30 +553,11 @@ export default function CV({ workExperiences }: HomeProps) {
               <a
                 download
                 href="/api/pages.pdf"
-                className="block w-full text-base text-white uppercase rounded-sm heading bg-primary-700 px-one grow-0 hover:bg-primary-900 focus-ring leading-one-and-half my-quarter"
+                className="block w-full text-md text-white uppercase heading bg-primary-700 px-one grow-0 hover:bg-primary-900 focus-ring leading-two"
               >
                 Download CV
               </a>
             </aside>
-
-            {/*
-          I write clear & intuitive code, I architect reusable components & modules, and am as comfortable building user interfaces & integrating APIs as I am writing backends in Node.js. I possess a problem-solving mindset with a thirst for learning that continues to mature my knowledge of front & back-end technologies.
-Practiced in agile methodologies, I&apos;m a proven team player, and believe products are grown through cross-function collaboration. I&apos;m both flexible & adaptable, am sympathetic to timeframes & constraints, and thrive when cultivating a product that yields to the demands of the customer.
- */}
-
-            {/* About Me
-🔭 I’m currently working on: Studying for my IAAP Web Accessibility Specialist Certification in order to improve my web accessibility knowledge and skills.
-🌱 I’m currently learning: 3D modeling and animation with Blender.
-🤔 What I want to learn next: Improving my React game with Epic React.
-📫 How to reach me: hello@${myfullname}.com
- */}
-
-            {/* 🔧 Current tools of choice
-React
-TypeScript
-Next.JS
-Remix
-Tailwind */}
           </div>
         </article>
       </Main>

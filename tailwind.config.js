@@ -2,6 +2,12 @@
 const { fontFamily, letterSpacing } = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
+const spacingBase = 1.75
+
+function spacing(n) {
+  return n * spacingBase + 'rem'
+}
+
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -35,23 +41,48 @@ module.exports = {
         xs: ['0.707rem', '1.75rem'],
       },
       spacing: {
-        quarter: '0.4375rem',
-        half: '0.875rem',
-        one: '1.75rem',
-        'one-and-half': '2.625rem',
-        two: '3.5rem',
-        three: '5.25rem',
-        four: '7rem',
-        five: '8.75rem',
-        six: '10.5rem',
-        eight: '14rem',
-        twelve: '21rem',
-        sixteen: '28rem',
+        quarter: spacing(0.25),
+        half: spacing(0.5),
+        one: spacing(1),
+        'one-and-half': spacing(1.5),
+        two: spacing(2),
+        three: spacing(3),
+        four: spacing(4),
+        five: spacing(5),
+        six: spacing(6),
+        eight: spacing(8),
+        twelve: spacing(12),
+        sixteen: spacing(16),
       },
       lineHeight: {
         one: '1.75rem',
         'one-and-half': '2.625rem',
         two: '3.5rem',
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            p: {
+              marginBottom: spacing(1),
+              marginTop: spacing(1),
+            },
+            ul: {
+              paddingLeft: spacing(1),
+              marginBottom: spacing(1),
+              marginTop: spacing(1),
+            },
+            li: {
+              paddingLeft: 0,
+              marginBottom: 0,
+              marginTop: 0,
+            },
+            h4: {
+              lineHeight: spacing(1),
+              marginBottom: spacing(1),
+              marginTop: spacing(1),
+            },
+          },
+        },
       },
     },
   },

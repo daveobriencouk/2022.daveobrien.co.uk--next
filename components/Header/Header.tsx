@@ -57,7 +57,7 @@ export default function Header({ className, onTransitionEnd, show, skipAnimation
       </Disclosure>
       <header
         className={classNames(
-          'mt-half md:mt-one mb-two md:mb-one-and-half xl:mb-two mx-one md:mx-one-and-half',
+          'mt-half md:mt-one mb-two md:mb-one-and-half xl:mb-two-and-half mx-one md:mx-one-and-half',
           'text-neutral-700',
           className
         )}
