@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import kebabCase from 'lodash/kebabCase'
 import NextLink from 'next/link'
-import Main from 'components/Main'
 import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
+import dayjs from 'dayjs'
+import classNames from 'classnames'
+import kebabCase from 'lodash/kebabCase'
+import { Disclosure, Tab, Transition } from '@headlessui/react'
 import {
   ChevronUpIcon,
   DocumentTextIcon,
@@ -14,20 +16,15 @@ import {
   FingerPrintIcon,
   ArchiveBoxArrowDownIcon,
 } from '@heroicons/react/24/outline'
-import { Disclosure, Tab, Transition } from '@headlessui/react'
 import { Waypoint } from 'react-waypoint'
 
 import CommaSeparatedList from 'components/CommaSeparatedList'
+import Main from 'components/Main'
+import { FOO } from 'constants/'
 import getSkills from 'helpers/getSkills'
 import useFeatureFlags from 'hooks/useFeatureFlags'
-import { generateMetaTitle } from 'utils/generateMetaTitle'
-
 import { getWorkExperiences } from 'models/workExperience'
-import { FOO } from 'constants/'
-import dayjs from 'dayjs'
-import classNames from 'classnames'
-
-// TODO: #10 Add CV page
+import { generateMetaTitle } from 'utils/generateMetaTitle'
 
 type MenuItem = {
   text: string
