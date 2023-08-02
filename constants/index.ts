@@ -339,7 +339,7 @@ export const SKILLS: Record<string, Skill> = {
     href: 'https://www.datadoghq.com/',
     text: 'Datadog',
     areas: ['work'],
-    categories: ['monitoring'],
+    categories: ['testing'],
   },
   babel: {
     href: 'https://babeljs.io/',
