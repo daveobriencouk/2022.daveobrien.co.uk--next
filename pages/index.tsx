@@ -126,65 +126,82 @@ export default function Home({ readMoreLinks }: HomeProps) {
           show={isMainContentShowing || hasInitialPageLoaded}
           onTransitionEnd={() => setInitialPageLoad(true)}
         >
-          {/*
-            // TODO: #36 Add navigational buttons to skip or display the CV
-            <p>Me in 60 seconds 👇</p>
-            <p>, or my CV</p>
-          */}
           {/* TODO: #25 Create plugin to control vertical rhythm via tailwind - with prose etc... https://egghead.io/blog/write-a-plugin-for-tailwind-css */}
           {/* TODO: #13 Migrate homepage content to markdown */}
           <article className="max-w-2xl mb-three">
-            <section>
-              <p className="text-base mb-one">
-                With a deep passion for frontend engineering and a strong understanding of the web, I am adept at
-                creating intuitive and engaging user experiences using technologies like React, JavaScript, HTML, and
-                CSS.
-              </p>
+            {checkSomeFeatureFlags(['content_home_short']) ? (
+              <section className="text-base">
+                <p className="mb-one">
+                  With over <b>20 years of frontend engineering experience</b>, I leverage technologies such as{' '}
+                  <b>TypeScript, React, CSS, and HTML</b> to craft engaging user experiences. My diverse career spans
+                  work with <b>industry leaders such as Vodafone, Virgin Media, and Maersk</b>, demonstrating my{' '}
+                  <b>comprehensive skills in UI design, API integration, and varied aspects of backend development</b>.
+                  As an avid Agile practitioner, <b>I thrive within collaborative environments</b>, consistently
+                  delivering timely, high-quality solutions centred around the end-user's needs.
+                </p>
+                <p className="mb-one">
+                  <Link
+                    href="/cv"
+                    // className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
+                  >
+                    Check out my CV
+                  </Link>{' '}
+                  to delve deeper into my technological expertise and notable professional accomplishments.
+                </p>
+              </section>
+            ) : (
+              <section className="text-base">
+                <p className="mb-one">
+                  With a deep passion for frontend engineering and a strong understanding of the web, I am adept at
+                  creating intuitive and engaging user experiences using technologies like React, JavaScript, HTML, and
+                  CSS.
+                </p>
 
-              <aside>
-                <ul className="text-base list-inside mb-one ml-quarter md:ml-half">
-                  {INTRO_BULLETS.map((bullet) => (
-                    <li className="flex gap-half mb-one" key={bullet.key}>
-                      <span className="flex-shrink-0 w-5 mt-0.5">
-                        <bullet.Icon className="" />
-                      </span>
-                      <span>{bullet.Text}</span>
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-
-              <p className="text-base mb-one">
-                As a front-end engineer, I am equally comfortable crafting user interfaces, integrating APIs, and
-                building applications. In addition, I have a strong foundation in backend development, including
-                experience with Express, Ruby, and PHP. My diverse skill set and adaptability allow me to tackle a wide
-                range of projects and challenges with confidence.
-              </p>
-
-              <p className="text-base mb-one">
-                I am well-versed in agile methodologies and thrive in collaborative environments where I can contribute
-                to the growth and success of a product. I am flexible, with a strong awareness of time-frames and
-                constraints, and I am committed to delivering high-quality solutions that meet the needs of the
-                end-user.
-              </p>
-
-              {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
-                <footer>
-                  <ul className="text-base list-disc mt-two mb-one pl-one-and-half">
-                    {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
-                      <li key={link.text}>
-                        <Link
-                          href={link.href}
-                          className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
-                        >
-                          {link.text}
-                        </Link>
+                <aside>
+                  <ul className="list-inside mb-one ml-quarter md:ml-half">
+                    {INTRO_BULLETS.map((bullet) => (
+                      <li className="flex gap-half mb-one" key={bullet.key}>
+                        <span className="flex-shrink-0 w-5 mt-0.5">
+                          <bullet.Icon className="" />
+                        </span>
+                        <span>{bullet.Text}</span>
                       </li>
                     ))}
                   </ul>
-                </footer>
-              )}
-            </section>
+                </aside>
+
+                <p className="mb-one">
+                  As a front-end engineer, I am equally comfortable crafting user interfaces, integrating APIs, and
+                  building applications. In addition, I have a strong foundation in backend development, including
+                  experience with Express, Ruby, and PHP. My diverse skill set and adaptability allow me to tackle a
+                  wide range of projects and challenges with confidence.
+                </p>
+
+                <p className="mb-one">
+                  I am well-versed in agile methodologies and thrive in collaborative environments where I can
+                  contribute to the growth and success of a product. I am flexible, with a strong awareness of
+                  time-frames and constraints, and I am committed to delivering high-quality solutions that meet the
+                  needs of the end-user.
+                </p>
+
+                {checkSomeFeatureFlags(['section_about', 'section_cv', 'section_notes', 'section_project']) && (
+                  <footer>
+                    <ul className="list-disc mt-two mb-one pl-one-and-half">
+                      {readMoreLinks.filter(linksByFeatureFlag).map((link) => (
+                        <li key={link.text}>
+                          <Link
+                            href={link.href}
+                            className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
+                          >
+                            {link.text}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </footer>
+                )}
+              </section>
+            )}
           </article>
         </MainContentTransition>
       </Main>

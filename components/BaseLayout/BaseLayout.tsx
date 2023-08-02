@@ -23,11 +23,14 @@ const gridStyles = {
 }
 
 export default function BaseLayout({ children }: BaseLayoutProps) {
-  const [showGrid] = useLocalStorage('dob-showGrid', false)
+  const [showGrid] = useLocalStorage('dob-showGrid', true)
 
   return (
     <div className={`${openSans.variable} ${raleway.variable} font-sans`}>
-      <div style={true ? gridStyles : {}} className="flex flex-col min-h-screen bg-neutral-100 min-w-[24rem] relative">
+      <div
+        style={showGrid ? gridStyles : {}}
+        className="flex flex-col min-h-screen bg-neutral-100 min-w-[24rem] relative"
+      >
         {children}
       </div>
     </div>

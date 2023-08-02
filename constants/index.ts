@@ -4,7 +4,13 @@ import { keyBy } from 'lodash'
 export const GLOBAL_META_DESC = null
 export const GLOBAL_META_TITLE = 'Dave O’Brien'
 
-export type FlagOptions = 'section_about' | 'section_cv' | 'section_notes' | 'section_project' | 'section_cv_all_skills'
+export type FlagOptions =
+  | 'section_about'
+  | 'section_cv'
+  | 'section_notes'
+  | 'section_project'
+  | 'section_cv_all_skills'
+  | 'content_home_short'
 
 export type Link = {
   featureFlag?: FlagOptions
