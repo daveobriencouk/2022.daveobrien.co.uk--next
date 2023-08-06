@@ -3,6 +3,7 @@ import matter from 'gray-matter'
 import dayjs from 'dayjs'
 import { z } from 'zod'
 import { SKILLS } from 'constants/'
+import kebabCase from 'lodash/kebabCase'
 
 type WorkExperience = {
   frontmatter: {
@@ -18,6 +19,10 @@ type WorkExperience = {
 }
 
 const path = '_workExperiences'
+
+function generateWorkExperienceId({ company, startDate }: { company: string; startDate: string }) {
+  return company === 'Freelance' ? `freelance-${dayjs(startDate).format('YYYY')}` : kebabCase(company)
+}
 
 export function getWorkExperiences(): WorkExperience[] {
   const files = fs.readdirSync(path)
@@ -47,11 +52,16 @@ export function getWorkExperiences(): WorkExperience[] {
           ...validatedFrontmatter,
           startDate: dayjs(validatedFrontmatter.startDate).format('MMM YYYY'),
           endDate: validatedFrontmatter.endDate ? dayjs(validatedFrontmatter.endDate).format('MMM YYYY') : 'Current',
+          id: generateWorkExperienceId({
+            company: validatedFrontmatter.company,
+            startDate: validatedFrontmatter.startDate,
+          }),
         },
         content,
         fileName: fileName.replace(/\.md$/, ''),
       }
     })
+    .sort((a, b) => dayjs(b.frontmatter.startDate).unix() - dayjs(a.frontmatter.startDate).unix())
 
   return posts
 }

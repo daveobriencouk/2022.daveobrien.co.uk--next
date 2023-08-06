@@ -81,6 +81,9 @@ module.exports = {
               marginBottom: spacing(1),
               marginTop: spacing(1),
             },
+            ':last-child': {
+              marginBottom: '0px',
+            },
           },
         },
       },

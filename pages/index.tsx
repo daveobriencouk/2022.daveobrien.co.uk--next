@@ -2,7 +2,8 @@ import React from 'react'
 import Head from 'next/head'
 import { ClockIcon, UserIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
 import { TypeAnimation } from 'react-type-animation'
-import { random, sample } from 'lodash'
+import random from 'lodash/random'
+import sample from 'lodash/sample'
 
 import type { ReactElement } from 'react'
 

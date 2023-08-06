@@ -1,5 +1,5 @@
 import type { LinkProps } from 'next/link'
-import { keyBy } from 'lodash'
+import keyBy from 'lodash/keyBy'
 
 export const GLOBAL_META_DESC = null
 export const GLOBAL_META_TITLE = 'Dave O’Brien'
@@ -475,7 +475,7 @@ export const SKILLS: Record<string, Skill> = {
   },
 }
 
-type PrimaryArea = 'work' | 'personal' | 'past' | undefined
+export type PrimaryArea = 'work' | 'personal' | 'past' | undefined
 
 function getPrimaryArea(areas: SkillArea[]): PrimaryArea {
   if (areas.includes('work')) return 'work'
@@ -499,7 +499,7 @@ type Skill = {
   categories: SkillCategory[]
 }
 
-type FormattedSkill = {
+export type FormattedSkill = {
   key: keyof typeof SKILLS
   primaryArea: PrimaryArea
   href: Skill['href']
@@ -535,3 +535,37 @@ export const FOO = Object.entries(SKILL_CATEGORIES).map(([key, { title }]) => {
 })
 
 console.log(FOO)
+
+export const EDUCATION_COLUMNS = [
+  {
+    column: 'Years',
+    isSmHidden: false,
+  },
+  {
+    column: 'Institution',
+    isSmHidden: false,
+  },
+  {
+    column: 'Qualification',
+    isSmHidden: true,
+  },
+  {
+    column: 'Grade',
+    isSmHidden: true,
+  },
+]
+
+export const EDUCATION_ROWS = [
+  {
+    years: '1997-1999',
+    institution: 'Collingwood 6th Form',
+    qualification: 'GNVQ Art & Design',
+    grade: 'Distinction',
+  },
+  {
+    years: '1993-1997',
+    institution: 'Collingwood College',
+    qualification: '10 GCSEs',
+    grade: 'A-C',
+  },
+]
