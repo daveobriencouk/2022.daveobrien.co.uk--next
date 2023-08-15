@@ -1,84 +1,48 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import type { GrayMatterFile } from 'gray-matter'
 import md from 'markdown-it'
-import dayjs from 'dayjs'
 import { Waypoint } from 'react-waypoint'
-import kebabCase from 'lodash/kebabCase'
-import { BriefcaseIcon, FingerPrintIcon, ArchiveBoxArrowDownIcon } from '@heroicons/react/24/outline'
 
 import AsideBlock from 'components/AsideBlock'
 import CvSection from 'components/CvSection'
 import Main from 'components/Main'
 import Table from 'components/Table'
 import Tabs from 'components/Tabs'
+import SkillPrimaryAreaIcon from 'components/SkillPrimaryAreaIcon'
 import WorkExperience from 'components/WorkExperience'
-import { EDUCATION_COLUMNS, EDUCATION_ROWS, FOO, FormattedSkill, PrimaryArea } from 'constants/'
-import { getWorkExperiences } from 'models/workExperience'
+import { getEducation } from 'models/cv/education'
+import { getIntro } from 'models/cv/intro'
+import { getMenuItems } from 'models/cv/menuItems'
+import { getSkillsAndTooling } from 'models/cv/skillsAndTooling/'
+import { getWorkExperiences } from 'models/cv/workExperience'
+import type { FormattedSkill } from 'models/cv/skillsAndTooling/types'
 import { generateMetaTitle } from 'utils/generateMetaTitle'
-import { getIntro } from 'models/intro'
-
-type MenuItem = {
-  text: string
-  children?: MenuItem[]
-}
-
-type WorkExperience = {
-  frontmatter: GrayMatterFile<string>['data']
-  content: GrayMatterFile<string>['content']
-  fileName: string
-}
-
-type PrimaryAreaIconProps = {
-  primaryArea: PrimaryArea
-}
-
-function PrimaryAreaIcon({ primaryArea }: PrimaryAreaIconProps) {
-  const iconProps = {
-    className: 'block w-5 h-5',
-    'aria-hidden': true,
-  }
-
-  switch (primaryArea) {
-    case 'work':
-      return <BriefcaseIcon {...iconProps} />
-    case 'personal':
-      return <FingerPrintIcon {...iconProps} />
-    case 'past':
-      return <ArchiveBoxArrowDownIcon {...iconProps} />
-    default:
-      return null
-  }
-}
 
 type CvPageProps = {
-  workExperiences: WorkExperience[]
+  intro: ReturnType<typeof getIntro>
+  education: ReturnType<typeof getEducation>
+  menuItems: ReturnType<typeof getMenuItems>
+  skillsAndTooling: ReturnType<typeof getSkillsAndTooling>
+  workExperiences: ReturnType<typeof getWorkExperiences>
 }
 
-/**
- * * Update Skills & tooling FOO constant... come from modal? Create a CV model?
- *   * Yes... do that...
- *   * intro, menuItems, workExperiences, skillsAndTooling, education
- * * Update getStaticProps to use the CV model, get types right
- */
-
-export default function CvPage({ intro, menuItems, workExperiences }: CvPageProps) {
+export default function CvPage({ education, intro, menuItems, skillsAndTooling, workExperiences }: CvPageProps) {
   const [active, setActive] = useState(null)
 
-  function handleEnter({ previousPosition, currentPosition, event }, id) {
-    if (currentPosition === 'inside') {
-      setActive(id)
-    }
-    console.log('enter', { previousPosition, currentPosition, event, id })
-  }
+  // function handleEnter({ previousPosition, currentPosition, event }, id) {
+  //   if (currentPosition === 'inside') {
+  //     setActive(id)
+  //   }
+  //   console.log('enter', { previousPosition, currentPosition, event, id })
+  // }
 
-  function handleLeave({ previousPosition, currentPosition, event }, id) {
-    if (currentPosition === 'inside') {
-      setActive(id)
-    }
+  // function handleLeave({ previousPosition, currentPosition, event }, id) {
+  //   if (currentPosition === 'inside') {
+  //     setActive(id)
+  //   }
 
-    console.log('leave', { previousPosition, currentPosition, event, id })
-  }
+  //   console.log('leave', { previousPosition, currentPosition, event, id })
+  // }
 
   return (
     <>
@@ -89,7 +53,9 @@ export default function CvPage({ intro, menuItems, workExperiences }: CvPageProp
       <Main>
         <article className="mb-three">
           <header className="flex flex-col max-w-2xl mb-one gap-one">
-            <h1 className="text-xl heading">Curriculum Vitae</h1>
+            <h1 className="text-xl heading" id="main-heading">
+              Curriculum Vitae
+            </h1>
           </header>
 
           <div className="flex flex-wrap gap-three">
@@ -99,14 +65,14 @@ export default function CvPage({ intro, menuItems, workExperiences }: CvPageProp
               </CvSection>
 
               <CvSection title="Skills & tooling" id="skills-and-tooling">
-                <Tabs data={FOO}>
+                <Tabs data={skillsAndTooling.skills}>
                   {({ skills }: { skills: FormattedSkill[] }) => (
                     // https://codesandbox.io/s/happy-waterfall-437kdg
                     <ul className="flex gap-x-4 flex-wrap">
                       {skills.map(({ text, href, key: skillKey, primaryArea }) => (
                         <li key={`${skillKey}-skill`}>
                           <a href={href} className="flex gap-1 items-center hover:text-primary-900">
-                            <PrimaryAreaIcon primaryArea={primaryArea} />
+                            <SkillPrimaryAreaIcon primaryArea={primaryArea} />
                             {text}
                           </a>
                         </li>
@@ -119,19 +85,16 @@ export default function CvPage({ intro, menuItems, workExperiences }: CvPageProp
               <CvSection title="Work experience" id="work-experience">
                 <ol>
                   {workExperiences.map(
-                    ({
-                      frontmatter: { active, company, contract, endDate, id, skills, startDate, title },
-                      content,
-                    }) => (
+                    ({ frontmatter: { company, contract, endDate, id, skills, startDate, title }, content }) => (
                       <li key={`experience-${id}`} className="mb-one last:mb-0">
                         <Waypoint
-                          onEnter={(waypoints) => handleEnter(waypoints, id)}
-                          onLeave={(waypoints) => handleLeave(waypoints, id)}
+                          // onEnter={(waypoints) => handleEnter(waypoints, id)}
+                          // onLeave={(waypoints) => handleLeave(waypoints, id)}
                           // topOffset="0%"
                           bottomOffset="99.9%"
                         >
                           <WorkExperience
-                            active={active}
+                            // active={active}
                             company={company}
                             content={content}
                             contract={contract}
@@ -152,7 +115,7 @@ export default function CvPage({ intro, menuItems, workExperiences }: CvPageProp
                 <Table>
                   <Table.Thead>
                     <Table.Tr>
-                      {EDUCATION_COLUMNS.map(({ column, isSmHidden }) => (
+                      {education.columns.map(({ column, isSmHidden }) => (
                         <Table.Th key={column} isSmHidden={isSmHidden}>
                           {column}
                         </Table.Th>
@@ -160,7 +123,7 @@ export default function CvPage({ intro, menuItems, workExperiences }: CvPageProp
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {EDUCATION_ROWS.map(({ years, institution, qualification, grade }) => (
+                    {education.rows.map(({ years, institution, qualification, grade }) => (
                       <Table.Tr key={years}>
                         <Table.Td className="align-text-top">{years}</Table.Td>
                         <Table.Td className="font-bold">
@@ -196,43 +159,19 @@ export default function CvPage({ intro, menuItems, workExperiences }: CvPageProp
 
 export async function getStaticProps() {
   const intro = getIntro()
-
+  const skillsAndTooling = getSkillsAndTooling()
   const workExperiences = getWorkExperiences()
+  const education = getEducation()
 
-  const menuItems: MenuItem[] = [
-    {
-      text: 'Intro',
-      id: 'intro',
-    },
-    {
-      text: 'Skills & Tooling',
-      id: 'skills-and-tooling',
-    },
-    {
-      text: 'Work Experience',
-      id: 'work-experience',
-      children: workExperiences.map(({ frontmatter: { company, startDate } }) => {
-        return {
-          id: generateWorkExperienceId({ company, startDate }),
-          text: company,
-        }
-      }),
-    },
-    {
-      text: 'Education',
-      id: 'education',
-    },
-  ]
+  const menuItems = getMenuItems({ workExperiences })
 
   return {
     props: {
+      education,
       intro,
       menuItems,
+      skillsAndTooling,
       workExperiences,
     },
   }
-}
-
-function generateWorkExperienceId({ company, startDate }: { company: string; startDate: string }) {
-  return company === 'Freelance' ? `freelance-${dayjs(startDate).format('YYYY')}` : kebabCase(company)
 }

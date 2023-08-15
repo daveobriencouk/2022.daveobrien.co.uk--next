@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { renderToBuffer, Page, View, Text, Document, StyleSheet } from '@react-pdf/renderer'
-import { getWorkExperiences } from 'models/workExperience'
+import { getWorkExperiences } from 'models/cv/workExperience'
 import { NextApiRequest, NextApiResponse } from 'next'
 import md from 'markdown-it'
 import getSkills from 'helpers/getSkills'
@@ -86,11 +86,11 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
                 {frontmatter.skills && (
                   <View style={styles.skills}>
                     <Text>Skills & Tooling</Text>
-                    {getSkills(frontmatter.skills).map((skill) => (
+                    {/* {getSkills(frontmatter.skills).map((skill) => (
                       <Text key={skill.text} style={styles.skill}>
                         {skill.text}
                       </Text>
-                    ))}
+                    ))} */}
                   </View>
                 )}
               </>

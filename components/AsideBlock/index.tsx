@@ -10,12 +10,21 @@ type ListProps = {
   items: Item[]
 }
 
-type Item = {
-  children?: Item[]
-  href?: string
-  id?: string
+type ItemWithHref = {
+  children?: Item[] | null
+  href: string
+  id?: never
   text: string
 }
+
+type ItemWithId = {
+  children?: Item[] | null
+  href?: never
+  id: string
+  text: string
+}
+
+type Item = ItemWithHref | ItemWithId
 
 type SubListProps = {
   children: React.ReactNode
@@ -36,7 +45,9 @@ type CallToActionProps = {
 function AsideBlock({ children, title }: AsideBlockProps) {
   return (
     <>
-      <h2 className="uppercase text-md heading mb-one">{title}</h2>
+      <h2 className="uppercase text-md heading mb-one">
+        <NextLink href="#main-heading">{title}</NextLink>
+      </h2>
       {children}
     </>
   )
@@ -51,7 +62,7 @@ function List({ items }: ListProps) {
 
         return (
           <li key={id || href}>
-            <AsideBlock.Link href={id ? `#${id}` : href} isActive={isActive || isChildActive}>
+            <AsideBlock.Link href={id ? `#${id}` : (href as string)} isActive={isActive || isChildActive}>
               {/* ICONS? And on the headings in the content */}
               {text}
             </AsideBlock.Link>
@@ -64,7 +75,7 @@ function List({ items }: ListProps) {
 
                   return (
                     <li key={id || href}>
-                      <AsideBlock.Link href={id ? `#${id}` : href} isActive={isActive}>
+                      <AsideBlock.Link href={id ? `#${id}` : (href as string)} isActive={isActive}>
                         {text}
                       </AsideBlock.Link>
                     </li>

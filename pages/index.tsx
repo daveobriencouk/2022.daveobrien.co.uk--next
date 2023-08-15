@@ -42,7 +42,7 @@ const INTRO_BULLETS = [
     Text: (
       <>
         <b>Tools & technology</b> used on my current contract projects include{' '}
-        <CommaSeparatedList array={getSkills(SKILLS_CURRENT)} /> Take a look at my{' '}
+        {/* <CommaSeparatedList array={getSkills(SKILLS_CURRENT)} /> Take a look at my{' '} */}
         <Link href="/cv#skills-tooling">full list of tooling I&apos;ve used in the past and present</Link>.
         {/* TODO: #33 Cut the list to 5/6 and replace below with a link to view full list and tooling over the years */}
         {/* This is what <Link href="/about#tooling-personal-projects">I&apos;m currently using on personal projects</Link>,
@@ -138,7 +138,7 @@ export default function Home({ readMoreLinks }: HomeProps) {
                   work with <b>industry leaders such as Vodafone, Virgin Media, and Maersk</b>, demonstrating my{' '}
                   <b>comprehensive skills in UI design, API integration, and varied aspects of backend development</b>.
                   As an avid Agile practitioner, <b>I thrive within collaborative environments</b>, consistently
-                  delivering timely, high-quality solutions centred around the end-user's needs.
+                  delivering timely, high-quality solutions centred around the end-user&apos;s needs.
                 </p>
                 <p className="mb-one">
                   <Link

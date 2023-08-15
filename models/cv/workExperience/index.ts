@@ -2,27 +2,12 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import dayjs from 'dayjs'
 import { z } from 'zod'
-import { SKILLS } from 'constants/'
-import kebabCase from 'lodash/kebabCase'
 
-type WorkExperience = {
-  frontmatter: {
-    title: string
-    startDate: string
-    endDate: string
-    company: string
-    skills?: (keyof SKILLS)[]
-    contract?: boolean
-  }
-  content: string
-  fileName: string
-}
+import { SKILLS } from '../skillsAndTooling'
+import type { WorkExperience } from './types'
+import { generateWorkExperienceId } from './utils'
 
 const path = '_workExperiences'
-
-function generateWorkExperienceId({ company, startDate }: { company: string; startDate: string }) {
-  return company === 'Freelance' ? `freelance-${dayjs(startDate).format('YYYY')}` : kebabCase(company)
-}
 
 export function getWorkExperiences(): WorkExperience[] {
   const files = fs.readdirSync(path)
@@ -50,6 +35,11 @@ export function getWorkExperiences(): WorkExperience[] {
       return {
         frontmatter: {
           ...validatedFrontmatter,
+          skills:
+            validatedFrontmatter.skills?.map((key) => {
+              const { href, text } = SKILLS[key]
+              return { href, text }
+            }) || null,
           startDate: dayjs(validatedFrontmatter.startDate).format('MMM YYYY'),
           endDate: validatedFrontmatter.endDate ? dayjs(validatedFrontmatter.endDate).format('MMM YYYY') : 'Current',
           id: generateWorkExperienceId({

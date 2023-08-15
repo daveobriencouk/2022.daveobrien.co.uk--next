@@ -1,4 +1,4 @@
-import { SKILLS } from 'constants/'
+import { SKILLS } from 'models/cv/skillsAndTooling'
 
 export default function getSkills(array: (keyof typeof SKILLS)[]) {
   return array

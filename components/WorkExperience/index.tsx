@@ -3,35 +3,23 @@ import md from 'markdown-it'
 import { Disclosure, Transition } from '@headlessui/react'
 import classNames from 'classnames'
 import { ChevronUpIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
-
+import type { WorkExperience } from 'models/cv/workExperience/types'
 import CommaSeparatedList from 'components/CommaSeparatedList'
-import getSkills from 'helpers/getSkills'
 
-type HeaderProps = {
+type HeaderProps = Omit<WorkExperience['frontmatter'], 'id' | 'skills'> & {
   isActive: boolean
-  company: string
-  contract: boolean
-  endDate: string
   open: boolean
-  startDate: string
-  title: string
 }
 
 type ContentProps = {
   content: string
-  skills: string[]
+  skills?: WorkExperience['frontmatter']['skills']
 }
 
-type WorkExperienceProps = {
-  active: string
-  company: string
-  content: string
-  contract: boolean
-  endDate: string
+type WorkExperienceProps = WorkExperience['frontmatter'] & {
+  active?: string
+  content: WorkExperience['content']
   id: string
-  skills: string[]
-  startDate: string
-  title: string
 }
 
 function Header({ company, contract, endDate, isActive, open, startDate, title }: HeaderProps) {
@@ -86,7 +74,7 @@ function Content({ content, skills }: ContentProps) {
         {skills && (
           <div className="text-base mt-one">
             <h4 className="font-black uppercase">Skills & Tooling</h4>
-            <CommaSeparatedList array={getSkills(skills)} as="ul" />
+            <CommaSeparatedList array={skills} as="ul" />
           </div>
         )}
       </Disclosure.Panel>
