@@ -6,14 +6,21 @@ import { getEducation } from 'models/cv/education'
 import { getMenuItems } from 'models/cv/menuItems'
 import { PDFViewer } from '@react-pdf/renderer'
 
-export default function CvPdf({ education, intro, skillsAndTooling, skillsAndToolingAll, workExperiences }) {
+type CvPdfProps = {
+  education: ReturnType<typeof getEducation>
+  intro: ReturnType<typeof getIntro>
+  skillsAndTooling: ReturnType<typeof getSkillsAndTooling>['skills']
+  workExperiences: ReturnType<typeof getWorkExperiences>
+}
+
+export default function CvPdf({ education, intro, skillsAndTooling, workExperiences }: CvPdfProps) {
   return (
     <PDFViewer width={1000} height={1500}>
       <MyDocument
         education={education}
+        imagePath="/images"
         intro={intro}
         skillsAndTooling={skillsAndTooling}
-        skillsAndToolingAll={skillsAndToolingAll}
         workExperiences={workExperiences}
       />
     </PDFViewer>
@@ -21,10 +28,10 @@ export default function CvPdf({ education, intro, skillsAndTooling, skillsAndToo
 }
 
 export async function getStaticProps() {
+  const education = getEducation()
   const intro = getIntro()
   const skillsAndTooling = getSkillsAndTooling()
   const workExperiences = getWorkExperiences()
-  const education = getEducation()
 
   const menuItems = getMenuItems({ workExperiences })
 
@@ -34,7 +41,6 @@ export async function getStaticProps() {
       intro,
       menuItems,
       skillsAndTooling: skillsAndTooling.skills.filter((item) => item.key !== 'all'),
-      skillsAndToolingAll: skillsAndTooling.skills.find((item) => item.key === 'all'),
       workExperiences,
     },
   }

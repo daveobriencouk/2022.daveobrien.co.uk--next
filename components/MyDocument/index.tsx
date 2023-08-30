@@ -1,83 +1,38 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Page, View, Text, Document, Image, Link } from '@react-pdf/renderer'
-import ReactMarkdown from 'react-markdown'
 
 import { spacing, styles } from './index.styles'
+import { ContactDetails } from './components/ContactDetails'
+import { MarkdownToPdf } from './components/MarkdownToPdf'
+import type { getEducation } from 'models/cv/education'
+import type { getIntro } from 'models/cv/intro'
+import type { getSkillsAndTooling } from 'models/cv/skillsAndTooling'
+import type { getWorkExperiences } from 'models/cv/workExperience'
 
-function ListItem({ children, isPenultimateItem, ...props }) {
-  return (
-    <View {...props} style={styles.listItem} break={isPenultimateItem}>
-      <Text style={styles.listItemBullet}>&bull;</Text>
-      <Text>{children}</Text>
-    </View>
-  )
+type MyDocumentProps = {
+  education: ReturnType<typeof getEducation>
+  imagePath: string
+  intro: ReturnType<typeof getIntro>
+  skillsAndTooling: ReturnType<typeof getSkillsAndTooling>['skills']
+  workExperiences: ReturnType<typeof getWorkExperiences>
 }
 
-function MarkdownToPDF({ content }) {
-  return (
-    <ReactMarkdown
-      children={content}
-      components={{
-        p: ({ node, index, ...props }) => {
-          const isFirstChild = index === 0
-          const style = {
-            ...styles.para,
-            fontWeight: isFirstChild ? 400 : 300,
-          }
-
-          return <Text {...props} style={style} />
-        },
-        h4: ({ node, ...props }) => <Text {...props} style={styles.h4} />,
-        ul: ({ node, ...props }) => <View {...props} style={styles.list} />,
-        li: ({ node, children, siblingCount, index, ...props }) => {
-          const isPenultimateItem = index === siblingCount - 2
-
-          return (
-            <ListItem {...props} isPenultimateItem={isPenultimateItem}>
-              {children}
-            </ListItem>
-          )
-        },
-      }}
-      includeElementIndex
-    />
-  )
-}
-
-function ContactDetails({ includeLocationDetail }) {
-  return (
-    <View style={styles.contact}>
-      <View style={styles.contactDetail}>
-        <Image src="/images/map-pin.png" style={styles.contactIcon} />
-        <Text>
-          <Link src="https://www.linkedin.com/in/daveobriencouk/" style={styles.contactLink}>
-            linkedin.com/in/daveobriencouk
-          </Link>
-        </Text>
-      </View>
-      <View style={styles.contactDetail}>
-        <Image src="/images/envelope.png" style={styles.contactIcon} />
-        <Text>Based in Surrey {includeLocationDetail && '(near J3 on the M3)'}</Text>
-      </View>
-    </View>
-  )
-}
-
-export function MyDocument({ education, intro, skillsAndTooling, skillsAndToolingAll, workExperiences }) {
+export function MyDocument({ education, imagePath, intro, skillsAndTooling, workExperiences }: MyDocumentProps) {
+  console.log({ skillsAndTooling })
   return (
     <Document producer="foo" creator="foo" title="Pages">
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <View style={styles.logo}>
-            <Image src="/images/logo-strapline.png" />
+            <Image src={`${imagePath}/logo-strapline.png`} />
           </View>
-          <ContactDetails includeLocationDetail={true} />
+          <ContactDetails imagePath={imagePath} includeLocationDetail={true} />
         </View>
 
         <View style={styles.introAndSkills}>
           <View style={styles.intro}>
             <Text style={styles.sectionHeading}>Intro</Text>
-            <MarkdownToPDF content={intro} />
+            <MarkdownToPdf content={intro} />
           </View>
           <View style={styles.skills}>
             <Text style={styles.sectionHeading}>Skills & Tooling</Text>
@@ -121,7 +76,7 @@ export function MyDocument({ education, intro, skillsAndTooling, skillsAndToolin
                     )}
                   </View>
                   <View style={styles.workExperienceContent} minPresenceAhead={1}>
-                    <MarkdownToPDF content={content} />
+                    <MarkdownToPdf content={content} />
                     {frontmatter.skills && (
                       <View style={styles.workExperienceSkills}>
                         <Text style={styles.h4}>Skills & Tooling</Text>
@@ -138,11 +93,9 @@ export function MyDocument({ education, intro, skillsAndTooling, skillsAndToolin
             })}
           </View>
           <View style={styles.secondaryWorkExperiences}>
-            {workExperiences.slice(3).map(({ frontmatter, content }, index) => {
+            {workExperiences.slice(3).map(({ frontmatter }, index) => {
               const length = workExperiences.length - 3
               const isLastItem = index === length - 1
-
-              console.log(isLastItem, index, length)
               return (
                 <View
                   style={{
@@ -181,9 +134,9 @@ export function MyDocument({ education, intro, skillsAndTooling, skillsAndToolin
             </View>
             <View style={styles.secondaryContact}>
               <View style={styles.smallLogo}>
-                <Image src="/images/logo.png" />
+                <Image src={`${imagePath}/logo.png`} />
               </View>
-              <ContactDetails />
+              <ContactDetails imagePath={imagePath} />
             </View>
           </View>
         </View>

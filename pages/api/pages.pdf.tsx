@@ -1,15 +1,34 @@
 /* eslint-disable import/no-anonymous-default-export */
+import fs from 'fs'
+import path from 'path'
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { renderToBuffer } from '@react-pdf/renderer'
 import { MyDocument } from 'components/MyDocument'
+import { getEducation } from 'models/cv/education'
+import { getIntro } from 'models/cv/intro'
+import { getSkillsAndTooling } from 'models/cv/skillsAndTooling'
 import { getWorkExperiences } from 'models/cv/workExperience'
-import { NextApiRequest, NextApiResponse } from 'next'
 
 export const dynamic = 'force-dynamic'
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+export default async function (_: NextApiRequest, res: NextApiResponse) {
+  const education = getEducation()
+  const intro = getIntro()
+  const skillsAndTooling = getSkillsAndTooling()
   const workExperiences = getWorkExperiences()
 
-  const buffer = await renderToBuffer(<MyDocument workExperiences={workExperiences} />)
+  const imageDir = path.resolve('./public/images')
+
+  const buffer = await renderToBuffer(
+    <MyDocument
+      education={education}
+      imagePath={imageDir}
+      intro={intro}
+      skillsAndTooling={skillsAndTooling.skills.filter((item) => item.key !== 'all')}
+      workExperiences={workExperiences}
+    />
+  )
 
   res
     .status(200)

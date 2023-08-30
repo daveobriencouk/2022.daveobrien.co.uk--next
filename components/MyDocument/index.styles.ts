@@ -1,6 +1,10 @@
 import { StyleSheet, Font } from '@react-pdf/renderer'
+import { ColorSet, RalewayHeadingParams } from './index.styles.types'
 
-// See: https://stackoverflow.com/questions/70126411/how-to-add-custom-font-in-react-pdf-pdf/70577891#70577891
+/**
+ * Setup fonts
+ * See: https://stackoverflow.com/questions/70126411/how-to-add-custom-font-in-react-pdf-pdf/70577891#70577891
+ */
 Font.register({
   family: 'Open Sans',
   fonts: [
@@ -30,22 +34,16 @@ Font.register({
     },
   ],
 })
+// Remove hyphenation
 Font.registerHyphenationCallback((word) => [word])
 
+/**
+ * Setup base values
+ */
 const baseFontSize = 8
 const baseLineHeight = 1.5
 
-const headingFontSize = baseFontSize * baseLineHeight
-
-function toPt(num) {
-  return `${num}pt`
-}
-
-export function spacing(foo) {
-  return toPt(foo * baseFontSize)
-}
-
-const colors = {
+const colors: Record<string, ColorSet> = {
   primary: {
     900: 'rgb(55, 65, 81)',
     800: 'rgb(68, 64, 60)',
@@ -55,7 +53,22 @@ const colors = {
   },
 }
 
-function ralewayHeading({ fontSize = 1.5, lineHeight = baseLineHeight / 2, primaryColor = 400 } = {}) {
+/**
+ * Define helper functions
+ */
+export function toPt(num: number) {
+  return `${num}pt`
+}
+
+export function spacing(multiplier: number) {
+  return toPt(multiplier * baseFontSize)
+}
+
+export function ralewayHeading({
+  fontSize = 1.5,
+  lineHeight = baseLineHeight / 2,
+  primaryColor = 400,
+}: RalewayHeadingParams = {}) {
   return {
     fontFamily: 'Raleway',
     fontSize: spacing(fontSize),
@@ -68,6 +81,9 @@ function ralewayHeading({ fontSize = 1.5, lineHeight = baseLineHeight / 2, prima
 }
 
 export const styles = StyleSheet.create({
+  /**
+   * Page styles
+   */
   page: {
     color: colors.primary[900],
     fontFamily: 'Open Sans',
@@ -78,17 +94,9 @@ export const styles = StyleSheet.create({
     padding: '10mm',
   },
 
-  sectionHeading: {
-    fontSize: spacing(1.5),
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    color: colors.primary[900],
-
-    borderBottom: `1px solid ${colors.primary[900]}`,
-
-    marginBottom: spacing(1.5),
-  },
-
+  /**
+   * Top header styles
+   */
   header: {
     display: 'flex',
     alignItems: 'flex-end',
@@ -120,6 +128,9 @@ export const styles = StyleSheet.create({
     textDecoration: 'none',
   },
 
+  /**
+   * Intro and skills styles
+   */
   introAndSkills: {
     display: 'flex',
     flexDirection: 'row',
@@ -145,11 +156,18 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 
+  /**
+   * Work experience and education styles
+   */
   workExperiencesAndEducation: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+
+  /**
+   * Work experience styles
+   */
   workExperiencesMain: {
     width: '100%',
   },
@@ -179,6 +197,7 @@ export const styles = StyleSheet.create({
   },
   workExperienceContent: {
     width: '75%',
+
     paddingTop: spacing(0.667),
   },
   workExperienceSkills: {
@@ -186,33 +205,20 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
 
+  /**
+   * Secondary work experience styles
+   */
   secondaryWorkExperiences: {
     width: '75%',
 
     marginBottom: spacing(0.667),
   },
-
   secondaryWorkExperience: {
     display: 'flex',
     flexDirection: 'row',
     gap: spacing(2),
     justifyContent: 'space-between',
   },
-
-  secondaryWorkExperienceDate: {
-    ...ralewayHeading(),
-  },
-
-  secondaryWorkExperienceJobTitle: {
-    ...ralewayHeading({ fontSize: 2, primaryColor: 600 }),
-
-    marginBottom: spacing(1),
-  },
-
-  secondaryWorkExperienceCompany: {
-    ...ralewayHeading({ primaryColor: 500 }),
-  },
-
   secondaryWorkExperienceLeft: {
     textAlign: 'right',
     width: '33.33%',
@@ -221,6 +227,21 @@ export const styles = StyleSheet.create({
   secondaryWorkExperienceRight: {
     width: '66.67%',
   },
+  secondaryWorkExperienceDate: {
+    ...ralewayHeading(),
+  },
+  secondaryWorkExperienceJobTitle: {
+    ...ralewayHeading({ fontSize: 2, primaryColor: 600 }),
+
+    marginBottom: spacing(1),
+  },
+  secondaryWorkExperienceCompany: {
+    ...ralewayHeading({ primaryColor: 500 }),
+  },
+
+  /**
+   * Education styles
+   */
   education: {},
   educationAndContact: {
     width: '25%',
@@ -228,7 +249,32 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  secondaryContact: {},
+  smallLogo: {
+    width: '47.5mm',
 
+    marginBottom: spacing(1),
+  },
+  educationPeriod: {
+    marginBottom: spacing(1),
+  },
+  educationYears: {},
+  educationInstitution: { fontWeight: 400 },
+  educationQualification: {},
+
+  /**
+   * General styles
+   */
+  sectionHeading: {
+    fontSize: spacing(1.5),
+    fontWeight: 800,
+    textTransform: 'uppercase',
+    color: colors.primary[900],
+
+    borderBottom: `1px solid ${colors.primary[900]}`,
+
+    marginBottom: spacing(1.5),
+  },
   h4: {
     fontWeight: 700,
     textTransform: 'uppercase',
@@ -255,19 +301,4 @@ export const styles = StyleSheet.create({
 
     textAlign: 'center',
   },
-  listItemChildren: {},
-
-  secondaryContact: {},
-  smallLogo: {
-    width: '47.5mm',
-
-    marginBottom: spacing(1),
-  },
-
-  educationPeriod: {
-    marginBottom: spacing(1),
-  },
-  educationYears: {},
-  educationInstitution: { fontWeight: 400 },
-  educationQualification: {},
 })

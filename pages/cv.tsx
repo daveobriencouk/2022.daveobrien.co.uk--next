@@ -19,8 +19,8 @@ import type { FormattedSkill } from 'models/cv/skillsAndTooling/types'
 import { generateMetaTitle } from 'utils/generateMetaTitle'
 
 type CvPageProps = {
-  intro: ReturnType<typeof getIntro>
   education: ReturnType<typeof getEducation>
+  intro: ReturnType<typeof getIntro>
   menuItems: ReturnType<typeof getMenuItems>
   skillsAndTooling: ReturnType<typeof getSkillsAndTooling>
   workExperiences: ReturnType<typeof getWorkExperiences>
@@ -158,10 +158,10 @@ export default function CvPage({ education, intro, menuItems, skillsAndTooling, 
 }
 
 export async function getStaticProps() {
+  const education = getEducation()
   const intro = getIntro()
   const skillsAndTooling = getSkillsAndTooling()
   const workExperiences = getWorkExperiences()
-  const education = getEducation()
 
   const menuItems = getMenuItems({ workExperiences })
 
