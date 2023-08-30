@@ -202,7 +202,6 @@ export const styles = StyleSheet.create({
   },
   workExperienceSkills: {
     display: 'flex',
-    flexWrap: 'wrap',
   },
 
   /**

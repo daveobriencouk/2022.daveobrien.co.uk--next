@@ -48,7 +48,7 @@ export function MyDocument({ education, imagePath, intro, skillsAndTooling, work
                       return (
                         <Text style={styles.skill} key={skill.key}>
                           {skill.text}
-                          {isLastItem ? '.' : ', '}
+                          {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
                         </Text>
                       )
                     })}
@@ -64,6 +64,7 @@ export function MyDocument({ education, imagePath, intro, skillsAndTooling, work
         <View style={styles.workExperiencesAndEducation}>
           <View style={styles.workExperiencesMain}>
             {workExperiences.slice(0, 3).map(({ frontmatter, content }) => {
+              console.log('frontmatter', frontmatter.skills)
               return (
                 <View style={styles.workExperience} key={frontmatter.id}>
                   <View style={styles.workExperienceHeading}>
@@ -80,11 +81,19 @@ export function MyDocument({ education, imagePath, intro, skillsAndTooling, work
                     {frontmatter.skills && (
                       <View style={styles.workExperienceSkills}>
                         <Text style={styles.h4}>Skills & Tooling</Text>
-                        {/* {getSkills(frontmatter.skills).map((skill) => (
-                      <Text key={skill.text} style={styles.skill}>
-                        {skill.text}
-                      </Text>
-                    ))} */}
+                        <View style={styles.skillsList}>
+                          {frontmatter.skills.map((skill, index) => {
+                            const length = frontmatter.skills?.length || 0
+                            const isPenultimateItem = index === length - 2
+                            const isLastItem = index === length - 1
+                            return (
+                              <Text style={styles.skill} key={skill.text}>
+                                {skill.text}
+                                {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
+                              </Text>
+                            )
+                          })}
+                        </View>
                       </View>
                     )}
                   </View>
