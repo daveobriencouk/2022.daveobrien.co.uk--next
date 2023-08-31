@@ -33,7 +33,7 @@ export default async function (_: NextApiRequest, res: NextApiResponse) {
   res
     .status(200)
     .setHeader('Content-Type', 'application/pdf')
-    .setHeader('Content-Disposition', `attachment; filename="pages.pdf"`)
+    .setHeader('Content-Disposition', `attachment; filename="Dave O'Brien's CV.pdf"`)
 
   res.send(buffer)
 }

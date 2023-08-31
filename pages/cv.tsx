@@ -147,7 +147,7 @@ export default function CvPage({ education, intro, menuItems, skillsAndTooling, 
             <aside className="sticky top-0 self-start basis-60 pt-half -mt-half">
               <AsideBlock title="CV Contents">
                 <AsideBlock.List items={menuItems} />
-                <AsideBlock.CallToAction href="/api/pages.pdf">Download CV</AsideBlock.CallToAction>
+                <AsideBlock.CallToAction href="/api/cv.pdf">Download CV</AsideBlock.CallToAction>
               </AsideBlock>
             </aside>
           </div>
