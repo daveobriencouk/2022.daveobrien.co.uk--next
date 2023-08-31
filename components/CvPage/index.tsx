@@ -9,7 +9,7 @@ import type { getIntro } from 'models/cv/intro'
 import type { getSkillsAndTooling } from 'models/cv/skillsAndTooling'
 import type { getWorkExperiences } from 'models/cv/workExperience'
 
-type MyDocumentProps = {
+type CvPageProps = {
   education: ReturnType<typeof getEducation>
   imagePath: string
   intro: ReturnType<typeof getIntro>
@@ -17,7 +17,7 @@ type MyDocumentProps = {
   workExperiences: ReturnType<typeof getWorkExperiences>
 }
 
-export function MyDocument({ education, imagePath, intro, skillsAndTooling, workExperiences }: MyDocumentProps) {
+export function CvPage({ education, imagePath, intro, skillsAndTooling, workExperiences }: CvPageProps) {
   return (
     <Document title="Dave O'Brien's CV" author="Dave O'Brien">
       <Page size="A4" style={styles.page}>

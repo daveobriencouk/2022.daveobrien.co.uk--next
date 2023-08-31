@@ -1,7 +1,7 @@
 import { View, Text } from '@react-pdf/renderer'
 import ReactMarkdown from 'react-markdown'
 
-import { styles } from 'components/MyDocument/index.styles'
+import { styles } from 'components/CvPage/index.styles'
 import { ListItem } from '../ListItem'
 
 type MarkdownToPdfProps = {

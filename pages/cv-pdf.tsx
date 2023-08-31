@@ -1,5 +1,5 @@
 import { getWorkExperiences } from 'models/cv/workExperience'
-import { MyDocument } from 'components/MyDocument'
+import { CvPage } from 'components/CvPage'
 import { getIntro } from 'models/cv/intro'
 import { getSkillsAndTooling } from 'models/cv/skillsAndTooling'
 import { getEducation } from 'models/cv/education'
@@ -16,7 +16,7 @@ type CvPdfProps = {
 export default function CvPdf({ education, intro, skillsAndTooling, workExperiences }: CvPdfProps) {
   return (
     <PDFViewer width={1000} height={1500}>
-      <MyDocument
+      <CvPage
         education={education}
         imagePath="/images"
         intro={intro}

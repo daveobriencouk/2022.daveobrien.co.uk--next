@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { View, Text, Image, Link } from '@react-pdf/renderer'
 
-import { styles } from 'components/MyDocument/index.styles'
+import { styles } from 'components/CvPage/index.styles'
 
 type ContactDetailsProps = {
   imagePath: string

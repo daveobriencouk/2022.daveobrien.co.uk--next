@@ -4,7 +4,7 @@ import path from 'path'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { renderToBuffer } from '@react-pdf/renderer'
-import { MyDocument } from 'components/MyDocument'
+import { CvPage } from 'components/CvPage'
 import { getEducation } from 'models/cv/education'
 import { getIntro } from 'models/cv/intro'
 import { getSkillsAndTooling } from 'models/cv/skillsAndTooling'
@@ -21,7 +21,7 @@ export default async function (_: NextApiRequest, res: NextApiResponse) {
   const imageDir = path.resolve('./public/images')
 
   const buffer = await renderToBuffer(
-    <MyDocument
+    <CvPage
       education={education}
       imagePath={imageDir}
       intro={intro}
