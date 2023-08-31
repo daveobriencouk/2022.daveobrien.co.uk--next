@@ -18,9 +18,8 @@ type MyDocumentProps = {
 }
 
 export function MyDocument({ education, imagePath, intro, skillsAndTooling, workExperiences }: MyDocumentProps) {
-  console.log({ skillsAndTooling })
   return (
-    <Document producer="foo" creator="foo" title="Pages">
+    <Document title="Dave O'Brien's CV" author="Dave O'Brien">
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <View style={styles.logo}>
@@ -37,24 +36,23 @@ export function MyDocument({ education, imagePath, intro, skillsAndTooling, work
           <View style={styles.skills}>
             <Text style={styles.sectionHeading}>Skills & Tooling</Text>
             <View>
-              {skillsAndTooling.map((skillCategory) => {
-                return (
-                  <View style={styles.skillsList} key={skillCategory.key}>
-                    <Text style={styles.skillCategory}>{skillCategory.title}: </Text>
-                    {skillCategory.skills.map((skill, index) => {
-                      const length = skillCategory.skills.length
-                      const isPenultimateItem = index === length - 2
-                      const isLastItem = index === length - 1
-                      return (
-                        <Text style={styles.skill} key={skill.key}>
-                          {skill.text}
-                          {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
-                        </Text>
-                      )
-                    })}
-                  </View>
-                )
-              })}
+              {skillsAndTooling.map((skillCategory) => (
+                <View style={styles.skillsList} key={skillCategory.key}>
+                  <Text style={styles.skillCategory}>{skillCategory.title}: </Text>
+                  {skillCategory.skills.map((skill, index) => {
+                    const length = skillCategory.skills.length
+                    const isPenultimateItem = index === length - 2
+                    const isLastItem = index === length - 1
+
+                    return (
+                      <Text style={styles.skill} key={skill.key}>
+                        {skill.text}
+                        {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
+                      </Text>
+                    )
+                  })}
+                </View>
+              ))}
             </View>
           </View>
         </View>
@@ -63,48 +61,46 @@ export function MyDocument({ education, imagePath, intro, skillsAndTooling, work
 
         <View style={styles.workExperiencesAndEducation}>
           <View style={styles.workExperiencesMain}>
-            {workExperiences.slice(0, 3).map(({ frontmatter, content }) => {
-              console.log('frontmatter', frontmatter.skills)
-              return (
-                <View style={styles.workExperience} key={frontmatter.id}>
-                  <View style={styles.workExperienceHeading}>
-                    <Text style={styles.workExperienceJobTitle}>{frontmatter.title}</Text>
-                    <Text style={styles.workExperienceCompany}>{frontmatter.company}</Text>
-                    {frontmatter.startDate && (
-                      <Text style={styles.workExperienceDate}>
-                        {frontmatter.startDate} - {frontmatter.endDate}
-                      </Text>
-                    )}
-                  </View>
-                  <View style={styles.workExperienceContent} minPresenceAhead={1}>
-                    <MarkdownToPdf content={content} />
-                    {frontmatter.skills && (
-                      <View style={styles.workExperienceSkills}>
-                        <Text style={styles.h4}>Skills & Tooling</Text>
-                        <View style={styles.skillsList}>
-                          {frontmatter.skills.map((skill, index) => {
-                            const length = frontmatter.skills?.length || 0
-                            const isPenultimateItem = index === length - 2
-                            const isLastItem = index === length - 1
-                            return (
-                              <Text style={styles.skill} key={skill.text}>
-                                {skill.text}
-                                {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
-                              </Text>
-                            )
-                          })}
-                        </View>
-                      </View>
-                    )}
-                  </View>
+            {workExperiences.slice(0, 3).map(({ frontmatter, content }) => (
+              <View style={styles.workExperience} key={frontmatter.id}>
+                <View style={styles.workExperienceHeading}>
+                  <Text style={styles.workExperienceJobTitle}>{frontmatter.title}</Text>
+                  <Text style={styles.workExperienceCompany}>{frontmatter.company}</Text>
+                  {frontmatter.startDate && (
+                    <Text style={styles.workExperienceDate}>
+                      {frontmatter.startDate} - {frontmatter.endDate}
+                    </Text>
+                  )}
                 </View>
-              )
-            })}
+                <View style={styles.workExperienceContent} minPresenceAhead={1}>
+                  <MarkdownToPdf content={content} />
+                  {frontmatter.skills && (
+                    <View style={styles.workExperienceSkills}>
+                      <Text style={styles.h4}>Skills & Tooling</Text>
+                      <View style={styles.skillsList}>
+                        {frontmatter.skills.map((skill, index) => {
+                          const length = frontmatter.skills?.length || 0
+                          const isPenultimateItem = index === length - 2
+                          const isLastItem = index === length - 1
+                          return (
+                            <Text style={styles.skill} key={skill.text}>
+                              {skill.text}
+                              {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
+                            </Text>
+                          )
+                        })}
+                      </View>
+                    </View>
+                  )}
+                </View>
+              </View>
+            ))}
           </View>
           <View style={styles.secondaryWorkExperiences}>
             {workExperiences.slice(3).map(({ frontmatter }, index) => {
               const length = workExperiences.length - 3
               const isLastItem = index === length - 1
+
               return (
                 <View
                   style={{
