@@ -140,10 +140,10 @@ export const styles = StyleSheet.create({
     marginBottom: spacing(1.5),
   },
   intro: {
-    width: '50%',
+    width: '37.5%',
   },
   skills: {
-    width: '50%',
+    width: '62.5%',
   },
   skillsList: {
     display: 'flex',
