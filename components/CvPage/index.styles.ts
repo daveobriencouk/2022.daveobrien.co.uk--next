@@ -40,7 +40,7 @@ Font.registerHyphenationCallback((word) => [word])
 /**
  * Setup base values
  */
-const baseFontSize = 8
+const baseFontSize = 7.75
 const baseLineHeight = 1.5
 
 const colors: Record<string, ColorSet> = {
@@ -140,10 +140,14 @@ export const styles = StyleSheet.create({
     marginBottom: spacing(1.5),
   },
   intro: {
-    width: '37.5%',
+    width: '40%',
   },
   skills: {
-    width: '62.5%',
+    width: '60%',
+  },
+  skillsHeading: {
+    fontWeight: 700,
+    textTransform: 'uppercase',
   },
   skillsList: {
     display: 'flex',
@@ -209,8 +213,6 @@ export const styles = StyleSheet.create({
    */
   secondaryWorkExperiences: {
     width: '75%',
-
-    marginBottom: spacing(0.667),
   },
   secondaryWorkExperience: {
     display: 'flex',
@@ -221,16 +223,18 @@ export const styles = StyleSheet.create({
   secondaryWorkExperienceLeft: {
     textAlign: 'right',
     width: '33.33%',
-    paddingTop: spacing(0.333),
+    // paddingTop: spacing(0.333),
   },
   secondaryWorkExperienceRight: {
     width: '66.67%',
+    display: 'flex',
+    flexDirection: 'row',
   },
   secondaryWorkExperienceDate: {
     ...ralewayHeading(),
   },
   secondaryWorkExperienceJobTitle: {
-    ...ralewayHeading({ fontSize: 2, primaryColor: 600 }),
+    ...ralewayHeading({ fontSize: 1.5, primaryColor: 600 }),
 
     marginBottom: spacing(1),
   },

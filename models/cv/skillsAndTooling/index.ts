@@ -12,6 +12,37 @@ export const CATEGORIES: Record<SkillCategory | 'all', { title: string }> = {
 }
 
 export const SKILLS: Skills = {
+  express: {
+    href: 'https://expressjs.com/',
+    text: 'Express',
+    areas: ['work', 'personal'],
+    categories: ['backend'],
+  },
+  nodeJs: {
+    href: 'https://nodejs.org/',
+    text: 'Node.js',
+    areas: ['work', 'personal'],
+    categories: ['backend'],
+  },
+  php: {
+    href: 'https://www.php.net/',
+    text: 'PHP',
+    areas: ['past'],
+    categories: ['backend'],
+  },
+  codeIgniter: {
+    href: 'https://www.codeigniter.com/',
+    text: 'CodeIgniter',
+    areas: ['past'],
+    categories: ['backend'],
+  },
+  yii: {
+    href: 'https://www.yiiframework.com/',
+    text: 'Yii',
+    areas: ['past'],
+    categories: ['backend'],
+  },
+
   react: {
     href: 'https://reactjs.org/',
     text: 'React',
@@ -277,37 +308,6 @@ export const SKILLS: Skills = {
     categories: ['testing'],
   },
 
-  express: {
-    href: 'https://expressjs.com/',
-    text: 'Express',
-    areas: ['work', 'personal'],
-    categories: ['backend'],
-  },
-  nodeJs: {
-    href: 'https://nodejs.org/',
-    text: 'Node.js',
-    areas: ['work', 'personal'],
-    categories: ['backend'],
-  },
-  php: {
-    href: 'https://www.php.net/',
-    text: 'PHP',
-    areas: ['past'],
-    categories: ['backend'],
-  },
-  codeIgniter: {
-    href: 'https://www.codeigniter.com/',
-    text: 'CodeIgniter',
-    areas: ['past'],
-    categories: ['backend'],
-  },
-  yii: {
-    href: 'https://www.yiiframework.com/',
-    text: 'Yii',
-    areas: ['past'],
-    categories: ['backend'],
-  },
-
   git: {
     href: 'https://git-scm.com/',
     text: 'Git',
@@ -377,12 +377,6 @@ export const SKILLS: Skills = {
   gulp: {
     href: 'https://gulpjs.com/',
     text: 'Gulp',
-    areas: ['past'],
-    categories: ['build'],
-  },
-  grunt: {
-    href: 'https://gruntjs.com/',
-    text: 'Grunt',
     areas: ['past'],
     categories: ['build'],
   },

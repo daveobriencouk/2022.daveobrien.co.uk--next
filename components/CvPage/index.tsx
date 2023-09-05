@@ -47,7 +47,7 @@ export function CvPage({ education, imagePath, intro, skillsAndTooling, workExpe
                     return (
                       <Text style={styles.skill} key={skill.key}>
                         {skill.text}
-                        {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
+                        {isLastItem ? '.' : isPenultimateItem ? ' & ' : ', '}
                       </Text>
                     )
                   })}
@@ -61,8 +61,8 @@ export function CvPage({ education, imagePath, intro, skillsAndTooling, workExpe
 
         <View style={styles.workExperiencesAndEducation}>
           <View style={styles.workExperiencesMain}>
-            {workExperiences.slice(0, 3).map(({ frontmatter, content }) => (
-              <View style={styles.workExperience} key={frontmatter.id}>
+            {workExperiences.slice(0, 3).map(({ frontmatter, content }, index) => (
+              <View style={styles.workExperience} key={frontmatter.id} break={index > 0}>
                 <View style={styles.workExperienceHeading}>
                   <Text style={styles.workExperienceJobTitle}>{frontmatter.title}</Text>
                   <Text style={styles.workExperienceCompany}>{frontmatter.company}</Text>
@@ -76,8 +76,8 @@ export function CvPage({ education, imagePath, intro, skillsAndTooling, workExpe
                   <MarkdownToPdf content={content} />
                   {frontmatter.skills && (
                     <View style={styles.workExperienceSkills}>
-                      <Text style={styles.h4}>Skills & Tooling</Text>
                       <View style={styles.skillsList}>
+                        <Text style={styles.skillsHeading}>Skills & Tooling: </Text>
                         {frontmatter.skills.map((skill, index) => {
                           const length = frontmatter.skills?.length || 0
                           const isPenultimateItem = index === length - 2
@@ -85,7 +85,7 @@ export function CvPage({ education, imagePath, intro, skillsAndTooling, workExpe
                           return (
                             <Text style={styles.skill} key={skill.text}>
                               {skill.text}
-                              {isLastItem ? '.' : isPenultimateItem ? ' and ' : ', '}
+                              {isLastItem ? '.' : isPenultimateItem ? ' & ' : ', '}
                             </Text>
                           )
                         })}
@@ -105,7 +105,7 @@ export function CvPage({ education, imagePath, intro, skillsAndTooling, workExpe
                 <View
                   style={{
                     ...styles.secondaryWorkExperience,
-                    marginBottom: isLastItem ? 0 : spacing(2),
+                    marginBottom: isLastItem ? 0 : spacing(1),
                   }}
                   key={frontmatter.id}
                 >
@@ -118,7 +118,7 @@ export function CvPage({ education, imagePath, intro, skillsAndTooling, workExpe
                   </View>
                   <View style={styles.secondaryWorkExperienceRight} break>
                     <Text style={styles.secondaryWorkExperienceJobTitle}>{frontmatter.title}</Text>
-                    <Text style={styles.secondaryWorkExperienceCompany}>{frontmatter.company}</Text>
+                    <Text style={styles.secondaryWorkExperienceCompany}>&nbsp;-&nbsp;{frontmatter.company}</Text>
                   </View>
                 </View>
               )
@@ -129,8 +129,10 @@ export function CvPage({ education, imagePath, intro, skillsAndTooling, workExpe
               <Text style={styles.sectionHeading}>Education</Text>
               {education.rows.map(({ years, institution, qualification, grade }) => (
                 <View key={institution} style={styles.educationPeriod}>
-                  <Text>{years}</Text>
-                  <Text style={styles.educationInstitution}>{institution}</Text>
+                  <Text>
+                    {years} - <Text style={styles.educationInstitution}>{institution}</Text>
+                  </Text>
+
                   <Text>
                     {qualification} ({grade})
                   </Text>

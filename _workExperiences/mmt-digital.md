@@ -30,31 +30,28 @@ skills:
 contract: true
 ---
 
-In 2017, I joined MMT Digital as a contract React developer, assigned to a cross-functional Agile team within Vodafone. Our initial project focused on the development of a new sub-brand, VOXI, a youth-targeted MVNO proposition. Despite our team's small size, we successfully launched VOXI within a three-month timeframe.
+In 2017, I joined MMT Digital as a contract React developer, assigned to a cross-functional Agile team within Vodafone. Our initial project focused on developing a new sub-brand, VOXI, aimed at a younger audience. Despite our team's small size, we successfully launched VOXI within a three-month timeframe.
 
-Following this, I worked on various initiatives such as handset financing, an online shop, and migration journeys from Vodafone to VOXI. During this time, my role evolved into a full-stack developer, mainly focusing on developing a suite of Node.JS microservices. However, React development remained a critical aspect of my responsibilities. As the brand grew significantly in a declining market, we continually enhanced the frontend aspects of the codebase.
+Subsequently, I worked on various initiatives including handset financing, e-commerce solutions, and seamless migration pathways between Vodafone and VOXI. As my role evolved into that of a full-stack developer, I balanced my React responsibilities with developing a suite of Express.js microservices to fill gaps in our existing service architecture.
 
-In the subsequent years, I transitioned to Vodafone's business enterprise division. Here, I was tasked with the upkeep of order management pages and the development of an enterprise-level broadband product availability check and ordering journey using React Query and JSON Forms. Alongside this, I also undertook the revamp of various legacy applications and libraries, migrating them to modern internal boilerplates. In addition, I handled a significant amount of technical debt tasks, such as vulnerability and package updates, and Vite uplifting.
+I eventually transitioned to Vodafone's Business Enterprise Division, where my responsibilities expanded to include the maintenance of order management pages and the development of an enterprise-level broadband product availability check and ordering journey. In this role, I've also focused on modernising legacy applications and proactively addressing significant technical debt, including vulnerability and package updates. Most recently, I've been engrossed in crafting reusable frontend assets that enable the construction of backend-driven, stepped form journeys—a task that stands as some of the most challenging and engaging work I've undertaken in recent times.
 
 #### Core responsibilities
 
-- Designing and building UIs based on specific requirements.
-- Constructing state management solutions for business logic and API integrations.
-- Integrating backend services following needs and Swagger documentation.
-- Developing Node.JS microservices to meet business requirements.
-- Collaborating closely with the development and UX/UI team on all aspects of the stories in-sprint.
-- Facilitating build and release processes.
-- Supporting the team in user story creation and mentoring.
-- Gathering PI goals and distilling them into epics, features, and user stories.
-- Working with stakeholders to deliver suitable MVP propositions.
-- Collaborating with marketing and UX/UI teams to effectively develop propositions.
+- Design and build UIs based on specific UX guidelines and business requirements.
+- Construct state management solutions for business logic and API integrations.
+- Integrate backend services according to needs and Swagger documentation.
+- Developed Express.js middleware to fill gaps in our existing architecture.
+- Collaborate closely with scrum team to deliver sprint goals.
+- Facilitate build and release processes.
+- Support the team in user story development and refinement.
+- Collaborate with stakeholders to define and deliver MVPs aligned with business objectives.
 
 #### Key achievements
 
-- Launch of marketing, acquisition, and in-life journeys for VOXI within three months.
-- Release of an online shop with PayPal integration via Braintree API.
-- Rebuilding of our MVP service authentication mechanism.
-- Formulation of a technological and process blueprint that was replicated throughout the business.
-- Addressing technical debt systematically, including rehabilitating forms using Formik, reducing page-level boilerplate via HOCs and hooks, rewriting account microservices, refactoring payment integration, restructuring our application, and rebuilding product architecture.
-- Architecting and building an enterprise-level broadband product availability check and ordering journey.
-- Developing a reusable set of packages for a stepped procedural form journey based on JCS services, with state management handled by backend responses, data schemas, and partial submission endpoints.
+- Launched marketing, acquisition, and in-life journeys for VOXI within three months.
+- Released an online shop with PayPal integration via Braintree API.
+- Rebuilt the MVP service authentication mechanism.
+- Reduced technical debt by optimising forms with Formik & React Hook Form, minimising page boilerplate via HOCs and hooks, and refactoring account services and payment integration.
+- Architected and built an enterprise-level broadband product availability check and ordering journey.
+- Developed a comprehensive package set of reusable frontend assets that facilitated the creation of backend-driven, stepped form journeys, thereby driving state management via journey composition services and data schemas.

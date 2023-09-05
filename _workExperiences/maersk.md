@@ -8,28 +8,26 @@ skills:
   - backbone
   - jquery
   - handlebars
-  - underscore
   - express
   - css
   - scss
   - bem
   - html
-  - grunt
 contract: true
 ---
 
-At the outset of my contract with Maersk, I was brought in to replace the Lead Developer on a challenging project tasked with building the next iteration of a self-service application. The project involved complex business requirements, including multi-branding, localisation, and support for Internet Explorer 8.
+At the outset of my contract with Maersk, I was brought in to replace the Lead Developer on a challenging project aimed at building the next iteration of a self-service application. The project involved complex business requirements such as multi-branding, localisation, and support for Internet Explorer 8.
 
 #### Core responsibilities
 
-- Developing robust business logic based on UX and project requirements
-- Building view logic, templates, and UI components in accordance with UX and visual design specifications
-- Taking the lead as the UI resource on the core project
-- Collaborating closely with BAs, UX & UI designers, and backend developers to translate requirements into functional solutions
-- Contributing to a cross-project initiatives focused on harmonising the UI across the entire program
+- Developed robust business logic based on UX and project requirements
+- Build view logic, templates, and UI components in line with UX and visual design specifications.
+- Took the lead as the UI resource on the core project.
+- Collaborate closely with BAs, UX & UI designers, and backend developers to translate requirements into functional solutions.
+- Contributed to cross-project initiatives aimed at harmonising the UI across the entire program.
 
 #### Key achievements
 
-- Architected and executed a proof of concept for an atomic approach using the existing UI library
-- Integrated modelling into the single-page application
-- Established and enforced a standardized approach to UI component development
+- Architected and executed a proof of concept for an atomic approach using the existing UI library.
+- Integrated modeling into the single-page application.
+- Established and enforced a standardised approach to UI component development.

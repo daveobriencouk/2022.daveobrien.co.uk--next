@@ -1,5 +1,6 @@
 import { View, Text } from '@react-pdf/renderer'
 import ReactMarkdown from 'react-markdown'
+import rehypeMinifyWhitespace from 'rehype-minify-whitespace'
 
 import { styles } from 'components/CvPage/index.styles'
 import { ListItem } from '../ListItem'
@@ -35,6 +36,7 @@ export function MarkdownToPdf({ content }: MarkdownToPdfProps) {
           )
         },
       }}
+      rehypePlugins={[rehypeMinifyWhitespace]}
       includeElementIndex
     />
   )
