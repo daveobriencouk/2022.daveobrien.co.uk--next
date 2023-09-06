@@ -1,5 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
+import path from 'path'
 import dayjs from 'dayjs'
 import { z } from 'zod'
 
@@ -7,18 +8,17 @@ import { SKILLS } from '../skillsAndTooling'
 import type { WorkExperience } from './types'
 import { generateWorkExperienceId } from './utils'
 
-const path = '_workExperiences'
-
 export function getWorkExperiences(): WorkExperience[] {
-  const files = fs.readdirSync(path)
+  const workExperiencesDir = path.join(process.cwd(), '_workExperiences')
+  const files = fs.readdirSync(workExperiencesDir)
 
   const posts = files
     .filter((fileName) => {
-      const stats = fs.statSync(`${path}/${fileName}`)
+      const stats = fs.statSync(`${workExperiencesDir}/${fileName}`)
       return stats.isFile() && fileName.endsWith('.md')
     })
     .map((fileName) => {
-      const readFile = fs.readFileSync(`_workExperiences/${fileName}`, 'utf-8')
+      const readFile = fs.readFileSync(`${workExperiencesDir}/${fileName}`, 'utf-8')
       const { data: frontmatter, content } = matter(readFile)
 
       const FrontmatterValidator = z.object({
