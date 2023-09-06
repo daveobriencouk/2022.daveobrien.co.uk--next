@@ -18,8 +18,6 @@ export default function Nav({ className, duration = 0, links, onTransitionEnd, s
   const { linksByFeatureFlag, flags } = useFeatureFlags()
   const router = useRouter()
 
-  console.log('Nav', { flags, links: links.filter(() => true) })
-
   return (
     <ul
       onTransitionEnd={() => {

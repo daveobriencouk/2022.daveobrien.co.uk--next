@@ -6,13 +6,15 @@ import Head from 'next/head'
 import flagsmith from 'flagsmith/isomorphic'
 import { FlagsmithProvider } from 'flagsmith/react'
 import type { IState } from 'flagsmith/types'
+import * as Fathom from 'fathom-client'
 
-import type { ReactElement, ReactNode } from 'react'
+import { useEffect, type ReactElement, type ReactNode } from 'react'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
 import { GLOBAL_META_DESC, GLOBAL_META_TITLE } from 'constants/'
 import Layout from 'components/Layout'
+import { useRouter } from 'next/router'
 
 // TODO: #35 Align vertical rhythm to base line, rather than leading
 
@@ -22,14 +24,40 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
+  fathom: {
+    includedDomains: string[]
+    trackingCode: string
+  }
   flagsmithState: IState
 }
 
 // TODO: #26 Cookie based debug? Check out the rhythm
 
-function App({ Component, pageProps, flagsmithState }: AppPropsWithLayout) {
+function App({ Component, pageProps, fathom, flagsmithState }: AppPropsWithLayout) {
   // INFO: Default layout to <Layout>
   const getLayout = Component.getLayout ?? ((page: ReactElement) => <Layout>{page}</Layout>)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!fathom.includedDomains || !fathom.trackingCode) return
+
+    // Initialize Fathom when the app loads
+    Fathom.load(fathom.trackingCode, {
+      includedDomains: fathom.includedDomains,
+    })
+
+    function onRouteChangeComplete() {
+      Fathom.trackPageview()
+    }
+
+    // Record a pageview when route changes
+    router.events.on('routeChangeComplete', onRouteChangeComplete)
+
+    // Unassign event listener
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete)
+    }
+  }, [fathom, router])
 
   return (
     <>
@@ -52,7 +80,13 @@ App.getInitialProps = async () => {
     environmentID: process.env.FLAGSMITH_ENVIRONMENT_ID as string,
   })
 
-  return { flagsmithState: flagsmith.getState() }
+  return {
+    fathom: {
+      includedDomains: [process.env.NEXT_PUBLIC_FATHOM_INCLUDED_DOMAINS],
+      trackingCode: process.env.NEXT_PUBLIC_FATHOM_TRACKING_CODE,
+    },
+    flagsmithState: flagsmith.getState(),
+  }
 }
 
 export default App
