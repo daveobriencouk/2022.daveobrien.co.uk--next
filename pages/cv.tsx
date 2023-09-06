@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 import md from 'markdown-it'
 import { Waypoint } from 'react-waypoint'
+import * as fathom from 'fathom-client'
 
 import AsideBlock from 'components/AsideBlock'
 import CvSection from 'components/CvSection'
@@ -147,7 +148,14 @@ export default function CvPage({ education, intro, menuItems, skillsAndTooling, 
             <aside className="sticky top-0 self-start basis-60 pt-half -mt-half">
               <AsideBlock title="CV Contents">
                 <AsideBlock.List items={menuItems} />
-                <AsideBlock.CallToAction href="/api/cv.pdf">Download CV</AsideBlock.CallToAction>
+                <AsideBlock.CallToAction
+                  href="/api/cv.pdf"
+                  onClick={() => {
+                    fathom.trackGoal('cv.download', 0)
+                  }}
+                >
+                  Download CV
+                </AsideBlock.CallToAction>
               </AsideBlock>
             </aside>
           </div>

@@ -1,5 +1,4 @@
 /* eslint-disable import/no-anonymous-default-export */
-import fs from 'fs'
 import path from 'path'
 import type { NextApiRequest, NextApiResponse } from 'next'
 

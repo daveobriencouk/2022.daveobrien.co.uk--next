@@ -40,6 +40,7 @@ type CallToActionProps = {
   children: React.ReactNode
   download?: string
   href: string
+  onClick?: () => void
 }
 
 function AsideBlock({ children, title }: AsideBlockProps) {
@@ -67,7 +68,6 @@ function List({ items }: ListProps) {
               {text}
             </AsideBlock.Link>
 
-            {/* if children */}
             {children && (
               <AsideBlock.SubList>
                 {children.map(({ href, id, text }) => {
@@ -109,11 +109,12 @@ function Link({ children, href, isActive }: LinkProps) {
   )
 }
 
-function CallToAction({ children, download, href }: CallToActionProps) {
+function CallToAction({ children, download, href, onClick }: CallToActionProps) {
   return (
     <a
       download={download}
       href={href}
+      onClick={onClick}
       className="block w-full text-md text-white uppercase heading bg-primary-700 px-one grow-0 hover:bg-primary-900 focus-ring leading-two"
     >
       {children}
