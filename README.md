@@ -73,6 +73,9 @@ This website utilizes various third-party services to enhance functionality, mon
 - **Feature Flagging**: Allows for toggling features on and off for different user segments.
   [Flagsmith](https://app.flagsmith.com/projects/)
 
+- **Application Monitoring**: Provides insights into application performance and errors.
+  [Sentry](https://sentry.io/)
+
 ## Contact
 
 LinkedIn profile: [Dave O'Brien](https://www.linkedin.com/in/daveobriencouk/)
