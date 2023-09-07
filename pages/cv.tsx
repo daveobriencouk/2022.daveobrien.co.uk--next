@@ -151,7 +151,7 @@ export default function CvPage({ education, intro, menuItems, skillsAndTooling, 
                 <AsideBlock.CallToAction
                   href="/api/cv.pdf"
                   onClick={() => {
-                    fathom.trackGoal('cv.download', 0)
+                    fathom.trackGoal('YGCYLC2Z', 0)
                   }}
                 >
                   Download CV
