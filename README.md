@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dave O'Brien's Personal Website
+
+<!-- Short description about the website. This might include what the purpose of the website is, technologies used, etc. -->
+<!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). -->
+
+<!-- ![Screenshot of the website](./path-to-screenshot.png)  -->
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Directory Structure](#directory-structure)
+- [Deployment](#deployment)
+- [Operational Tools](#operational-tools)
+- [Contact](#contact)
+
+## Features
+
+TK
+
+<!-- - A brief list or description of the main features of the website. -->
+
+## Technologies Used
+
+TK
+
+<!-- - **Next.js**: -->
+<!-- - **TailwindCSS**  -->
 
 ## Getting Started
 
-First, run the development server:
+TK
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+TK
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+<!-- - Ensure you have Node.js and npm/yarn installed. -->
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Installation
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clone the repository: `git clone https://github.com/daveobriencouk/2022.daveobrien.co.uk--next.git`.
+2. Move into the directory: `2022.daveobrien.co.uk--next`.
+3. Install dependencies: `npm install`.
+4. Run the development server: `npm run dev`.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Learn More
+## Directory Structure
 
-To learn more about Next.js, take a look at the following resources:
+TK
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- Briefly explain the main directory structure, particularly if there's something unique about your setup. -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+TK
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Deployment platform**: A cloud platform for seamless deployment and scaling of static sites and serverless functions.
+  [Vercel](https://vercel.com/dashboard)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- Instructions or notes about how to deploy the website, e.g., using Vercel, Netlify, or other platforms. -->
+
+## Operational Tools
+
+This website utilizes various third-party services to enhance functionality, monitoring, and user experience. Below are links and brief descriptions of these services:
+
+- **Analytics Service**: Provides insights into website traffic and user behavior.
+  [Fathom](https://app.usefathom.com/)
+
+- **Feature Flagging**: Allows for toggling features on and off for different user segments.
+  [Flagsmith](https://app.flagsmith.com/projects/)
+
+## Contact
+
+LinkedIn profile: [Dave O'Brien](https://www.linkedin.com/in/daveobriencouk/)
