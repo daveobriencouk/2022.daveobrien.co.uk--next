@@ -27,10 +27,10 @@ export const FOOTER_LINKS: Link[] = [
     href: 'https://www.linkedin.com/in/daveobriencouk/',
     text: 'LinkedIn',
   },
-  // {
-  //   href: 'https://github.com/daveobriencouk/2022.daveobrien.co.uk--next',
-  //   text: 'Fork me on GitHub',
-  // },
+  {
+    href: 'https://github.com/daveobriencouk/2022.daveobrien.co.uk--next',
+    text: 'Fork me on GitHub',
+  },
 ]
 
 export const NAV_LINKS: Link[] = [
