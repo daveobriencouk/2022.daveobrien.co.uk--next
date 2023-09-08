@@ -252,7 +252,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  secondaryContact: {},
+  secondaryContact: {
+    paddingBottom: spacing(0.33),
+  },
   smallLogo: {
     width: '47.5mm',
 

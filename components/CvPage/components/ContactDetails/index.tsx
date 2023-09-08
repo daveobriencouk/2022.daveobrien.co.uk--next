@@ -20,6 +20,14 @@ export function ContactDetails({ imagePath, includeLocationDetail }: ContactDeta
         </Text>
       </View>
       <View style={styles.contactDetail}>
+        <Image src={`${imagePath}/globe.png`} style={styles.contactIcon} />
+        <Text>
+          <Link src="https://www.daveobrien.co.uk/" style={styles.contactLink}>
+            daveobrien.co.uk
+          </Link>
+        </Text>
+      </View>
+      <View style={styles.contactDetail}>
         <Image src={`${imagePath}/envelope.png`} style={styles.contactIcon} />
         <Text>Based in Surrey {includeLocationDetail && '(near J3 on the M3)'}</Text>
       </View>
