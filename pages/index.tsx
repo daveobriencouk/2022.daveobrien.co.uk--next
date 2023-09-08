@@ -138,15 +138,12 @@ export default function Home({ readMoreLinks }: HomeProps) {
                   As an avid Agile practitioner, <b>I thrive within collaborative environments</b>, consistently
                   delivering timely, high-quality solutions centred around the end-user&apos;s needs.
                 </p>
-                {/* <p className="mb-one">
-                  <Link
-                    href="/cv"
-                    // className="underline-offset-2 hover:underline text-sky-600 hover:text-sky-900"
-                  >
-                    Check out my CV
-                  </Link>{' '}
-                  to delve deeper into my technological expertise and notable professional accomplishments.
-                </p> */}
+                <p className="mb-one">
+                  Want to find out more about me?{' '}
+                  <Link href="/cv" className="font-bold">
+                    Take a look at my CV.
+                  </Link>
+                </p>
               </section>
             ) : (
               <section className="text-base">
