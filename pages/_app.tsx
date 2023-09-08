@@ -64,8 +64,11 @@ function App({ Component, pageProps, fathomAnalytics, flagsmithState }: AppProps
       <Head>
         <title>{GLOBAL_META_TITLE}</title>
         {GLOBAL_META_DESC && <meta name="description" content={GLOBAL_META_DESC} />}
-        {/* TODO: #9 Add favicon */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <FlagsmithProvider flagsmith={flagsmith} serverState={flagsmithState}>
         <>{getLayout(<Component {...pageProps} />)}</>
