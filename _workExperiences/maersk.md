@@ -29,5 +29,5 @@ At the outset of my contract with Maersk, I was brought in to replace the Lead D
 #### Key achievements
 
 - Architected and executed a proof of concept for an atomic approach using the existing UI library.
-- Integrated modeling into the single-page application.
+- Introduced modeling into the single-page application.
 - Established and enforced a standardised approach to UI component development.

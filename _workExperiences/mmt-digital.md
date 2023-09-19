@@ -30,11 +30,11 @@ skills:
 contract: true
 ---
 
-In 2017, I joined MMT Digital as a contract React developer, assigned to a cross-functional Agile team within Vodafone. Our initial project focused on developing a new sub-brand, VOXI, aimed at a younger audience. Despite our team's small size, we successfully launched VOXI within a three-month timeframe.
+In 2017, I joined MMT Digital as a contract React Developer, assigned to a cross-functional Agile team within Vodafone. Our initial project focused on developing a new sub-brand, VOXI, aimed at a younger audience. Despite our team's small size, we successfully launched VOXI within a three-month timeframe.
 
-Subsequently, I worked on various initiatives including handset financing, e-commerce solutions, and seamless migration pathways between Vodafone and VOXI. As my role evolved into that of a full-stack developer, I balanced my React responsibilities with developing a suite of Express.js microservices to fill gaps in our existing service architecture.
+Subsequently, I worked on various initiatives including handset financing, e-commerce solutions, and seamless migration pathways between Vodafone and VOXI. As my role evolved into that of a full-stack developer, I balanced my React duties with developing a suite of Express.js microservices to fill gaps in our existing service architecture.
 
-I eventually transitioned to Vodafone's Business Enterprise Division, where my responsibilities expanded to include the maintenance of order management pages and the development of an enterprise-level broadband product availability check and ordering journey. In this role, I've also focused on modernising legacy applications and proactively addressing significant technical debt, including vulnerability and package updates. Most recently, I've been engrossed in crafting reusable frontend assets that enable the construction of backend-driven, stepped form journeys—a task that stands as some of the most challenging and engaging work I've undertaken in recent times.
+I eventually transitioned to Vodafone's Business Enterprise division, where my responsibilities expanded to include the maintenance of order management pages and the development of an enterprise-level broadband product availability check and ordering journey. In this role, I've also focused on modernising legacy applications and proactively addressing significant technical debt, including vulnerability and package updates. Most recently, I've been engrossed in crafting reusable frontend assets that enable the construction of backend-driven, stepped form journeys — a task that stands as some of the most challenging and engaging work I've undertaken in recent times.
 
 #### Core responsibilities
 
