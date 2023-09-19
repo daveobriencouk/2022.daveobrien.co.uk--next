@@ -12,15 +12,15 @@ export const CATEGORIES: Record<SkillCategory | 'all', { title: string }> = {
 }
 
 export const SKILLS: Skills = {
-  express: {
-    href: 'https://expressjs.com/',
-    text: 'Express',
-    areas: ['work', 'personal'],
-    categories: ['backend'],
-  },
   nodeJs: {
     href: 'https://nodejs.org/',
     text: 'Node.js',
+    areas: ['work', 'personal'],
+    categories: ['backend'],
+  },
+  express: {
+    href: 'https://expressjs.com/',
+    text: 'Express',
     areas: ['work', 'personal'],
     categories: ['backend'],
   },
@@ -43,35 +43,23 @@ export const SKILLS: Skills = {
     categories: ['backend'],
   },
 
-  react: {
-    href: 'https://reactjs.org/',
-    text: 'React',
-    areas: ['work', 'personal'],
-    categories: ['frontend'],
-  },
-  nextjs: {
-    href: 'https://nextjs.org/',
-    text: 'Next.js',
-    areas: ['personal'],
-    categories: ['frontend'],
-  },
-  remix: {
-    href: 'https://remix.run/',
-    text: 'Remix',
-    areas: ['personal'],
-    categories: ['frontend'],
-  },
   typescript: {
     href: 'https://www.typescriptlang.org/',
     text: 'TypeScript',
     areas: ['work', 'personal'],
     categories: ['frontend', 'backend'],
   },
-  html: {
-    href: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
-    text: 'HTML',
-    areas: ['personal'],
+  react: {
+    href: 'https://reactjs.org/',
+    text: 'React',
+    areas: ['work', 'personal'],
     categories: ['frontend'],
+  },
+  javascript: {
+    href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+    text: 'JavaScript',
+    areas: ['personal'],
+    categories: ['frontend', 'backend'],
   },
   css: {
     href: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
@@ -79,82 +67,24 @@ export const SKILLS: Skills = {
     areas: ['work', 'personal', 'past'],
     categories: ['frontend'],
   },
-  tailwindcss: {
-    href: 'https://tailwindcss.com/',
-    text: 'Tailwind',
+  html: {
+    href: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
+    text: 'HTML',
     areas: ['personal'],
     categories: ['frontend'],
   },
-  styledComponents: {
-    href: 'https://styled-components.com/',
-    text: 'styled-components',
-    areas: ['work'],
-    categories: ['frontend'],
-  },
 
-  reactQuery: {
-    href: 'https://react-query.tanstack.com/',
-    text: 'React Query',
-    areas: ['work'],
-    categories: ['frontend'],
-  },
-  mobx: {
-    href: 'https://mobx.js.org/README.html',
-    text: 'MobX',
-    areas: ['work'],
-    categories: ['frontend'],
-  },
-
-  ajv: {
-    href: 'https://ajv.js.org/',
-    text: 'AJV',
-    areas: ['work'],
-    categories: ['frontend', 'backend'],
-  },
-  jsonSchema: {
-    href: 'https://json-schema.org/',
-    text: 'JSON Schema',
-    areas: ['work'],
-    categories: ['frontend', 'backend'],
-  },
-  zod: {
-    href: 'https://zod.dev/',
-    text: 'Zod',
+  remix: {
+    href: 'https://remix.run/',
+    text: 'Remix',
     areas: ['personal'],
-    categories: ['frontend', 'backend'],
-  },
-
-  lodash: {
-    href: 'https://lodash.com/',
-    text: 'Lodash',
-    areas: ['work', 'personal'],
-    categories: ['frontend', 'backend'],
-  },
-
-  cssModules: {
-    href: 'https://github.com/css-modules/css-modules',
-    text: 'CSS Modules',
-    areas: ['work'],
     categories: ['frontend'],
   },
-  scss: {
-    href: 'https://sass-lang.com/',
-    text: 'SCSS',
-    areas: ['work'],
-    categories: ['frontend'],
-  },
-  less: {
-    href: 'https://lesscss.org/',
-    text: 'Less',
-    areas: ['past'],
-    categories: ['frontend'],
-  },
-
-  javascript: {
-    href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
-    text: 'JavaScript',
+  nextjs: {
+    href: 'https://nextjs.org/',
+    text: 'Next.js',
     areas: ['personal'],
-    categories: ['frontend', 'backend'],
+    categories: ['frontend'],
   },
   gatsbyJS: {
     href: 'https://www.gatsbyjs.com/',
@@ -174,7 +104,62 @@ export const SKILLS: Skills = {
     areas: ['past'],
     categories: ['frontend'],
   },
+  cordova: {
+    href: 'https://cordova.apache.org/',
+    text: 'Cordova',
+    areas: ['past'],
+    categories: ['frontend'],
+  },
 
+  mobx: {
+    href: 'https://mobx.js.org/README.html',
+    text: 'MobX',
+    areas: ['work'],
+    categories: ['frontend'],
+  },
+  reactQuery: {
+    href: 'https://react-query.tanstack.com/',
+    text: 'React Query',
+    areas: ['work'],
+    categories: ['frontend'],
+  },
+  reactPdf: {
+    href: 'https://react-pdf.org/',
+    text: 'React-pdf',
+    areas: ['personal'],
+    categories: ['frontend', 'backend'],
+  },
+  reactStyleguidist: {
+    href: 'https://react-styleguidist.js.org/',
+    text: 'Styleguidist',
+    areas: ['work'],
+    categories: ['frontend'],
+  },
+
+  zod: {
+    href: 'https://zod.dev/',
+    text: 'Zod',
+    areas: ['personal'],
+    categories: ['frontend', 'backend'],
+  },
+  ajv: {
+    href: 'https://ajv.js.org/',
+    text: 'AJV',
+    areas: ['work'],
+    categories: ['frontend', 'backend'],
+  },
+  jsonSchema: {
+    href: 'https://json-schema.org/',
+    text: 'JSON Schema',
+    areas: ['work'],
+    categories: ['frontend', 'backend'],
+  },
+  lodash: {
+    href: 'https://lodash.com/',
+    text: 'Lodash',
+    areas: ['work', 'personal'],
+    categories: ['frontend', 'backend'],
+  },
   underscore: {
     href: 'https://underscorejs.org/',
     text: 'Underscore.js',
@@ -184,6 +169,37 @@ export const SKILLS: Skills = {
   jquery: {
     href: 'https://jquery.com/',
     text: 'jQuery',
+    areas: ['past'],
+    categories: ['frontend'],
+  },
+
+  tailwindcss: {
+    href: 'https://tailwindcss.com/',
+    text: 'Tailwind',
+    areas: ['personal'],
+    categories: ['frontend'],
+  },
+  styledComponents: {
+    href: 'https://styled-components.com/',
+    text: 'styled-components',
+    areas: ['work'],
+    categories: ['frontend'],
+  },
+  scss: {
+    href: 'https://sass-lang.com/',
+    text: 'SCSS',
+    areas: ['work'],
+    categories: ['frontend'],
+  },
+  cssModules: {
+    href: 'https://github.com/css-modules/css-modules',
+    text: 'CSS Modules',
+    areas: ['work'],
+    categories: ['frontend'],
+  },
+  less: {
+    href: 'https://lesscss.org/',
+    text: 'Less',
     areas: ['past'],
     categories: ['frontend'],
   },
@@ -204,6 +220,31 @@ export const SKILLS: Skills = {
     href: 'https://smacss.com/',
     text: 'SMACSS',
     areas: ['work', 'personal'],
+    categories: ['frontend'],
+  },
+
+  mui: {
+    href: 'https://mui.com/',
+    text: 'Material UI',
+    areas: ['past'],
+    categories: ['frontend'],
+  },
+  foundation: {
+    href: 'https://get.foundation/',
+    text: 'Foundation',
+    areas: ['past'],
+    categories: ['frontend'],
+  },
+  bourbon: {
+    href: 'https://www.bourbon.io/',
+    text: 'Bourbon',
+    areas: ['past'],
+    categories: ['frontend'],
+  },
+  semanticUi: {
+    href: 'https://semantic-ui.com/',
+    text: 'Semantic UI',
+    areas: ['past'],
     categories: ['frontend'],
   },
 
@@ -232,45 +273,6 @@ export const SKILLS: Skills = {
     categories: ['frontend'],
   },
 
-  mui: {
-    href: 'https://mui.com/',
-    text: 'Material UI',
-    areas: ['work', 'personal'],
-    categories: ['frontend'],
-  },
-  foundation: {
-    href: 'https://get.foundation/',
-    text: 'Foundation',
-    areas: ['past'],
-    categories: ['frontend'],
-  },
-  bourbon: {
-    href: 'https://www.bourbon.io/',
-    text: 'Bourbon',
-    areas: ['past'],
-    categories: ['frontend'],
-  },
-  semanticUi: {
-    href: 'https://semantic-ui.com/',
-    text: 'Semantic UI',
-    areas: ['personal'],
-    categories: ['frontend'],
-  },
-
-  reactStyleguidist: {
-    href: 'https://react-styleguidist.js.org/',
-    text: 'React Styleguidist',
-    areas: ['work'],
-    categories: ['frontend'],
-  },
-
-  cordova: {
-    href: 'https://cordova.apache.org/',
-    text: 'Cordova',
-    areas: ['past'],
-    categories: ['frontend'],
-  },
-
   jest: {
     href: 'https://jestjs.io/',
     text: 'Jest',
@@ -287,6 +289,12 @@ export const SKILLS: Skills = {
     href: 'https://testing-library.com/docs/react-testing-library/intro',
     text: 'React Testing Library',
     areas: ['work', 'personal'],
+    categories: ['testing'],
+  },
+  sentry: {
+    href: 'https://sentry.io/',
+    text: 'Sentry',
+    areas: ['personal'],
     categories: ['testing'],
   },
   sonarqube: {
@@ -371,7 +379,7 @@ export const SKILLS: Skills = {
   jira: {
     href: 'https://www.atlassian.com/software/jira',
     text: 'Jira',
-    areas: ['work'],
+    areas: ['past'],
     categories: ['build'],
   },
   gulp: {
@@ -399,15 +407,15 @@ export const SKILLS: Skills = {
     areas: ['work'],
     categories: ['data'],
   },
-  mysql: {
-    href: 'https://www.mysql.com/',
-    text: 'MySQL',
-    areas: ['past'],
-    categories: ['data'],
-  },
   mongodb: {
     href: 'https://www.mongodb.com/',
     text: 'MongoDB',
+    areas: ['past'],
+    categories: ['data'],
+  },
+  mysql: {
+    href: 'https://www.mysql.com/',
+    text: 'MySQL',
     areas: ['past'],
     categories: ['data'],
   },
@@ -439,7 +447,7 @@ export const SKILLS: Skills = {
   drupal: {
     href: 'https://www.drupal.org/',
     text: 'Drupal',
-    areas: ['work', 'personal'],
+    areas: ['past'],
     categories: ['content'],
   },
   middleman: {
