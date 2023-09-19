@@ -1,5 +1,13 @@
+import path from 'path'
+
 import { StyleSheet, Font } from '@react-pdf/renderer'
 import { ColorSet, RalewayHeadingParams } from './index.styles.types'
+
+const fontDir = path.resolve(__dirname, './fonts')
+
+/**
+ * Sort fonts,
+ */
 
 /**
  * Setup fonts
@@ -9,19 +17,19 @@ Font.register({
   family: 'Open Sans',
   fonts: [
     {
-      src: 'http://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0C4nY1M2xLER.ttf',
+      src: `${fontDir}/open-sans-300.ttf`,
       fontWeight: 300,
     },
     {
-      src: 'http://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4nY1M2xLER.ttf',
+      src: `${fontDir}/open-sans-400.ttf`,
       fontWeight: 400,
     },
     {
-      src: 'http://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1y4nY1M2xLER.ttf',
+      src: `${fontDir}/open-sans-700.ttf`,
       fontWeight: 700,
     },
     {
-      src: 'http://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgshZ1y4nY1M2xLER.ttf',
+      src: `${fontDir}/open-sans-800.ttf`,
       fontWeight: 800,
     },
   ],
@@ -140,10 +148,10 @@ export const styles = StyleSheet.create({
     marginBottom: spacing(1.5),
   },
   intro: {
-    width: '40%',
+    width: '45%',
   },
   skills: {
-    width: '60%',
+    width: '55%',
   },
   skillsHeading: {
     fontWeight: 700,
