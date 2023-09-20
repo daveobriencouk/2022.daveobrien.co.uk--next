@@ -3,7 +3,7 @@ import path from 'path'
 import { StyleSheet, Font } from '@react-pdf/renderer'
 import { ColorSet, RalewayHeadingParams } from './index.styles.types'
 
-const fontDir = path.resolve(__dirname, './fonts')
+const fontDir = path.resolve('./public/fonts')
 
 /**
  * Sort fonts,
