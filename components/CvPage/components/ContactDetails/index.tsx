@@ -20,6 +20,14 @@ export function ContactDetails({ imagePath, includeLocationDetail }: ContactDeta
         </Text>
       </View>
       <View style={styles.contactDetail}>
+        <Image src={`${imagePath}/phone.png`} style={styles.contactIcon} />
+        <Text>
+          <Link src="tel:+44-7473-367-123" style={styles.contactLink}>
+            07473 367123
+          </Link>
+        </Text>
+      </View>
+      <View style={styles.contactDetail}>
         <Image src={`${imagePath}/globe.png`} style={styles.contactIcon} />
         <Text>
           <Link src="https://www.daveobrien.co.uk/" style={styles.contactLink}>
@@ -27,10 +35,12 @@ export function ContactDetails({ imagePath, includeLocationDetail }: ContactDeta
           </Link>
         </Text>
       </View>
-      <View style={styles.contactDetail}>
-        <Image src={`${imagePath}/envelope.png`} style={styles.contactIcon} />
-        <Text>Based in Surrey {includeLocationDetail && '(near J3 on the M3)'}</Text>
-      </View>
+      {includeLocationDetail && (
+        <View style={styles.contactDetail}>
+          <Image src={`${imagePath}/envelope.png`} style={styles.contactIcon} />
+          <Text>Based in Surrey {includeLocationDetail && '(near J3 on the M3)'}</Text>
+        </View>
+      )}
     </View>
   )
 }
