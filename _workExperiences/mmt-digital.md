@@ -2,6 +2,7 @@
 title: 'Senior React Developer'
 company: 'Vodafone / MMT Digital'
 startDate: '2017-04'
+endDate: '2023-09'
 skills:
   - react
   - typescript

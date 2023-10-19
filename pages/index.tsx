@@ -138,12 +138,14 @@ export default function Home({ readMoreLinks }: HomeProps) {
                   As an avid Agile practitioner, <b>I thrive within collaborative environments</b>, consistently
                   delivering timely, high-quality solutions centred around the end-user&apos;s needs.
                 </p>
-                <p className="mb-one">
-                  Want to find out more about me?{' '}
-                  <Link href="/cv" className="font-bold">
-                    Take a look at my CV.
-                  </Link>
-                </p>
+                {checkSomeFeatureFlags(['section_cv']) && (
+                  <p className="mb-one">
+                    Want to find out more about me?{' '}
+                    <Link href="/cv" className="font-bold">
+                      Take a look at my CV.
+                    </Link>
+                  </p>
+                )}
               </section>
             ) : (
               <section className="text-base">
